@@ -5,6 +5,7 @@ class CustomTextfield extends StatefulWidget {
   final String label;
   final TextInputType keyboardType;
   final Function(String)? onSubmitted;
+  final Widget? suffixIcon;
 
   const CustomTextfield({
     Key? key,
@@ -12,6 +13,7 @@ class CustomTextfield extends StatefulWidget {
     required this.label,
     this.keyboardType = TextInputType.text,
     this.onSubmitted,
+    this.suffixIcon,
   }) : super(key: key);
 
   @override
@@ -26,6 +28,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
       keyboardType: widget.keyboardType,
       onSubmitted: widget.onSubmitted,
       decoration: InputDecoration(
+        suffixIcon: widget.suffixIcon,
         labelText: widget.label,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),

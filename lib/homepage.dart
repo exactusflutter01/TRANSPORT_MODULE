@@ -7,7 +7,9 @@ class Homepage extends StatelessWidget {
 
   @override
   TextEditingController vehclecode = TextEditingController();
+  TextEditingController vehclecodedesc = TextEditingController();
   TextEditingController InsuranceCompany = TextEditingController();
+  TextEditingController InsuranceCompanydes = TextEditingController();
   TextEditingController PolicyType = TextEditingController();
   TextEditingController PolicyNo = TextEditingController();
   TextEditingController Amount = TextEditingController();
@@ -19,35 +21,74 @@ class Homepage extends StatelessWidget {
         title: Text("Insurance"),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          children: [
-            CustomTextfield(
-              cntrollr: vehclecode,
-              label: "Vehicle Code",
-              keyboardType: TextInputType.numberWithOptions(),
-            ),
-            30.heightBox,
-            CustomTextfield(
-              cntrollr: InsuranceCompany,
-              label: "Insurance Company",
-            ),
-            30.heightBox,
-            CustomTextfield(
-              cntrollr: PolicyType,
-              label: "Policy Type",
-            ),
-            30.heightBox,
-            CustomTextfield(
-              cntrollr: PolicyNo,
-              label: "Policy No",
-            ),
-            30.heightBox,
-            CustomTextfield(
-              cntrollr: Amount,
-              label: "Amount",
-            )
-          ],
+        padding: const EdgeInsets.all(15.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              CustomTextfield(
+                cntrollr: vehclecode,
+                label: "Vehicle Code",
+                keyboardType: TextInputType.numberWithOptions(),
+                suffixIcon: Icon(Icons.search),
+              ),
+              10.heightBox,
+              CustomTextfield(
+                cntrollr: vehclecodedesc,
+                label: "",
+                keyboardType: TextInputType.numberWithOptions(),
+              ),
+              30.heightBox,
+              CustomTextfield(
+                cntrollr: InsuranceCompany,
+                label: "Insurance Company",
+                suffixIcon: Icon(Icons.search),
+              ),
+              10.heightBox,
+              CustomTextfield(
+                cntrollr: InsuranceCompanydes,
+                label: "",
+              ),
+              30.heightBox,
+              CustomTextfield(
+                cntrollr: PolicyType,
+                label: "Policy Type",
+                suffixIcon: Icon(Icons.search),
+              ),
+              10.heightBox,
+              CustomTextfield(
+                cntrollr: PolicyType,
+                label: "",
+              ),
+              30.heightBox,
+              CustomTextfield(
+                cntrollr: PolicyNo,
+                label: "Policy No",
+              ),
+              30.heightBox,
+              CustomTextfield(
+                cntrollr: Amount,
+                label: "Amount",
+              ),
+              30.heightBox,
+              Row(
+                children: [
+                  Flexible(
+                    child: CustomTextfield(
+                      cntrollr: Amount,
+                      label: "StartDate",
+                    ),
+                  ),
+                  5.widthBox,
+                  Flexible(
+                    child: CustomTextfield(
+                      cntrollr: Amount,
+                      label: "ExpiryDate",
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
