@@ -48,7 +48,7 @@ class Homepage extends StatelessWidget {
                 cntrollr: InsuranceCompanydes,
                 label: "",
               ),
-              30.heightBox,
+              20.heightBox,
               CustomTextfield(
                 cntrollr: PolicyType,
                 label: "Policy Type",
@@ -59,12 +59,12 @@ class Homepage extends StatelessWidget {
                 cntrollr: PolicyType,
                 label: "",
               ),
-              30.heightBox,
+              20.heightBox,
               CustomTextfield(
                 cntrollr: PolicyNo,
                 label: "Policy No",
               ),
-              30.heightBox,
+              20.heightBox,
               CustomTextfield(
                 cntrollr: Amount,
                 label: "Amount",
@@ -86,7 +86,55 @@ class Homepage extends StatelessWidget {
                     ),
                   ),
                 ],
-              )
+              ),
+              15.heightBox,
+              Row(
+                children: [
+                  Flexible(
+                    child: CustomTextfield(
+                      cntrollr: Amount,
+                      label: "Start Meter Reading",
+                    ),
+                  ),
+                  5.widthBox,
+                  Flexible(
+                    child: CustomTextfield(
+                      cntrollr: Amount,
+                      label: "End Meter Reading",
+                    ),
+                  ),
+                ],
+              ),
+              15.heightBox,
+              Row(
+                children: [
+                  Flexible(
+                    child: CustomTextfield(
+                      cntrollr: Amount,
+                      label: "Invoice No",
+                    ),
+                  ),
+                  5.widthBox,
+                  Flexible(
+                    child: CustomTextfield(
+                      cntrollr: Amount,
+                      label: "Invoice date",
+                    ),
+                  ),
+                ],
+              ),
+              20.heightBox,
+              CustomTextfield(
+                cntrollr: PolicyType,
+                label: "Driver",
+                suffixIcon: Icon(Icons.search),
+              
+              ),
+              10.heightBox,
+              CustomTextfield(
+                cntrollr: PolicyType,
+                label: "",
+              ),
             ],
           ),
         ),
