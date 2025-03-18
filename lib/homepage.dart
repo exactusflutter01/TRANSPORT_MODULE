@@ -79,7 +79,7 @@ class Homepage extends StatelessWidget {
                     ),
                   ),
                   5.widthBox,
-                  Flexible(
+                  Flexible(9
                     child: CustomTextfield(
                       cntrollr: Amount,
                       label: "ExpiryDate",
