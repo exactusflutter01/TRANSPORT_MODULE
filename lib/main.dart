@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:trans_module/homepage.dart';
-import 'package:trans_module/registrationPage.dart';
+import 'package:trans_module/view/homepage.dart';
+import 'package:trans_module/view/mainScreen.dart';
+import 'package:trans_module/view/registrationPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: RegistrationPage(),
+      home: MainScreen(),
     );
   }
 }
