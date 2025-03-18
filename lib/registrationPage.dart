@@ -110,7 +110,7 @@ class RegistrationPage extends StatelessWidget {
                   ),
                 ],
               ),
-                30.heightBox,
+              30.heightBox,
               Row(
                 children: [
                   Expanded(
@@ -123,6 +123,58 @@ class RegistrationPage extends StatelessWidget {
                   Expanded(
                     child: CustomTextfield(
                       cntrollr: otherRegExpDate_controller,
+                      label: "",
+                    ),
+                  ),
+                ],
+              ),
+              30.heightBox,
+              CustomTextfield(
+                cntrollr: docNo_Controller,
+                label: "Remarks",
+                keyboardType: TextInputType.numberWithOptions(),
+                onSubmitted: (p0) {},
+              ),
+              30.heightBox,
+              CustomTextfield(
+                cntrollr: docDate_Controller,
+                label: "Document Ref",
+              ),
+              30.heightBox,
+              Row(
+                children: [
+                  Expanded(
+                    child: CustomTextfield(
+                      cntrollr: docNo_Controller,
+                      label: "Debit Account Code",
+                      keyboardType: TextInputType.numberWithOptions(),
+                      onSubmitted: (p0) {},
+                    ),
+                  ),
+                  15.widthBox,
+                  Expanded(
+                    child: CustomTextfield(
+                      cntrollr: docDate_Controller,
+                      label: "",
+                    ),
+                  ),
+                ],
+              ),
+              30.heightBox,
+              Row(
+                children: [
+                  Expanded(
+                    child: CustomTextfield(
+                      cntrollr: docNo_Controller,
+                      label: "Credit Account Code",
+                      keyboardType: TextInputType.numberWithOptions(),
+                      onSubmitted: (p0) {},
+                    ),
+                  ),
+                  15.widthBox,
+                  Expanded(
+                    child: CustomTextfield(
+                      cntrollr: docDate_Controller,
                       label: "",
                     ),
                   ),
