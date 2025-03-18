@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:trans_module/view/homepage.dart';
+import 'package:trans_module/view/insurancePage.dart';
 import 'package:trans_module/view/mainScreen.dart';
 import 'package:trans_module/view/registrationPage.dart';
 
