@@ -1,30 +1,70 @@
 import 'package:flutter/material.dart';
 import 'package:trans_module/PRESENATION/WIDGETS/SizedBoxExtension.dart';
 import 'package:trans_module/PRESENATION/WIDGETS/TextfieldWidgets.dart';
+import 'package:trans_module/PRESENATION/WIDGETS/TextfieldWithDate.dart';
 
-class Homepage extends StatelessWidget {
+class Homepage extends StatefulWidget {
   Homepage({super.key});
 
   @override
+  State<Homepage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  @override
   TextEditingController vehclecode = TextEditingController();
+
   TextEditingController vehclecodedesc = TextEditingController();
+
   TextEditingController InsuranceCompany = TextEditingController();
+
   TextEditingController InsuranceCompanydes = TextEditingController();
+
   TextEditingController PolicyType = TextEditingController();
+
   TextEditingController PolicyNo = TextEditingController();
+
   TextEditingController Amount = TextEditingController();
-  // TextEditingController PolicyType = TextEditingController();
-  // TextEditingController PolicyType = TextEditingController();
+
+  TextEditingController docdate = TextEditingController();
+  TextEditingController Startdate = TextEditingController();
+  TextEditingController Expirydate = TextEditingController();
+  TextEditingController InvoiceDate = TextEditingController();
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Insurance"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
+              CustomTextfield(
+                cntrollr: vehclecode,
+                label: "Doc No",
+                suffixIcon: Icon(Icons.search),
+              ),
+              20.heightBox,
+              Row(
+                children: [
+                  Flexible(
+                    child: CustomDateField(
+                      controller: docdate,
+                      label: "Doc date",
+                    ),
+                  ),
+                  5.widthBox,
+                  Flexible(
+                    child: CustomTextfield(
+                      cntrollr: Amount,
+                      label: "Div code",
+                      suffixIcon: Icon(Icons.search),
+                    ),
+                  ),
+                ],
+              ),
+              20.heightBox,
               CustomTextfield(
                 cntrollr: vehclecode,
                 label: "Vehicle Code",
@@ -37,7 +77,7 @@ class Homepage extends StatelessWidget {
                 label: "",
                 keyboardType: TextInputType.numberWithOptions(),
               ),
-              30.heightBox,
+              20.heightBox,
               CustomTextfield(
                 cntrollr: InsuranceCompany,
                 label: "Insurance Company",
@@ -73,16 +113,16 @@ class Homepage extends StatelessWidget {
               Row(
                 children: [
                   Flexible(
-                    child: CustomTextfield(
-                      cntrollr: Amount,
-                      label: "StartDate",
+                    child: CustomDateField(
+                      controller: Startdate,
+                      label: "Start Date",
                     ),
                   ),
                   5.widthBox,
-                  Flexible(9
-                    child: CustomTextfield(
-                      cntrollr: Amount,
-                      label: "ExpiryDate",
+                  Flexible(
+                    child: CustomDateField(
+                      controller: Startdate,
+                      label: "Expiry date",
                     ),
                   ),
                 ],
@@ -116,8 +156,8 @@ class Homepage extends StatelessWidget {
                   ),
                   5.widthBox,
                   Flexible(
-                    child: CustomTextfield(
-                      cntrollr: Amount,
+                    child: CustomDateField(
+                      controller: InvoiceDate,
                       label: "Invoice date",
                     ),
                   ),
@@ -128,7 +168,28 @@ class Homepage extends StatelessWidget {
                 cntrollr: PolicyType,
                 label: "Driver",
                 suffixIcon: Icon(Icons.search),
-              
+              ),
+              10.heightBox,
+              CustomTextfield(
+                cntrollr: PolicyType,
+                label: "",
+              ),
+              10.heightBox,
+              CustomTextfield(
+                cntrollr: PolicyType,
+                label: "Remarks",
+                Maxline: 3,
+              ),
+              20.heightBox,
+              CustomTextfield(
+                cntrollr: PolicyType,
+                label: "Document Ref",
+              ),
+              20.heightBox,
+              CustomTextfield(
+                cntrollr: PolicyType,
+                label: "Debit Account Code",
+                suffixIcon: Icon(Icons.search),
               ),
               10.heightBox,
               CustomTextfield(
