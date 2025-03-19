@@ -1,10 +1,11 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:trans_module/CONSTANTS.dart';
 
-const String baseUrl = "http://scm06.exactuscloud.com:4028/api";
 
-class ApiService {
+
+class regRepository {
   Future<List<dynamic>> fetchDivCode() async {
     try {
       const url = '$baseUrl/registration/div_code_get';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:trans_module/PRESENATION/WIDGETS/SizedBoxExtension.dart';
-import 'package:trans_module/PRESENATION/WIDGETS/TextfieldWidgets.dart';
+import 'package:trans_module/WIDGETS/SizedBoxExtension.dart';
+import 'package:trans_module/WIDGETS/TextfieldWidgets.dart';
 
 class RegistrationPage extends StatelessWidget {
   TextEditingController docNo_Controller = TextEditingController();
