@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trans_module/view/insurancePage.dart';
-import 'package:trans_module/view/registrationPage.dart';
+import 'package:trans_module/view/Registration/registrationPage.dart';
 
 class MainScreen extends StatelessWidget {
   MainScreen({super.key});
@@ -55,6 +55,7 @@ class MainScreen extends StatelessWidget {
                       elevation: 6,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
+                        
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,

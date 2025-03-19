@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:trans_module/view/insurancePage.dart';
 import 'package:trans_module/view/mainScreen.dart';
-import 'package:trans_module/view/registrationPage.dart';
+import 'package:trans_module/view/Registration/registrationPage.dart';
 
 void main() {
   runApp(const MyApp());

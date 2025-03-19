@@ -28,8 +28,10 @@ class RegistrationPage extends StatelessWidget {
               CustomTextfield(
                 cntrollr: docNo_Controller,
                 label: "Doc NO",
-                keyboardType: TextInputType.numberWithOptions(),
-                // onSubmitted: (p0) {},
+                // keyboardType: TextInputType.numberWithOptions(),
+                suffixIcon: Icon(Icons.search),onSubmitted: () {
+                  
+                },
               ),
               30.heightBox,
               CustomTextfield(
