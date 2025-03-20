@@ -97,8 +97,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:trans_module/BATTERY_INFO/battery_page.dart';
 import 'package:trans_module/CONSTANTS.dart';
+import 'package:trans_module/FUEL_FILLING/fuel_filling_page.dart';
 import 'package:trans_module/INSURANCE/insu_page.dart';
 import 'package:trans_module/REGISTRATION/reg_page.dart';
 
@@ -111,6 +112,16 @@ class MainScreen extends StatelessWidget {
       'title': 'Registration',
       'icon': Icons.app_registration,
       'page': RegistrationPage()
+    },
+    {
+      'title': 'Battery Info',
+      'icon': Icons.battery_full,
+      'page': batteryInfoPage()
+    },
+    {
+      'title': 'Fuel Filling',
+      'icon': Icons.local_gas_station,
+      'page': FuelFillingPage()
     },
   ];
 
