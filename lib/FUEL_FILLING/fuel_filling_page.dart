@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trans_module/CONSTANTS.dart';
 
 class FuelFillingPage extends StatelessWidget {
   const FuelFillingPage({super.key});
@@ -7,7 +8,7 @@ class FuelFillingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-        title: Text("Insurance"),
+        title: Text("Fuel Filling",style: appbarTextStyle,),
       ),
     );
   }
