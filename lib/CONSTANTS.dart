@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-const String baseUrl = "http://scm06.exactuscloud.com:4016/api";
+const String baseUrl = "https://scm06.exactuscloud.com:4016/api";
 
 final TextStyle appbarTextStyle = GoogleFonts.mitr(
   fontWeight: FontWeight.w800,

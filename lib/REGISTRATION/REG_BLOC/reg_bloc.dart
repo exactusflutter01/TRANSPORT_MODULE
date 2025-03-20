@@ -33,8 +33,6 @@ class RegBloc extends Bloc<RegEvent, RegState> {
         emit(RegState.loaded(filteredDivs));
       }
     });
-    // on<RegEvent>((event, emit) {
-    //   // TODO: implement event handler
-    // });
+  
   }
 }
