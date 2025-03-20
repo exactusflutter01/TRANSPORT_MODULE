@@ -7,6 +7,7 @@ class CustomTextfield extends StatefulWidget {
   final Function()? onSubmitted;
   final Widget? suffixIcon;
   final int? Maxline;
+  final bool isMadatory;
 
   CustomTextfield({
     Key? key,
@@ -16,6 +17,7 @@ class CustomTextfield extends StatefulWidget {
     this.onSubmitted,
     this.suffixIcon,
     this.Maxline,
+    this.isMadatory=false,
   }) : super(key: key);
 
   @override
@@ -31,6 +33,13 @@ class _CustomTextfieldState extends State<CustomTextfield> {
       keyboardType: widget.keyboardType,
       onTap: widget.onSubmitted,
       decoration: InputDecoration(
+ prefixIcon: widget.isMadatory == true 
+    ? Icon(
+        Icons.star,
+        color: Colors.red,
+        size: 15,
+      ) 
+    : null,
           suffixIcon: widget.suffixIcon,
           labelText: widget.label,
           labelStyle:
