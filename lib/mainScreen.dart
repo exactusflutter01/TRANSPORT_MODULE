@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trans_module/INSURANCE/insu_page.dart';
+import 'package:trans_module/INSURANCE/SCREENS/insu_page.dart';
 import 'package:trans_module/REGISTRATION/reg_page.dart';
 
 class MainScreen extends StatelessWidget {

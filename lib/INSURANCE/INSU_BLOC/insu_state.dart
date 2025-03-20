@@ -1,6 +1,13 @@
 part of 'insu_bloc.dart';
 
 @freezed
-class InsuState with _$InsuState {
-  const factory InsuState.initial() = _Initial;
+abstract class InsuranceState with _$InsuranceState {
+  factory InsuranceState(
+      {required List ItemsList,
+      required bool isLoading,
+      required bool isError}) = insuranceState;
+
+  factory InsuranceState.initial() {
+    return InsuranceState(ItemsList: [], isLoading: true, isError: false);
+  }
 }
