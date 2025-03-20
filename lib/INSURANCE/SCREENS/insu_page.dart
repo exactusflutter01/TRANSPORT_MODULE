@@ -4,14 +4,14 @@ import 'package:trans_module/WIDGETS/TextfieldWidgets.dart';
 import 'package:trans_module/WIDGETS/TextfieldWithDate.dart';
 
 
-class Homepage extends StatefulWidget {
-  Homepage({super.key});
+class Insurance_page extends StatefulWidget {
+  Insurance_page({super.key});
 
   @override
-  State<Homepage> createState() => _HomepageState();
+  State<Insurance_page> createState() => _HomepageState();
 }
 
-class _HomepageState extends State<Homepage> {
+class _HomepageState extends State<Insurance_page> {
   @override
   TextEditingController vehclecode = TextEditingController();
 

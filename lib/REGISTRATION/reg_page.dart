@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:trans_module/CONSTANTS.dart';
 import 'package:trans_module/WIDGETS/SizedBoxExtension.dart';
 import 'package:trans_module/WIDGETS/TextfieldWidgets.dart';
+import 'package:trans_module/WIDGETS/TextfieldWithDate.dart';
 
 class RegistrationPage extends StatelessWidget {
   TextEditingController docNo_Controller = TextEditingController();
@@ -18,7 +20,10 @@ class RegistrationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Registration'),
+        title: Text(
+          'Registration',
+          style: appbarTextStyle,
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -29,13 +34,11 @@ class RegistrationPage extends StatelessWidget {
                 cntrollr: docNo_Controller,
                 label: "Doc NO",
                 // keyboardType: TextInputType.numberWithOptions(),
-                suffixIcon: Icon(Icons.search),onSubmitted: () {
-                  
-                },
+                suffixIcon: Icon(Icons.search), onSubmitted: () {},
               ),
               30.heightBox,
-              CustomTextfield(
-                cntrollr: docDate_Controller,
+              CustomDateField(
+                controller: docDate_Controller,
                 label: "Doc Date",
               ),
               30.heightBox,
@@ -46,6 +49,8 @@ class RegistrationPage extends StatelessWidget {
                     child: CustomTextfield(
                       cntrollr: division_controller,
                       label: "Division",
+                      suffixIcon: Icon(Icons.search),
+                      onSubmitted: () {},
                     ),
                   ),
                   15.widthBox,
@@ -62,15 +67,15 @@ class RegistrationPage extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: CustomTextfield(
-                      cntrollr: regStartDate_controller,
+                    child: CustomDateField(
+                      controller: regStartDate_controller,
                       label: "Reg Start Date",
                     ),
                   ),
                   15.widthBox,
                   Expanded(
-                    child: CustomTextfield(
-                      cntrollr: regExpDate_controller,
+                    child: CustomDateField(
+                      controller: regExpDate_controller,
                       label: "Reg Exp Date",
                     ),
                   ),
@@ -105,8 +110,8 @@ class RegistrationPage extends StatelessWidget {
                   ),
                   15.widthBox,
                   Expanded(
-                    child: CustomTextfield(
-                      cntrollr: otherRegExpDate_controller,
+                    child: CustomDateField(
+                      controller: otherRegExpDate_controller,
                       label: "Other Reg Exp Date",
                     ),
                   ),

@@ -25,13 +25,16 @@ class _CustomDateFieldState extends State<CustomDateField> {
       showCursor: true,
       controller: widget.controller,
       decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(6)),
-        labelText: widget.label,
-        suffixIcon: IconButton(
-          icon: const Icon(Icons.calendar_month),
-          onPressed: () => _selectDate(context),
-        ),
-      ),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(6)),
+          labelText: widget.label,
+          labelStyle:
+              TextStyle(color: Colors.black, fontWeight: FontWeight.w700),
+          suffixIcon: IconButton(
+            icon: const Icon(Icons.calendar_month),
+            onPressed: () => _selectDate(context),
+          ),
+          // enabledBorder: UnderlineInputBorder(),
+          suffixIconColor: Colors.green),
       onTap: () => _selectDate(context),
       readOnly: widget.readOnly,
     );

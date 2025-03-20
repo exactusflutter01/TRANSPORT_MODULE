@@ -1,0 +1,2 @@
+D:/EXACTUS/TRANSPORTATION/TRANSPORT_MODULE/android/app/.cxx/Debug/1g5v1j5t/x86/CMakeFiles/edit_cache.dir
+D:/EXACTUS/TRANSPORTATION/TRANSPORT_MODULE/android/app/.cxx/Debug/1g5v1j5t/x86/CMakeFiles/rebuild_cache.dir
