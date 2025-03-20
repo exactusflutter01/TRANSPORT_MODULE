@@ -22,6 +22,11 @@ class InsuBloc extends Bloc<InsuEvent, InsuranceState> {
         isLoading: false,
         isError: false,
       ));
-    } catch (e) {}
+    } catch (e) {
+      emit(state.copyWith(
+        isLoading: false,
+        isError: true,
+      ));
+    }
   }
 }
