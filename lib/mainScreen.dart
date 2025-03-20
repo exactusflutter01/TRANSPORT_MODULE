@@ -12,6 +12,11 @@ class MainScreen extends StatelessWidget {
       'icon': Icons.app_registration,
       'page': RegistrationPage()
     },
+    {
+      'title': 'Battery Info',
+      'icon': Icons.app_registration,
+      'page': RegistrationPage()
+    },
   ];
 
   @override
