@@ -8,7 +8,7 @@ import 'package:trans_module/CONSTANTS.dart';
 class regRepository {
   Future<List<dynamic>> fetchDivCode() async {
     try {
-      const url = '$baseUrl/registration/div_code_get';
+      const url = '/registration/div_code_get';
       var response = await http.get(Uri.parse(url));
 
       print("Response Status Code: ${response.statusCode}");
