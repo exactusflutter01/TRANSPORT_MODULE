@@ -5,13 +5,14 @@ class CustomDateField extends StatefulWidget {
   final String label;
   final bool readOnly;
   final Function(String)? onDateSelected; // Callback to return selected date
-
+final bool isMadatory;
   const CustomDateField({
     Key? key,
     required this.controller,
     required this.label,
     this.readOnly = false,
     this.onDateSelected,
+       this.isMadatory=false,
   }) : super(key: key);
 
   @override
@@ -25,10 +26,17 @@ class _CustomDateFieldState extends State<CustomDateField> {
       showCursor: true,
       controller: widget.controller,
       decoration: InputDecoration(
+    //      prefixIcon: widget.isMadatory == true 
+    // ? Icon(
+    //     Icons.star,
+    //     color: Colors.red,
+    //     size: 10,
+    //   ) 
+    // : null,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(6)),
           labelText: widget.label,
           labelStyle:
-              TextStyle(color: Colors.black, fontWeight: FontWeight.w700),
+              TextStyle(color:widget.isMadatory == true ?Colors.red: Colors.black, fontWeight: FontWeight.w700),
           suffixIcon: IconButton(
             icon: const Icon(Icons.calendar_month),
             onPressed: () => _selectDate(context),

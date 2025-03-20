@@ -5,9 +5,11 @@ class CustomTextfield extends StatefulWidget {
   final String label;
   final TextInputType keyboardType;
   final Function()? onSubmitted;
+final ValueChanged<String>? onChanged;
   final Widget? suffixIcon;
   final int? Maxline;
   final bool isMadatory;
+  final bool isReadonly;
 
   CustomTextfield({
     Key? key,
@@ -17,7 +19,7 @@ class CustomTextfield extends StatefulWidget {
     this.onSubmitted,
     this.suffixIcon,
     this.Maxline,
-    this.isMadatory=false,
+    this.isMadatory=false,  this.isReadonly=false, this.onChanged,
   }) : super(key: key);
 
   @override
@@ -28,29 +30,35 @@ class _CustomTextfieldState extends State<CustomTextfield> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      readOnly: widget.isReadonly,
       maxLines: widget.Maxline ?? 1,
       controller: widget.cntrollr,
       keyboardType: widget.keyboardType,
       onTap: widget.onSubmitted,
+      onChanged: widget.onChanged,
       decoration: InputDecoration(
- prefixIcon: widget.isMadatory == true 
-    ? Icon(
-        Icons.star,
-        color: Colors.red,
-        size: 15,
-      ) 
-    : null,
+//  prefixIcon: widget.isMadatory == true 
+//     ? Icon(
+//         Icons.star,
+//         color: Colors.red,
+//         size: 10,
+//       ) 
+//     : null,
           suffixIcon: widget.suffixIcon,
           labelText: widget.label,
           labelStyle:
-              TextStyle(color: Colors.black, fontWeight: FontWeight.w700),
+              TextStyle(color:widget.isMadatory == true ?Colors.red: Colors.black, fontWeight: FontWeight.w700),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.0),
+              
               borderSide: BorderSide(
                   color: Colors.green, width: 2, style: BorderStyle.solid)),
           // enabledBorder: UnderlineInputBorder(),
           // hoverColor: Colors.green,
+          
           suffixIconColor: Colors.green),
+
+          
     );
   }
 }
