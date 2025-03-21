@@ -15,7 +15,7 @@ class DivisionModel {
 
   factory DivisionModel.fromJson(Map<String, dynamic> json) {
     return DivisionModel(
-      var1: json['DIVISION_CODE'],
+      var1: json['DIV_CODE'] ?? '',
       var2: '',
       var3: '',
       var4: '',

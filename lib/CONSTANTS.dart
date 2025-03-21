@@ -15,9 +15,9 @@ final TextStyle appbarTextStyle = GoogleFonts.mitr(
   fontSize: 27,
 );
 
-final TextStyle mainscreenTextStyle = GoogleFonts.bebasNeue(
+final TextStyle mainscreenTextStyle = GoogleFonts.lato(
   fontWeight: FontWeight.bold,
   // color: const Color.fromARGB(255, 42, 128, 48),
   color: Colors.black,
-  fontSize: 25,
+  fontSize: 18,
 );

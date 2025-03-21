@@ -191,7 +191,7 @@ class MainScreen extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             sliver: SliverGrid(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+                crossAxisCount: 3,
                 crossAxisSpacing: 13,
                 mainAxisSpacing: 13,
                 childAspectRatio: 1.2,
@@ -224,7 +224,7 @@ class MainScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(menuItems[index]['icon'],
-                              size: 35, color: Colors.black),
+                              size: 32, color: Colors.black),
                           const SizedBox(height: 10),
                           Text(
                             menuItems[index]['title'],

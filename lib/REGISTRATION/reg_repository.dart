@@ -142,15 +142,16 @@ class RegRepository {
           print("Parsed Model Data: $modelData");
           return modelData;
         } else {
-          throw Exception(
-              "Unexpected data format: ${response.data.runtimeType}");
+          print("Unexpected data format: ${response.data.runtimeType}");
+          return [];
         }
       } else {
-        throw Exception('Failed to load div codes: ${response.statusCode}');
+        print('Failed to load div codes: ${response.statusCode}');
+        return [];
       }
     } catch (e) {
       print("Network error: $e");
-      throw Exception('Network error: $e');
+      return [];
     }
   }
 }
