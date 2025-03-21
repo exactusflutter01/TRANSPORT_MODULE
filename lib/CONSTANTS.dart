@@ -8,6 +8,7 @@ final Dio dio =
 
 final Color commonColor = Color.fromARGB(255, 35, 117, 41);
 
+
 final TextStyle appbarTextStyle = GoogleFonts.mitr(
   fontWeight: FontWeight.w800,
   color: const Color.fromARGB(255, 35, 117, 41),

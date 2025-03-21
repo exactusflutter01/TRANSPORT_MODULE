@@ -141,15 +141,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:trans_module/BATTERY_INFO/battery_page.dart';
 import 'package:trans_module/CONSTANTS.dart';
 import 'package:trans_module/FUEL_FILLING/fuel_filling_page.dart';
-import 'package:trans_module/INSURANCE/insu_page.dart';
-
+import 'package:trans_module/INSURANCE/SCREENS/insu_page.dart';
 import 'package:trans_module/REGISTRATION/reg_page.dart';
 
 class MainScreen extends StatelessWidget {
   MainScreen({super.key});
 
   final List<Map<String, dynamic>> menuItems = [
-    {'title': 'Insurance', 'icon': Icons.security, 'page': Homepage()},
+    {'title': 'Insurance', 'icon': Icons.security, 'page': Insurance_page()},
     {
       'title': 'Registration',
       'icon': Icons.app_registration,

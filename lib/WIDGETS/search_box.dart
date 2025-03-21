@@ -15,7 +15,7 @@ searchBox(context, title, dataList) async {
           dataList: dataList,
         );
       });
-  return data??'';
+  return data ?? '';
 }
 
 class CommonDialogBox extends StatefulWidget {
@@ -57,7 +57,7 @@ class _CommonDialogBoxState extends State<CommonDialogBox> {
                   20.heightBox,
                 ],
               )),
-                  10.heightBox,
+          10.heightBox,
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: CustomTextfield(
@@ -79,7 +79,14 @@ class _CommonDialogBoxState extends State<CommonDialogBox> {
                           Navigator.pop(context);
                         },
                         child: Container(
-                            height: 50, child: Card(child: Column())));
+                            height: 50,
+                            child: Card(
+                                child: Column(
+                              children: [
+
+                                Text(dataList.var1)
+                              ],
+                            ))));
                   }),
             ),
           ),
