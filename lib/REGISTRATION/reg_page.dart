@@ -49,6 +49,8 @@ class RegistrationPage extends StatelessWidget {
                     child: CustomTextfield(
                       cntrollr: division_controller,
                       label: "Division",
+                      suffixIcon: Icon(Icons.search),
+                      onSubmitted: () {},
                     ),
                   ),
                   15.widthBox,
