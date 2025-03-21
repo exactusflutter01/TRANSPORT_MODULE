@@ -56,7 +56,7 @@ class FuelFillingPage extends StatelessWidget {
                       isReadonly: true,
                       suffixIcon: Icon(Icons.search),
                       onSubmitted: () async {
-                      await  FuelFillingRepository().fetchPaymentMoods();
+                      // await  FuelFillingRepository().fetchPaymentMoods();
 
                         final data = await searchBox(
                             context,

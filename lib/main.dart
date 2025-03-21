@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:trans_module/FUEL_FILLING/FUEL_BLOC/fuel_bloc.dart';
 import 'package:trans_module/INSURANCE/insu_page.dart';
 import 'package:trans_module/mainScreen.dart';
 import 'package:trans_module/REGISTRATION/reg_page.dart';
