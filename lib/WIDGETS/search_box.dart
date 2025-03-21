@@ -79,10 +79,13 @@ class _CommonDialogBoxState extends State<CommonDialogBox> {
                           Navigator.pop(context);
                         },
                         child: Container(
-                            height: 50,
+                            height: 70,
                             child: Card(
                                 child: Column(
-                              children: [],
+                              children: [
+                                Text(dataList.var1),
+                                Text(dataList.var2)
+                              ],
                             ))));
                   }),
             ),

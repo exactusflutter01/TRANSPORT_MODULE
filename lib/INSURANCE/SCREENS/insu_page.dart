@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:trans_module/CONSTANTS.dart';
 import 'package:trans_module/INSURANCE/INSU_BLOC/insu_bloc.dart';
 import 'package:trans_module/INSURANCE/test.dart';
 import 'package:trans_module/WIDGETS/SizedBoxExtension.dart';
 import 'package:trans_module/WIDGETS/TextfieldWidgets.dart';
 import 'package:trans_module/WIDGETS/TextfieldWithDate.dart';
 import 'package:trans_module/WIDGETS/search_box.dart';
+import 'package:intl/intl.dart';
 
-class Insurance_page extends StatefulWidget {
-  Insurance_page({super.key});
+class Insurance_page extends StatelessWidget {
+  Insurance_page({
+    super.key,
+  });
 
-  @override
-  State<Insurance_page> createState() => _HomepageState();
-}
-
-class _HomepageState extends State<Insurance_page> {
   @override
   TextEditingController vehclecode = TextEditingController();
 
@@ -25,33 +24,61 @@ class _HomepageState extends State<Insurance_page> {
   TextEditingController InsuranceCompanydes = TextEditingController();
 
   TextEditingController PolicyType = TextEditingController();
+  TextEditingController PolicyTypedesc = TextEditingController();
 
   TextEditingController PolicyNo = TextEditingController();
 
   TextEditingController Amount = TextEditingController();
 
   TextEditingController docdate = TextEditingController();
+
   TextEditingController Startdate = TextEditingController();
+
   TextEditingController Expirydate = TextEditingController();
+
   TextEditingController InvoiceDate = TextEditingController();
+  TextEditingController DebitAccCode = TextEditingController();
+  TextEditingController DebitAccCodedesc = TextEditingController();
+  TextEditingController smr = TextEditingController();
+  TextEditingController emr = TextEditingController();
+  TextEditingController InvoiceNo = TextEditingController();
+  TextEditingController driver = TextEditingController();
+  TextEditingController drivdesc = TextEditingController();
+  TextEditingController Remarks = TextEditingController();
+
   Widget build(BuildContext context) {
+    DateTime TimeNow = DateTime.now();
+    docdate.text = DateFormat('dd-MM-yyyy').format(TimeNow);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Insurance"),
+        title: Text(
+          "Insurance",
+          style: appbarTextStyle,
+        ),
       ),
       body: BlocConsumer<InsuBloc, InsuranceState>(
-        listener: (context, state) {
-          if (state.isError) {
-            // Show error message when there is an error
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("Error occurred while fetching data!")),
-            );
+        listenWhen: (previous, current) {
+          return previous.ItemsList != current.ItemsList;
+        },
+        listener: (context, state) async {
+          // print("state.ItemsList Listener ${state.ItemsList}");
+          if (state.ItemsList.isNotEmpty) {
+            final data =
+                await searchBox(context, "Insurance Company", state.ItemsList);
+            InsuranceCompany.text = data.var1;
+            InsuranceCompanydes.text = data.var2;
           }
-          if (!state.isLoading && state.ItemsList.isNotEmpty) {
-            // Show a success message after fetching items
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("Data fetched successfully!")),
-            );
+          if (state.PolicyList.isNotEmpty) {
+            final data =
+                await searchBox(context, "Policy Type", state.PolicyList);
+            PolicyType.text = data.var1;
+            PolicyNo.text = data.var2;
+          }
+          if (state.DebitCode.isNotEmpty) {
+            final data =
+                await searchBox(context, "Debit Account Code", state.DebitCode);
+            DebitAccCode.text = data.var1;
+            DebitAccCodedesc.text = data.var2;
           }
         },
         builder: (context, state) {
@@ -61,9 +88,11 @@ class _HomepageState extends State<Insurance_page> {
               child: Column(
                 children: [
                   CustomTextfield(
+                    isReadonly: true,
                     cntrollr: vehclecode,
                     label: "Doc No",
                     suffixIcon: Icon(Icons.search),
+                    isMadatory: true,
                   ),
                   20.heightBox,
                   Row(
@@ -72,11 +101,13 @@ class _HomepageState extends State<Insurance_page> {
                         child: CustomDateField(
                           controller: docdate,
                           label: "Doc date",
+                          isMadatory: true,
                         ),
                       ),
                       5.widthBox,
                       Flexible(
                         child: CustomTextfield(
+                          isReadonly: true,
                           cntrollr: Amount,
                           label: "Div code",
                           suffixIcon: Icon(Icons.search),
@@ -86,6 +117,7 @@ class _HomepageState extends State<Insurance_page> {
                   ),
                   20.heightBox,
                   CustomTextfield(
+                    isReadonly: true,
                     cntrollr: vehclecode,
                     label: "Vehicle Code",
                     keyboardType: TextInputType.numberWithOptions(),
@@ -99,21 +131,14 @@ class _HomepageState extends State<Insurance_page> {
                   ),
                   20.heightBox,
                   CustomTextfield(
+                    isReadonly: true,
+                    isMadatory: true,
                     cntrollr: InsuranceCompany,
                     label: "Insurance Company",
                     suffixIcon: Icon(Icons.search),
                     onSubmitted: () async {
-                      context.read<InsuBloc>().add(FetchDoc());
-                      await searchBox(
-                          context, "Insurance Company", state.ItemsList);
-
-                      // ItemSelector(
-                      //   labelText: 'item',
-                      //   itemList: state.ItemsList,
-                      //   // onItemSelected: (selectedItem) {
-                      //   //   print('Selected: $selectedItem');
-                      //   // },
-                      // );
+                      print("state.ItemsList ${state.ItemsList}");
+                      context.read<InsuBloc>().add(InsuEvent.fetchdoc());
                     },
                   ),
                   10.heightBox,
@@ -123,13 +148,18 @@ class _HomepageState extends State<Insurance_page> {
                   ),
                   20.heightBox,
                   CustomTextfield(
+                    isReadonly: true,
+                    isMadatory: true,
                     cntrollr: PolicyType,
                     label: "Policy Type",
                     suffixIcon: Icon(Icons.search),
+                    onSubmitted: () {
+                      context.read<InsuBloc>().add(InsuEvent.fetchPolicy());
+                    },
                   ),
                   10.heightBox,
                   CustomTextfield(
-                    cntrollr: PolicyType,
+                    cntrollr: PolicyTypedesc,
                     label: "",
                   ),
                   20.heightBox,
@@ -139,6 +169,7 @@ class _HomepageState extends State<Insurance_page> {
                   ),
                   20.heightBox,
                   CustomTextfield(
+                    isMadatory: true,
                     cntrollr: Amount,
                     label: "Amount",
                   ),
@@ -165,14 +196,16 @@ class _HomepageState extends State<Insurance_page> {
                     children: [
                       Flexible(
                         child: CustomTextfield(
-                          cntrollr: Amount,
+                          isMadatory: true,
+                          cntrollr: smr,
                           label: "Start Meter Reading",
                         ),
                       ),
                       5.widthBox,
                       Flexible(
                         child: CustomTextfield(
-                          cntrollr: Amount,
+                          isMadatory: true,
+                          cntrollr: emr,
                           label: "End Meter Reading",
                         ),
                       ),
@@ -183,7 +216,7 @@ class _HomepageState extends State<Insurance_page> {
                     children: [
                       Flexible(
                         child: CustomTextfield(
-                          cntrollr: Amount,
+                          cntrollr: InvoiceNo,
                           label: "Invoice No",
                         ),
                       ),
@@ -198,13 +231,15 @@ class _HomepageState extends State<Insurance_page> {
                   ),
                   20.heightBox,
                   CustomTextfield(
-                    cntrollr: PolicyType,
+                    isReadonly: true,
+                    isMadatory: true,
+                    cntrollr: driver,
                     label: "Driver",
                     suffixIcon: Icon(Icons.search),
                   ),
                   10.heightBox,
                   CustomTextfield(
-                    cntrollr: PolicyType,
+                    cntrollr: drivdesc,
                     label: "",
                   ),
                   10.heightBox,
@@ -215,18 +250,22 @@ class _HomepageState extends State<Insurance_page> {
                   ),
                   20.heightBox,
                   CustomTextfield(
-                    cntrollr: PolicyType,
+                    cntrollr: Remarks,
                     label: "Document Ref",
                   ),
                   20.heightBox,
                   CustomTextfield(
-                    cntrollr: PolicyType,
+                    isReadonly: true,
+                    cntrollr: DebitAccCode,
                     label: "Debit Account Code",
                     suffixIcon: Icon(Icons.search),
+                    onSubmitted: () {
+                      context.read<InsuBloc>().add(InsuEvent.fetchDebitCode());
+                    },
                   ),
                   10.heightBox,
                   CustomTextfield(
-                    cntrollr: PolicyType,
+                    cntrollr: DebitAccCodedesc,
                     label: "",
                   ),
                 ],
