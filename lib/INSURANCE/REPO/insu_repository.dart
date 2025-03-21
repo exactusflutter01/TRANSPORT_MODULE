@@ -6,7 +6,7 @@ import 'package:trans_module/INSURANCE/MODELS/insu_model.dart';
 class Insurance_Repo {
   fetchinsCmpny() async {
     try {
-      final response = await dio.get('insurance/insurance_company_get');
+      final response = await dio.get('/insurance/insurance_company_get');
       print(dio);
       print("response.data ${response.data}");
       final modelData = (response.data)
@@ -22,7 +22,7 @@ class Insurance_Repo {
 // /insurance/debit_code_get
   fetchPolicyType() async {
     try {
-      final response = await dio.get('insurance/policy_type_get');
+      final response = await dio.get('/insurance/policy_type_get');
       print(dio);
       print("response.data ${response.data}");
       final modelData = (response.data)
@@ -37,7 +37,7 @@ class Insurance_Repo {
 
   fetchDebitCode() async {
     try {
-      final response = await dio.get('insurance/debit_code_get');
+      final response = await dio.get('/insurance/debit_code_get');
       print(dio);
       print("response.data ${response.data}");
       final modelData = (response.data)
