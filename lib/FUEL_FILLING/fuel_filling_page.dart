@@ -38,7 +38,6 @@ class FuelFillingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<FuelBloc, FuelState>(
       listenWhen: (previous, current) {
-       
         return previous.paymentMood != current.paymentMood;
       },
       listener: (context, state) async {
@@ -46,6 +45,7 @@ class FuelFillingPage extends StatelessWidget {
           print("state.paymentMood ${state.paymentMood}");
           final data =
               await searchBox(context, 'Document Numbers', state.paymentMood);
+          payment_mode_Controller.text = data.var1;
         }
       },
       builder: (context, state) {
@@ -100,6 +100,7 @@ class FuelFillingPage extends StatelessWidget {
                       10.widthBox,
                       Expanded(
                         child: CustomTextfield(
+                          isReadonly: true,
                           cntrollr: payment_mode_Controller,
                           label: "Payment Mode",
                           suffixIcon: Icon(Icons.search),
