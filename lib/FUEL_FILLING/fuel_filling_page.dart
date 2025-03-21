@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trans_module/CONSTANTS.dart';
+import 'package:trans_module/FUEL_FILLING/FUEL_BLOC/fuel_bloc.dart';
 import 'package:trans_module/FUEL_FILLING/fuel_filling_repository.dart';
 import 'package:trans_module/WIDGETS/SizedBoxExtension.dart';
 import 'package:trans_module/WIDGETS/TextfieldWidgets.dart';
@@ -56,14 +58,7 @@ class FuelFillingPage extends StatelessWidget {
                       isReadonly: true,
                       suffixIcon: Icon(Icons.search),
                       onSubmitted: () async {
-                      await  FuelFillingRepository().fetchPaymentMoods();
-
-                        final data = await searchBox(
-                            context,
-                            'Document Numbers',
-                            ['1000', '2000', '3000', '4000']);
-                        print("data $data");
-                        docNo_Controller.text = data;
+                        // await  FuelFillingRepository().fetchPaymentMoods();
                       },
                       isMadatory: true,
                     ),
@@ -90,13 +85,24 @@ class FuelFillingPage extends StatelessWidget {
                     ),
                   ),
                   10.widthBox,
-                  Expanded(
-                    child: CustomTextfield(
-                      cntrollr: payment_mode_Controller,
-                      label: "Payment Mode",
-                      suffixIcon: Icon(Icons.search),
-                      onSubmitted: () {},
-                    ),
+                  BlocBuilder<FuelBloc, FuelState>(
+                    builder: (context, state) {
+                      return Expanded(
+                        child: CustomTextfield(
+                          cntrollr: payment_mode_Controller,
+                          label: "Payment Mode",
+                          suffixIcon: Icon(Icons.search),
+                          onSubmitted: () async {
+                            context
+                                .read<FuelBloc>()
+                                .add( FuelEvent.fetchPaymentMood());
+                            print("state.paymentMood ${state.paymentMood}");
+                            final data = await searchBox(
+                                context, 'Document Numbers', state.paymentMood);
+                          },
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

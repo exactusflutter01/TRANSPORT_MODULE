@@ -1,6 +1,13 @@
 part of 'fuel_bloc.dart';
 
 @freezed
-class FuelState with _$FuelState {
-  const factory FuelState.initial() = _Initial;
+abstract class FuelState with _$FuelState {
+   factory FuelState({
+required List paymentMood,
+required bool isLoading,
+required String msg
+  })=fuelState;
+   factory FuelState.initial(){
+    return FuelState(paymentMood: [], isLoading: false, msg: '');
+  }
 }

@@ -82,7 +82,10 @@ class _CommonDialogBoxState extends State<CommonDialogBox> {
                             height: 50,
                             child: Card(
                                 child: Column(
-                              children: [],
+                              children: [
+
+                                Text(dataList.var1)
+                              ],
                             ))));
                   }),
             ),
