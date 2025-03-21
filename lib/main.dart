@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RegBloc(regRepository()),
+      create: (context) => RegBloc(RegRepository()),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         builder: (context, child) => ResponsiveBreakpoints(breakpoints: [

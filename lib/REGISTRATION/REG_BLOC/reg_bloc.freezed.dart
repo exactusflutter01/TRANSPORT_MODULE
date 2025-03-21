@@ -184,10 +184,10 @@ class Loading implements RegState {
 /// @nodoc
 
 class Loaded implements RegState {
-  const Loaded(final List<dynamic> divCodes) : _divCodes = divCodes;
+  const Loaded(final List<DivisionModel> divCodes) : _divCodes = divCodes;
 
-  final List<dynamic> _divCodes;
-  List<dynamic> get divCodes {
+  final List<DivisionModel> _divCodes;
+  List<DivisionModel> get divCodes {
     if (_divCodes is EqualUnmodifiableListView) return _divCodes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_divCodes);
@@ -223,7 +223,7 @@ abstract mixin class $LoadedCopyWith<$Res> implements $RegStateCopyWith<$Res> {
   factory $LoadedCopyWith(Loaded value, $Res Function(Loaded) _then) =
       _$LoadedCopyWithImpl;
   @useResult
-  $Res call({List<dynamic> divCodes});
+  $Res call({List<DivisionModel> divCodes});
 }
 
 /// @nodoc
@@ -243,7 +243,7 @@ class _$LoadedCopyWithImpl<$Res> implements $LoadedCopyWith<$Res> {
       null == divCodes
           ? _self._divCodes
           : divCodes // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<DivisionModel>,
     ));
   }
 }
