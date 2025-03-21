@@ -79,13 +79,57 @@ class _CommonDialogBoxState extends State<CommonDialogBox> {
                           Navigator.pop(context);
                         },
                         child: Container(
-                            height: 50,
+                          
                             child: Card(
+                                child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
                                 child: Column(
-                              children: [
-
-                                Text(dataList.var1)
-                              ],
+                                  children: [
+                                    Row(
+                                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                            width: 150,
+                                            child: Text(dataList.var1)),
+                                            20.widthBox,
+                                        Container(
+                                          width: 150,
+                                          child: Text(dataList.var2)),
+                                      ],
+                                    ),
+                                    20.heightBox,
+                                    Row(
+                                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                            width: 150,
+                                            child: Text(dataList.var3)),
+                                            20.widthBox,
+                                        Container(
+                                          width: 150,
+                                          child: Text(dataList.var4)),
+                                      ],
+                                    ),
+                                    20.heightBox,
+                                    Row(
+                                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                            width: 150,
+                                            child: Text(dataList.var5)),
+                                            20.widthBox,
+                                        Container(
+                                          width: 150,
+                                          child: Text(dataList.var6)),
+                                      ],
+                                    ),
+                                    20.heightBox,
+                                    
+                                  ],
+                                ),
+                              ),
                             ))));
                   }),
             ),

@@ -9,6 +9,7 @@ part 'fuel_bloc.freezed.dart';
 
 class FuelBloc extends Bloc<FuelEvent, FuelState> {
   final FuelFillingRepository repository;
+  
   FuelBloc(this.repository) : super(FuelState.initial()) {
     on<FetchPaymentMood>(_fetchPaymentMood);
   }

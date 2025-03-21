@@ -3,8 +3,6 @@
 // import 'package:http/http.dart' as http;
 // import 'package:trans_module/CONSTANTS.dart';
 
-
-
 // class regRepository {
 //   Future<List<dynamic>> fetchDivCode() async {
 //     try {
@@ -68,7 +66,6 @@
 // import 'package:dio/dio.dart';
 // import 'package:trans_module/REGISTRATION/reg_model.dart';
 
-
 // class RegRepository {
 //   final Dio dio = Dio(BaseOptions(baseUrl: "https://scm06.exactuscloud.com:4016/api"));
 
@@ -122,30 +119,37 @@
 //   }
 // }
 
-import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:trans_module/CONSTANTS.dart';
 import 'package:trans_module/REGISTRATION/reg_model.dart';
 
 class RegRepository {
-  final Dio dio = Dio(BaseOptions(baseUrl: "https://scm06.exactuscloud.com:4016/api"));
-
   Future<List<DivisionModel>> fetchDivCode() async {
+    print("Fetching division codes...");
+
     try {
-      const endpoint = '/registration/div_code_get';
-      Response response = await dio.get(endpoint);
+      final response = await dio.get('/registration/div_code_get');
+
+      print("Response Status Code: ${response.statusCode}");
+      print("Response Data: ${response.data}");
 
       if (response.statusCode == 200) {
         if (response.data is List) {
-          return (response.data as List)
-              .map((json) => DivisionModel.fromJson(json))
+          final modelData = (response.data as List)
+              .map((item) =>
+                  DivisionModel.fromJson(item as Map<String, dynamic>))
               .toList();
+          print("Parsed Model Data: $modelData");
+          return modelData;
         } else {
-          throw Exception("Unexpected data format");
+          throw Exception(
+              "Unexpected data format: ${response.data.runtimeType}");
         }
       } else {
-        throw Exception('Failed to load div code: ${response.statusCode}');
+        throw Exception('Failed to load div codes: ${response.statusCode}');
       }
     } catch (e) {
+      print("Network error: $e");
       throw Exception('Network error: $e');
     }
   }
