@@ -1,57 +1,21 @@
 import 'dart:convert';
 import 'package:trans_module/CONSTANTS.dart';
 import 'package:http/http.dart' as http;
+import 'package:trans_module/INSURANCE/MODELS/insu_model.dart';
 
-class Insurance_ApiService {
-  Future FetchDocumentNo(div_code) async {
+class Insurance_Repo {
+  fetchinsCmpny() async {
     try {
-      var url = '$baseUrl/insurance/doc_no_get/$div_code';
-      var response = await http.get(Uri.parse(url));
-      if (response.statusCode == 200) {
-        var Jsondata = json.decode(response.body);
-        return Jsondata;
-      }
+      final response = await dio.get('insurance/insurance_company_get');
+      print(dio);
+      print("response.data ${response.data}");
+      final modelData = (response.data)
+          .map((item) => Ins_cmpny_model.fromJson(item as Map<String, dynamic>))
+          .toList();
+      print("modelData $modelData");
+      return modelData;
     } catch (e) {
-      print("Failed to fetch Document No $e");
-    }
-  }
-
-  Future FetchIns_company() async {
-    try {
-      var url = '$baseUrl/insurance/insurance_company_get';
-      var response = await http.get(Uri.parse(url));
-      if (response.statusCode == 200) {
-        var Jsondata = json.decode(response.body);
-        return Jsondata;
-      }
-    } catch (e) {
-      print("Failed to fetch Document No $e");
-    }
-  }
-
-  Future FetchPolicy_type() async {
-    try {
-      var url = '$baseUrl/insurance/policy_type_get';
-      var response = await http.get(Uri.parse(url));
-      if (response.statusCode == 200) {
-        var Jsondata = json.decode(response.body);
-        return Jsondata;
-      }
-    } catch (e) {
-      print("Failed to fetch Document No $e");
-    }
-  }
-
-  Future Fetchdebit_code() async {
-    try {
-      var url = '$baseUrl/insurance/debit_code_get';
-      var response = await http.get(Uri.parse(url));
-      if (response.statusCode == 200) {
-        var Jsondata = json.decode(response.body);
-        return Jsondata;
-      }
-    } catch (e) {
-      print("Failed to fetch Document No $e");
+      print("Error in Insurance Repo $e");
     }
   }
 }

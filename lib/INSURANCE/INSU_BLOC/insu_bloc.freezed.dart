@@ -58,60 +58,20 @@ class _Started implements InsuEvent {
 /// @nodoc
 
 class FetchDoc implements InsuEvent {
-  const FetchDoc(this.divcode);
-
-  final dynamic divcode;
-
-  /// Create a copy of InsuEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $FetchDocCopyWith<FetchDoc> get copyWith =>
-      _$FetchDocCopyWithImpl<FetchDoc>(this, _$identity);
+  const FetchDoc();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is FetchDoc &&
-            const DeepCollectionEquality().equals(other.divcode, divcode));
+        (other.runtimeType == runtimeType && other is FetchDoc);
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(divcode));
+  int get hashCode => runtimeType.hashCode;
 
   @override
   String toString() {
-    return 'InsuEvent.fetchdoc(divcode: $divcode)';
-  }
-}
-
-/// @nodoc
-abstract mixin class $FetchDocCopyWith<$Res>
-    implements $InsuEventCopyWith<$Res> {
-  factory $FetchDocCopyWith(FetchDoc value, $Res Function(FetchDoc) _then) =
-      _$FetchDocCopyWithImpl;
-  @useResult
-  $Res call({dynamic divcode});
-}
-
-/// @nodoc
-class _$FetchDocCopyWithImpl<$Res> implements $FetchDocCopyWith<$Res> {
-  _$FetchDocCopyWithImpl(this._self, this._then);
-
-  final FetchDoc _self;
-  final $Res Function(FetchDoc) _then;
-
-  /// Create a copy of InsuEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? divcode = freezed,
-  }) {
-    return _then(FetchDoc(
-      freezed == divcode ? _self.divcode! : divcode,
-    ));
+    return 'InsuEvent.fetchdoc()';
   }
 }
 

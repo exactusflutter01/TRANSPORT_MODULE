@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ItemSelector extends StatefulWidget {
   final String labelText; // Label to display
-  final List<String> itemList; // List of items
+  final List<dynamic> itemList; // List of items
 
   const ItemSelector({
     super.key,
@@ -15,14 +15,15 @@ class ItemSelector extends StatefulWidget {
 }
 
 class _ItemSelectorState extends State<ItemSelector> {
-  String selectedValue = '';
+  String selectedValue = ''; // Selected item from list
 
   @override
   void initState() {
     super.initState();
-    selectedValue = widget.labelText;
+    selectedValue = widget.labelText; // Set initial label
   }
 
+  // Show AlertDialog with list of items
   Future<void> _showItemDialog() async {
     await showDialog(
       context: context,
@@ -63,6 +64,20 @@ class _ItemSelectorState extends State<ItemSelector> {
 
   @override
   Widget build(BuildContext context) {
-    throw UnimplementedError();
+    return Column(
+      children: [
+        // Label showing selected value
+        Text(
+          selectedValue,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 10),
+        // Button to open dialog
+        ElevatedButton(
+          onPressed: _showItemDialog,
+          child: const Text('Show List'),
+        ),
+      ],
+    );
   }
 }
