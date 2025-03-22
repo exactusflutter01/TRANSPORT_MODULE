@@ -6,11 +6,43 @@ import 'package:trans_module/INSURANCE/MODELS/insu_model.dart';
 class Insurance_Repo {
   fetchinsCmpny() async {
     try {
-      final response = await dio.get('insurance/insurance_company_get');
+      final response = await dio.get('/insurance/insurance_company_get');
       print(dio);
       print("response.data ${response.data}");
       final modelData = (response.data)
           .map((item) => Ins_cmpny_model.fromJson(item as Map<String, dynamic>))
+          .toList();
+      print("modelData $modelData");
+      return modelData;
+    } catch (e) {
+      print("Error in Insurance Repo $e");
+    }
+  }
+
+// /insurance/debit_code_get
+  fetchPolicyType() async {
+    try {
+      final response = await dio.get('/insurance/policy_type_get');
+      print(dio);
+      print("response.data ${response.data}");
+      final modelData = (response.data)
+          .map((item) => PolicyTypeModel.fromJson(item as Map<String, dynamic>))
+          .toList();
+      print("modelData $modelData");
+      return modelData;
+    } catch (e) {
+      print("Error in Insurance Repo $e");
+    }
+  }
+
+  fetchDebitCode() async {
+    try {
+      final response = await dio.get('/insurance/debit_code_get');
+      print(dio);
+      print("response.data ${response.data}");
+      final modelData = (response.data)
+          .map((item) =>
+              DebitaccountModel.fromJson(item as Map<String, dynamic>))
           .toList();
       print("modelData $modelData");
       return modelData;
