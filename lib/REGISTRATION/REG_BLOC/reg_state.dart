@@ -22,10 +22,11 @@ part of 'reg_bloc.dart';
 abstract class RegState with _$RegState {
   factory RegState(
       {required List divisionCode,
+      required List DocNo,
       required bool isLoading,
       required String msg}) = regState;
 
   factory RegState.initial() {
-    return RegState(divisionCode: [], isLoading: false, msg: '');
+    return RegState(divisionCode: [], isLoading: false, msg: '', DocNo: []);
   }
 }

@@ -11,6 +11,7 @@ class RegBloc extends Bloc<RegEvent, RegState> {
 
   RegBloc(this.repository) : super( RegState.initial()) {
     on<FetchDivCodes>(_fetchdivcodes);
+    on<FetchDocNO>(_FetchDocNO);
   
   }
 
@@ -25,6 +26,20 @@ class RegBloc extends Bloc<RegEvent, RegState> {
     } catch (e) {
       emit(state.copyWith(
           msg: 'Error While Fetching fetchDivCode $e', isLoading: false));
+    }
+  }
+
+  _FetchDocNO(FetchDocNO event, Emitter<RegState> emit )async{
+       print("Fetching document number for division: ${event.divcode}");
+  emit(state.copyWith(isLoading: true));
+   try {
+   final data =await repository.fetchDocNo(event.divcode);
+       print("in bloc code data $data");
+      emit(state.copyWith(
+          DocNo: data, msg: 'Successful', isLoading: false));
+    } catch (e) {
+      emit(state.copyWith(
+          msg: 'Error While Fetching _FetchDocNO $e', isLoading: false));
     }
   }
 }

@@ -56,8 +56,72 @@ class FetchDivCodes implements RegEvent {
 }
 
 /// @nodoc
+
+class FetchDocNO implements RegEvent {
+  const FetchDocNO(this.divcode);
+
+  final String divcode;
+
+  /// Create a copy of RegEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $FetchDocNOCopyWith<FetchDocNO> get copyWith =>
+      _$FetchDocNOCopyWithImpl<FetchDocNO>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is FetchDocNO &&
+            (identical(other.divcode, divcode) || other.divcode == divcode));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, divcode);
+
+  @override
+  String toString() {
+    return 'RegEvent.fetchDocNO(divcode: $divcode)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $FetchDocNOCopyWith<$Res>
+    implements $RegEventCopyWith<$Res> {
+  factory $FetchDocNOCopyWith(
+          FetchDocNO value, $Res Function(FetchDocNO) _then) =
+      _$FetchDocNOCopyWithImpl;
+  @useResult
+  $Res call({String divcode});
+}
+
+/// @nodoc
+class _$FetchDocNOCopyWithImpl<$Res> implements $FetchDocNOCopyWith<$Res> {
+  _$FetchDocNOCopyWithImpl(this._self, this._then);
+
+  final FetchDocNO _self;
+  final $Res Function(FetchDocNO) _then;
+
+  /// Create a copy of RegEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? divcode = null,
+  }) {
+    return _then(FetchDocNO(
+      null == divcode
+          ? _self.divcode
+          : divcode // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
 mixin _$RegState {
   List get divisionCode;
+  List get DocNo;
   bool get isLoading;
   String get msg;
 
@@ -75,18 +139,23 @@ mixin _$RegState {
             other is RegState &&
             const DeepCollectionEquality()
                 .equals(other.divisionCode, divisionCode) &&
+            const DeepCollectionEquality().equals(other.DocNo, DocNo) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.msg, msg) || other.msg == msg));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(divisionCode), isLoading, msg);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(divisionCode),
+      const DeepCollectionEquality().hash(DocNo),
+      isLoading,
+      msg);
 
   @override
   String toString() {
-    return 'RegState(divisionCode: $divisionCode, isLoading: $isLoading, msg: $msg)';
+    return 'RegState(divisionCode: $divisionCode, DocNo: $DocNo, isLoading: $isLoading, msg: $msg)';
   }
 }
 
@@ -95,7 +164,11 @@ abstract mixin class $RegStateCopyWith<$Res> {
   factory $RegStateCopyWith(RegState value, $Res Function(RegState) _then) =
       _$RegStateCopyWithImpl;
   @useResult
-  $Res call({List<dynamic> divisionCode, bool isLoading, String msg});
+  $Res call(
+      {List<dynamic> divisionCode,
+      List<dynamic> DocNo,
+      bool isLoading,
+      String msg});
 }
 
 /// @nodoc
@@ -111,6 +184,7 @@ class _$RegStateCopyWithImpl<$Res> implements $RegStateCopyWith<$Res> {
   @override
   $Res call({
     Object? divisionCode = null,
+    Object? DocNo = null,
     Object? isLoading = null,
     Object? msg = null,
   }) {
@@ -118,6 +192,10 @@ class _$RegStateCopyWithImpl<$Res> implements $RegStateCopyWith<$Res> {
       divisionCode: null == divisionCode
           ? _self.divisionCode!
           : divisionCode // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      DocNo: null == DocNo
+          ? _self.DocNo!
+          : DocNo // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
       isLoading: null == isLoading
           ? _self.isLoading
@@ -136,9 +214,11 @@ class _$RegStateCopyWithImpl<$Res> implements $RegStateCopyWith<$Res> {
 class regState implements RegState {
   regState(
       {required final List<dynamic> divisionCode,
+      required final List<dynamic> DocNo,
       required this.isLoading,
       required this.msg})
-      : _divisionCode = divisionCode;
+      : _divisionCode = divisionCode,
+        _DocNo = DocNo;
 
   final List<dynamic> _divisionCode;
   @override
@@ -146,6 +226,14 @@ class regState implements RegState {
     if (_divisionCode is EqualUnmodifiableListView) return _divisionCode;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_divisionCode);
+  }
+
+  final List<dynamic> _DocNo;
+  @override
+  List<dynamic> get DocNo {
+    if (_DocNo is EqualUnmodifiableListView) return _DocNo;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_DocNo);
   }
 
   @override
@@ -168,18 +256,23 @@ class regState implements RegState {
             other is regState &&
             const DeepCollectionEquality()
                 .equals(other._divisionCode, _divisionCode) &&
+            const DeepCollectionEquality().equals(other._DocNo, _DocNo) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.msg, msg) || other.msg == msg));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_divisionCode), isLoading, msg);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_divisionCode),
+      const DeepCollectionEquality().hash(_DocNo),
+      isLoading,
+      msg);
 
   @override
   String toString() {
-    return 'RegState(divisionCode: $divisionCode, isLoading: $isLoading, msg: $msg)';
+    return 'RegState(divisionCode: $divisionCode, DocNo: $DocNo, isLoading: $isLoading, msg: $msg)';
   }
 }
 
@@ -190,7 +283,11 @@ abstract mixin class $regStateCopyWith<$Res>
       _$regStateCopyWithImpl;
   @override
   @useResult
-  $Res call({List<dynamic> divisionCode, bool isLoading, String msg});
+  $Res call(
+      {List<dynamic> divisionCode,
+      List<dynamic> DocNo,
+      bool isLoading,
+      String msg});
 }
 
 /// @nodoc
@@ -206,6 +303,7 @@ class _$regStateCopyWithImpl<$Res> implements $regStateCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   $Res call({
     Object? divisionCode = null,
+    Object? DocNo = null,
     Object? isLoading = null,
     Object? msg = null,
   }) {
@@ -213,6 +311,10 @@ class _$regStateCopyWithImpl<$Res> implements $regStateCopyWith<$Res> {
       divisionCode: null == divisionCode
           ? _self._divisionCode
           : divisionCode // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      DocNo: null == DocNo
+          ? _self._DocNo
+          : DocNo // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
       isLoading: null == isLoading
           ? _self.isLoading

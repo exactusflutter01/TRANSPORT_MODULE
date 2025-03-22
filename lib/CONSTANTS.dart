@@ -6,18 +6,18 @@ import 'package:dio/dio.dart';
 final Dio dio =
     Dio(BaseOptions(baseUrl: "https://scm06.exactuscloud.com:4016/api"));
 
-final Color commonColor = Color.fromARGB(255, 35, 117, 41);
+final Color commonColor = Color.fromARGB(255, 29, 77, 37);
 
 
 final TextStyle appbarTextStyle = GoogleFonts.mitr(
   fontWeight: FontWeight.w800,
-  color: const Color.fromARGB(255, 35, 117, 41),
+  color: const Color.fromARGB(255, 29, 77, 37),
   fontSize: 27,
 );
 
-final TextStyle mainscreenTextStyle = GoogleFonts.lato(
-  fontWeight: FontWeight.bold,
+final TextStyle mainscreenTextStyle = GoogleFonts.luckiestGuy(
+  fontWeight: FontWeight.w300,
   // color: const Color.fromARGB(255, 42, 128, 48),
   color: Colors.black,
-  fontSize: 18,
+  fontSize: 17,
 );

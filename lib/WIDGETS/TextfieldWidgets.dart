@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:trans_module/CONSTANTS.dart';
 
 class CustomTextfield extends StatefulWidget {
   final TextEditingController cntrollr;
   final String label;
   final TextInputType keyboardType;
   final Function()? onSubmitted;
-final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onChanged;
   final Widget? suffixIcon;
   final int? Maxline;
   final bool isMadatory;
@@ -19,7 +20,9 @@ final ValueChanged<String>? onChanged;
     this.onSubmitted,
     this.suffixIcon,
     this.Maxline,
-    this.isMadatory=false,  this.isReadonly=false, this.onChanged,
+    this.isMadatory = false,
+    this.isReadonly = false,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -27,6 +30,18 @@ final ValueChanged<String>? onChanged;
 }
 
 class _CustomTextfieldState extends State<CustomTextfield> {
+  String? _errorText; // Error message holder
+
+  void _validateField() {
+    setState(() {
+      if (widget.isMadatory && widget.cntrollr.text.isEmpty) {
+        _errorText = "This field is required!";
+      } else {
+        _errorText = null;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextField(
@@ -37,28 +52,41 @@ class _CustomTextfieldState extends State<CustomTextfield> {
       onTap: widget.onSubmitted,
       onChanged: widget.onChanged,
       decoration: InputDecoration(
-//  prefixIcon: widget.isMadatory == true 
+//  prefixIcon: widget.isMadatory == true
 //     ? Icon(
 //         Icons.star,
 //         color: Colors.red,
 //         size: 10,
-//       ) 
+//       )
 //     : null,
-          suffixIcon: widget.suffixIcon,
-          labelText: widget.label,
-          labelStyle:
-              TextStyle(color:widget.isMadatory == true ?Colors.red: Colors.black, fontWeight: FontWeight.w700),
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.0),
-              
-              borderSide: BorderSide(
-                  color: Colors.green, width: 2, style: BorderStyle.solid)),
-          // enabledBorder: UnderlineInputBorder(),
-          // hoverColor: Colors.green,
-          
-          suffixIconColor: Colors.green),
-
-          
+        suffixIcon: widget.suffixIcon,
+        labelText: widget.label,
+        suffixIconColor: Color.fromARGB(255, 29, 77, 37),
+        
+        labelStyle: TextStyle(
+            color: widget.isMadatory == true
+                ? const Color.fromARGB(255, 170, 51, 51)
+                : Colors.black,
+            fontWeight: FontWeight.w600),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8.0),
+            borderSide: BorderSide(
+                color: Colors.black, width: 2, style: BorderStyle.solid)),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0),
+          borderSide: const BorderSide(
+            color: Colors.green,
+            width: 2,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0),
+          borderSide: const BorderSide(
+            color: Colors.black45,
+            width: 2,
+          ),
+        ),
+      ),
     );
   }
 }

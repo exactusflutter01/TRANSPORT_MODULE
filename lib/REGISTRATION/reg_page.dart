@@ -7,35 +7,68 @@ import 'package:trans_module/WIDGETS/SizedBoxExtension.dart';
 import 'package:trans_module/WIDGETS/TextfieldWidgets.dart';
 import 'package:trans_module/WIDGETS/TextfieldWithDate.dart';
 import 'package:trans_module/WIDGETS/commonButton.dart';
+import 'package:trans_module/WIDGETS/commonDropDown.dart';
 import 'package:trans_module/WIDGETS/search_box.dart';
 
-class RegistrationPage extends StatelessWidget {
+class RegistrationPage extends StatefulWidget {
+  @override
+  State<RegistrationPage> createState() => _RegistrationPageState();
+}
+
+class _RegistrationPageState extends State<RegistrationPage> {
   TextEditingController docNo_Controller = TextEditingController();
+
   TextEditingController docDate_Controller = TextEditingController();
+
   TextEditingController division_controller = TextEditingController();
+
   TextEditingController vehicleCode_controller = TextEditingController();
+
   TextEditingController regStartDate_controller = TextEditingController();
+
   TextEditingController regExpDate_controller = TextEditingController();
+
   TextEditingController startMeterReading_controller = TextEditingController();
+
   TextEditingController endMeterReading_controller = TextEditingController();
+
   TextEditingController amt_controller = TextEditingController();
+
   TextEditingController otherRegExpDate_controller = TextEditingController();
+
   TextEditingController driver_controller = TextEditingController();
+
   final TextEditingController remarks_controller = TextEditingController();
+
   final TextEditingController documentRef_controller = TextEditingController();
+
   final TextEditingController debitAcc_controller = TextEditingController();
+
   final TextEditingController creditAcc_controller = TextEditingController();
+  String? selectedItem;
+  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RegBloc, RegState>(
       listenWhen: (previous, current) {
-        return previous.divisionCode != current.divisionCode;
+        return previous.divisionCode != current.divisionCode ||
+            previous.DocNo != current.DocNo;
       },
       listener: (context, state) async {
         if (state.divisionCode.isNotEmpty) {
           print("reg divcode ${state.divisionCode}");
-          final data = await searchBox(context, 'ghkh', state.divisionCode);
+          final data = await searchBox(context, 'Division', state.divisionCode);
+          division_controller.text = data.var1;
+
+          context.read<RegBloc>().add(FetchDocNO(data.var1));
         }
+        if (state.DocNo.isNotEmpty) {
+          print("reg docNo ${state.DocNo}");
+          final docNoData =
+              await searchBox(context, 'Document Number', state.DocNo);
+          docNo_Controller.text = docNoData.var1;
+        }
+        ;
       },
       builder: (context, state) {
         return Scaffold(
@@ -44,7 +77,13 @@ class RegistrationPage extends StatelessWidget {
                 'Registration',
                 style: appbarTextStyle,
               ),
-              actions: [SaveButton(onSubmitted: () {})],
+              actions: [
+                CommonButton(
+                  onSubmitted: () {},
+                  label: 'Save',
+                  imagePath: 'assets/icons/save.png',
+                ),
+              ],
             ),
             body: SingleChildScrollView(
               child: Padding(
@@ -52,28 +91,27 @@ class RegistrationPage extends StatelessWidget {
                 child: Column(
                   children: [
                     CustomTextfield(
+                      isReadonly: true,
+                      isMadatory: true,
                       cntrollr: docNo_Controller,
                       label: "Doc NO",
-                      // keyboardType: TextInputType.numberWithOptions(),
-                      suffixIcon: Icon(Icons.search), onSubmitted: () {},
+                      keyboardType: TextInputType.numberWithOptions(),
+                      suffixIcon: Icon(Icons.search),
+                      onSubmitted: () {
+                        context
+                            .read<RegBloc>()
+                            .add(RegEvent.fetchDocNO(division_controller.text));
+                      },
                     ),
                     30.heightBox,
                     CustomDateField(
+                      isMadatory: true,
                       controller: docDate_Controller,
                       label: "Doc Date",
                     ),
                     30.heightBox,
                     Row(
                       children: [
-                        // Flexible(
-                        //   flex: 1,
-                        //   child: CustomTextfield(
-                        //     cntrollr: division_controller,
-                        //     label: "Division",
-                        //     suffixIcon: Icon(Icons.search),
-                        //     onSubmitted: () {},
-                        //   ),
-                        // ),
                         Flexible(
                           flex: 1,
                           child: CustomTextfield(
@@ -87,13 +125,15 @@ class RegistrationPage extends StatelessWidget {
                             },
                           ),
                         ),
-
                         15.widthBox,
                         Flexible(
                           flex: 2,
                           child: CustomTextfield(
+                            isMadatory: true,
                             cntrollr: vehicleCode_controller,
                             label: "Vehicle Code",
+                            suffixIcon: Icon(Icons.search),
+                            onSubmitted: () {},
                           ),
                         ),
                       ],
@@ -103,6 +143,7 @@ class RegistrationPage extends StatelessWidget {
                       children: [
                         Expanded(
                           child: CustomDateField(
+                            isMadatory: true,
                             controller: regStartDate_controller,
                             label: "Reg Start Date",
                           ),
@@ -110,6 +151,7 @@ class RegistrationPage extends StatelessWidget {
                         15.widthBox,
                         Expanded(
                           child: CustomDateField(
+                            isMadatory: true,
                             controller: regExpDate_controller,
                             label: "Reg Exp Date",
                           ),
@@ -121,6 +163,7 @@ class RegistrationPage extends StatelessWidget {
                       children: [
                         Expanded(
                           child: CustomTextfield(
+                            isMadatory: true,
                             cntrollr: startMeterReading_controller,
                             label: "Start Meter Reading",
                           ),
@@ -128,6 +171,7 @@ class RegistrationPage extends StatelessWidget {
                         15.widthBox,
                         Expanded(
                           child: CustomTextfield(
+                            isMadatory: true,
                             cntrollr: endMeterReading_controller,
                             label: "End Meter Reading",
                           ),
@@ -139,6 +183,7 @@ class RegistrationPage extends StatelessWidget {
                       children: [
                         Expanded(
                           child: CustomTextfield(
+                            isMadatory: true,
                             cntrollr: amt_controller,
                             label: "Amount",
                           ),
@@ -157,8 +202,11 @@ class RegistrationPage extends StatelessWidget {
                       children: [
                         Expanded(
                           child: CustomTextfield(
+                            isMadatory: true,
                             cntrollr: driver_controller,
                             label: "Driver",
+                            suffixIcon: Icon(Icons.search),
+                            onSubmitted: () {},
                           ),
                         ),
                         15.widthBox,
@@ -172,6 +220,8 @@ class RegistrationPage extends StatelessWidget {
                     ),
                     30.heightBox,
                     CustomTextfield(
+                      Maxline: 3,
+                      isMadatory: true,
                       cntrollr: docNo_Controller,
                       label: "Remarks",
                       keyboardType: TextInputType.numberWithOptions(),
@@ -190,7 +240,8 @@ class RegistrationPage extends StatelessWidget {
                             cntrollr: docNo_Controller,
                             label: "Debit Account Code",
                             keyboardType: TextInputType.numberWithOptions(),
-                            // onSubmitted: (p0) {},
+                            suffixIcon: Icon(Icons.search),
+                            onSubmitted: () {},
                           ),
                         ),
                         15.widthBox,
@@ -210,7 +261,8 @@ class RegistrationPage extends StatelessWidget {
                             cntrollr: docNo_Controller,
                             label: "Credit Account Code",
                             keyboardType: TextInputType.numberWithOptions(),
-                            // onSubmitted: (p0) {},
+                            suffixIcon: Icon(Icons.search),
+                            onSubmitted: () {},
                           ),
                         ),
                         15.widthBox,
@@ -221,7 +273,38 @@ class RegistrationPage extends StatelessWidget {
                           ),
                         ),
                       ],
-                    )
+                    ),
+                    30.heightBox,
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: isChecked,
+                          onChanged: (value) {
+                            setState(() {
+                              isChecked = value!;
+                            });
+                          },
+                        ),
+                        Text(
+                          "Verified",
+                          style: TextStyle(fontWeight: FontWeight.w800),
+                        ),
+                        15.widthBox,
+                        Expanded(
+                          child: CustomDropdown(
+                            width: 180,
+                            items: ['type1', 'type2'],
+                            hint: 'Select Reg Type',
+                            selectedValue: selectedItem,
+                            onChanged: (value) {
+                              setState(() {
+                                selectedItem = value;
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
