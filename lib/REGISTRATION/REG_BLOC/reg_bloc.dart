@@ -7,34 +7,39 @@ part 'reg_state.dart';
 part 'reg_bloc.freezed.dart';
 
 class RegBloc extends Bloc<RegEvent, RegState> {
-  final regRepository repository;
+  final RegRepository repository;
 
-  RegBloc(this.repository) : super(const RegState.initial()) {
-    on<FetchDivCodes>((event, emit) async {
-      emit(const RegState.loading());
+  RegBloc(this.repository) : super( RegState.initial()) {
+    on<FetchDivCodes>(_fetchdivcodes);
+    on<FetchDocNO>(_FetchDocNO);
+  
+  }
 
-      try {
-        final divList = await repository.fetchDivCode();
-        emit(RegState.loaded(divList));
-      } catch (e) {
-        emit(RegState.error(e.toString()));
-      }
-    });
-    on<SearchDivCode>((event, emit) {
-      if (state is Loaded) {
-        final allDivs = (state as Loaded).divCodes;
-        final filteredDivs = allDivs
-            .where((div) => div['DIV_NAME']
-                .toString()
-                .toLowerCase()
-                .contains(event.query.toLowerCase()))
-            .toList();
+  _fetchdivcodes(FetchDivCodes event, Emitter<RegState> emit )async{
+       print("in bloc code");
+  emit(state.copyWith(isLoading: true));
+   try {
+   final data =await repository.fetchDivCode();
+       print("in bloc code data $data");
+      emit(state.copyWith(
+          divisionCode: data, msg: 'Successful', isLoading: false));
+    } catch (e) {
+      emit(state.copyWith(
+          msg: 'Error While Fetching fetchDivCode $e', isLoading: false));
+    }
+  }
 
-        emit(RegState.loaded(filteredDivs));
-      }
-    });
-    // on<RegEvent>((event, emit) {
-    //   // TODO: implement event handler
-    // });
+  _FetchDocNO(FetchDocNO event, Emitter<RegState> emit )async{
+       print("Fetching document number for division: ${event.divcode}");
+  emit(state.copyWith(isLoading: true));
+   try {
+   final data =await repository.fetchDocNo(event.divcode);
+       print("in bloc code data $data");
+      emit(state.copyWith(
+          DocNo: data, msg: 'Successful', isLoading: false));
+    } catch (e) {
+      emit(state.copyWith(
+          msg: 'Error While Fetching _FetchDocNO $e', isLoading: false));
+    }
   }
 }
