@@ -55,20 +55,19 @@ class _RegistrationPageState extends State<RegistrationPage> {
             previous.DocNo != current.DocNo;
       },
       listener: (context, state) async {
-        if (state.divisionCode.isNotEmpty) {
-          print("reg divcode ${state.divisionCode}");
-          final data = await searchBox(context, 'Division', state.divisionCode);
-          division_controller.text = data.var1;
+        // if (state.divisionCode.isNotEmpty) {
+        //   print("reg divcode ${state.divisionCode}");
+        //   final data = await searchBox(context, 'Division', state.divisionCode);
+        //   division_controller.text = data.var1;
 
-          context.read<RegBloc>().add(FetchDocNO(data.var1));
-        }
-        if (state.DocNo.isNotEmpty) {
-          print("reg docNo ${state.DocNo}");
-          final docNoData =
-              await searchBox(context, 'Document Number', state.DocNo);
-          docNo_Controller.text = docNoData.var1;
-        }
-        ;
+        //   context.read<RegBloc>().add(FetchDocNO(data.var1));
+        // }
+        // if (state.DocNo.isNotEmpty) {
+        //   print("reg docNo ${state.DocNo}");
+        //   final docNoData =
+        //       await searchBox(context, 'Document Number', state.DocNo);
+        //   docNo_Controller.text = docNoData.var1;
+        // }
       },
       builder: (context, state) {
         return Scaffold(
@@ -97,21 +96,32 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       label: "Doc NO",
                       keyboardType: TextInputType.numberWithOptions(),
                       suffixIcon: Icon(Icons.search),
-                      onSubmitted: () {
-                        context
-                            .read<RegBloc>()
-                            .add(RegEvent.fetchDocNO(division_controller.text));
+                      onSubmitted: () async {
+                        final bloc = context.read<RegBloc>();
+
+                        bloc.add(RegEvent.fetchDocNO(division_controller.text));
+                        await for (final state in bloc.stream) {
+                          if (state.DocNo.isNotEmpty) {
+                            print("reg docNo ${state.DocNo}");
+                            final docNoData = await searchBox(
+                                context, 'Document Number', state.DocNo);
+                            docNo_Controller.text = docNoData.var1;
+                          }
+                        }
                       },
-                    ),
-                    30.heightBox,
-                    CustomDateField(
-                      isMadatory: true,
-                      controller: docDate_Controller,
-                      label: "Doc Date",
                     ),
                     30.heightBox,
                     Row(
                       children: [
+                        Flexible(
+                          flex: 1,
+                          child: CustomDateField(
+                            isMadatory: true,
+                            controller: docDate_Controller,
+                            label: "Doc Date",
+                          ),
+                        ),
+                        15.widthBox,
                         Flexible(
                           flex: 1,
                           child: CustomTextfield(
@@ -119,21 +129,42 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             label: "Division",
                             suffixIcon: Icon(Icons.search),
                             onSubmitted: () async {
-                              context
-                                  .read<RegBloc>()
-                                  .add(RegEvent.fetchdivcodes());
+                              final bloc = context.read<RegBloc>();
+                              bloc.add(RegEvent.fetchdivcodes());
+
+                              await for (final state in bloc.stream) {
+                                if (state.divisionCode.isNotEmpty) {
+                                  print("reg divcode ${state.divisionCode}");
+                                  final data = await searchBox(
+                                      context, 'Division', state.divisionCode);
+                                  division_controller.text = data.var1;
+                                }
+                              }
                             },
                           ),
                         ),
-                        15.widthBox,
+                      ],
+                    ),
+                    30.heightBox,
+                    Row(
+                      children: [
                         Flexible(
-                          flex: 2,
+                          flex: 1,
                           child: CustomTextfield(
                             isMadatory: true,
                             cntrollr: vehicleCode_controller,
                             label: "Vehicle Code",
                             suffixIcon: Icon(Icons.search),
                             onSubmitted: () {},
+                          ),
+                        ),
+                        15.widthBox,
+                        Flexible(
+                          flex: 1,
+                          child: CustomTextfield(
+                            isMadatory: true,
+                            cntrollr: vehicleCode_controller,
+                            label: "",
                           ),
                         ),
                       ],

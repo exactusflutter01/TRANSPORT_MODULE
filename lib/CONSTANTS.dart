@@ -19,5 +19,5 @@ final TextStyle mainscreenTextStyle = GoogleFonts.luckiestGuy(
   fontWeight: FontWeight.w300,
   // color: const Color.fromARGB(255, 42, 128, 48),
   color: Colors.black,
-  fontSize: 17,
+  fontSize: 19,
 );
