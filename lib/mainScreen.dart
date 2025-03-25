@@ -254,7 +254,7 @@ class MainScreen extends StatelessWidget {
               child: Text(
                 'TRANSPORTATION',
                 style: GoogleFonts.lilitaOne(
-                    fontSize: 24,
+                    fontSize: 28,
                     color: Colors.white,
                     fontWeight: FontWeight.w400),
               ),
@@ -267,10 +267,10 @@ class MainScreen extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, pageIndex) {
               
-                final startIndex = pageIndex * 6;
-                final endIndex = (startIndex + 6) > menuItems.length
+                final startIndex = pageIndex * 10;
+                final endIndex = (startIndex + 10) > menuItems.length
                     ? menuItems.length
-                    : (startIndex + 6);
+                    : (startIndex + 10);
                 final items = menuItems.sublist(startIndex, endIndex);
 
                 return Padding(
