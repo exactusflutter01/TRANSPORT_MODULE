@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trans_module/CONSTANTS.dart';
 import 'package:trans_module/WIDGETS/SizedBoxExtension.dart';
 import 'package:trans_module/WIDGETS/search_box.dart';
 
 import '../WIDGETS/TextfieldWidgets.dart';
 import '../WIDGETS/TextfieldWithDate.dart';
+import 'BATTERY_BLOC/battery_bloc.dart';
 
 class batteryInfoPage extends StatelessWidget {
   batteryInfoPage({super.key});
@@ -47,6 +49,7 @@ class batteryInfoPage extends StatelessWidget {
                 // keyboardType: TextInputType.numberWithOptions(),
                 suffixIcon: Icon(Icons.search),
                 onSubmitted: () {
+                  context.read<BatteryBloc>().add(BatteryEvent.docnofetch());
                   searchBox(context, 'DocNo', []);
                 },
                 isMadatory: true,
