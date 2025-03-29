@@ -19,5 +19,5 @@ final TextStyle mainscreenTextStyle = GoogleFonts.mitr(
   fontWeight: FontWeight.w700,
   // color: const Color.fromARGB(255, 42, 128, 48),
   color: Colors.black,
-  fontSize: 15,
+  fontSize: 19,
 );
