@@ -44,7 +44,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(widget.borderRadius),
-        border: Border.all(width: 1),
+        border: Border.all(width: 2, color: Colors.black45),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.2),
