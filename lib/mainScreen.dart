@@ -249,8 +249,8 @@ class MainScreen extends StatelessWidget {
                         children: [
                           Image.asset(
                             menuItems[index]['icon'],
-                            width: 50,
-                            height: 50,
+                            width: 35,
+                            height: 35,
                             fit: BoxFit.contain,
                             errorBuilder: (context, error, stackTrace) {
                               return Icon(Icons.image_not_supported,
