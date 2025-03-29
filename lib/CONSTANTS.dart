@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:dio/dio.dart';
-// const String baseUrl = "http://scm06.exactuscloud.com:4016/api";
+
+var Gscompanycode = 'BSG';
 
 final Dio dio =
     Dio(BaseOptions(baseUrl: "https://scm06.exactuscloud.com:4016/api"));
 
 final Color commonColor = Color.fromARGB(255, 29, 77, 37);
-
 
 final TextStyle appbarTextStyle = GoogleFonts.mitr(
   fontWeight: FontWeight.w800,

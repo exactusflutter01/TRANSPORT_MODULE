@@ -7,7 +7,9 @@ abstract class InsuranceState with _$InsuranceState {
       required List PolicyList,
       required List DebitCode,
       required bool isLoading,
-      required bool isError}) = insuranceState;
+      required bool isError,
+      required String ResponseMessage,
+      required dynamic Response}) = insuranceState;
 
   factory InsuranceState.initial() {
     return InsuranceState(
@@ -15,6 +17,8 @@ abstract class InsuranceState with _$InsuranceState {
         isLoading: true,
         isError: false,
         PolicyList: [],
-        DebitCode: []);
+        DebitCode: [],
+        Response: '',
+        ResponseMessage: '');
   }
 }
