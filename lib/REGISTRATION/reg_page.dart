@@ -321,19 +321,19 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           style: TextStyle(fontWeight: FontWeight.w800),
                         ),
                         15.widthBox,
-                        Expanded(
-                          child: CustomDropdown(
-                            width: 180,
-                            items: ['type1', 'type2'],
-                            hint: 'Select Reg Type',
-                            selectedValue: selectedItem,
-                            onChanged: (value) {
-                              setState(() {
-                                selectedItem = value;
-                              });
-                            },
-                          ),
-                        ),
+                        // Expanded(
+                        //   child: CustomDropdown(
+                        //     width: 180,
+                        //     items: ['type1', 'type2'],
+                        //     hint: 'Select Reg Type',
+                        //     selectedValue: selectedItem,
+                        //     onChanged: (value) {
+                        //       setState(() {
+                        //         selectedItem = value;
+                        //       });
+                        //     },
+                        //   ),
+                        // ),
                       ],
                     ),
                   ],
