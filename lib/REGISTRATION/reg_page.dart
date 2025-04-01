@@ -78,7 +78,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
               actions: [
                 CommonButton(
-                  onSubmitted: () {},
+                  onSubmitted: () {
+                    context.read<RegBloc>().add(RegEvent.saveData());
+                  },
                   label: 'Save',
                   imagePath: 'assets/icons/save.png',
                 ),

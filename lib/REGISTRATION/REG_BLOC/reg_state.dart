@@ -24,9 +24,10 @@ abstract class RegState with _$RegState {
       {required List divisionCode,
       required List DocNo,
       required bool isLoading,
+       required bool isSaving,
       required String msg}) = regState;
 
   factory RegState.initial() {
-    return RegState(divisionCode: [], isLoading: false, msg: '', DocNo: []);
+    return RegState(divisionCode: [], isLoading: false, msg: '', DocNo: [], isSaving: false);
   }
 }
