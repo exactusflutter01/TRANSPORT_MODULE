@@ -116,7 +116,9 @@ class CustomDropdown extends StatelessWidget {
         controller: controller,
         readOnly: true,
         decoration: InputDecoration(
-          border: const OutlineInputBorder(),
+          border:  OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10)
+          ),
           label: Text(hintText,
               style: const TextStyle(
                   color: Colors.black,
