@@ -57,6 +57,7 @@ class _CommonDialogBoxState extends State<CommonDialogBox> {
                     alignment: Alignment.bottomRight,
                     child: TextButton(
                         onPressed: () {
+                            widget.onsubmitted('');
                           Navigator.pop(context);
                         },
                         child: Icon(

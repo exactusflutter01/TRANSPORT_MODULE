@@ -179,17 +179,17 @@ class _FinePageState extends State<FinePage> {
                     30.heightBox,
                     Row(
                       children: [
-                        CustomDropdown(
-                          width: 180,
-                          items: ['type1', 'type2'],
-                          hint: 'Classification',
-                          selectedValue: selectedItem,
-                          onChanged: (value) {
-                            setState(() {
-                              selectedItem = value;
-                            });
-                          },
-                        ),
+                        // CustomDropdown(
+                        //   width: 180,
+                        //   items: ['type1', 'type2'],
+                        //   hint: 'Classification',
+                        //   selectedValue: selectedItem,
+                        //   onChanged: (value) {
+                        //     setState(() {
+                        //       selectedItem = value;
+                        //     });
+                        //   },
+                        // ),
                       ],
                     ),
                     30.heightBox,

@@ -37,16 +37,8 @@ class FuelFillingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<FuelBloc, FuelState>(
-      listenWhen: (previous, current) {
-        return previous.paymentMood != current.paymentMood;
-      },
       listener: (context, state) async {
-        if (state.paymentMood.isNotEmpty) {
-          print("state.paymentMood ${state.paymentMood}");
-          final data =
-              await searchBox(context, 'Document Numbers', state.paymentMood);
-          payment_mode_Controller.text = data.var1;
-        }
+        print("state.fuelTypeList listener ${state.fuelTypeList}");
       },
       builder: (context, state) {
         return Scaffold(
@@ -105,9 +97,21 @@ class FuelFillingPage extends StatelessWidget {
                           label: "Payment Mode",
                           suffixIcon: Icon(Icons.search),
                           onSubmitted: () async {
-                            context
-                                .read<FuelBloc>()
-                                .add(FuelEvent.fetchPaymentMood());
+                            // context
+                            //     .read<FuelBloc>()
+                            //     .add(FuelEvent.fetchPaymentMood());
+
+                            final bloc = context.read<FuelBloc>();
+                            bloc.add(FuelEvent.fetchPaymentMood());
+
+                            await for (final state in bloc.stream) {
+                              if (state.paymentMood.isNotEmpty) {
+                                final data = await searchBox(context,
+                                    'Payments Mood', state.paymentMood);
+                                payment_mode_Controller.text = data.var1;
+                                break; // Stop listening after handling updated state
+                              }
+                            }
                           },
                         ),
                       )
@@ -146,7 +150,19 @@ class FuelFillingPage extends StatelessWidget {
                           cntrollr: fuel_type_Controller,
                           label: "Fuel Type",
                           suffixIcon: Icon(Icons.search),
-                          onSubmitted: () {},
+                          onSubmitted: () async {
+                            final bloc = context.read<FuelBloc>();
+                            bloc.add(FuelEvent.fetchFuelType());
+                            await for (final state in bloc.stream) {
+                              if (state.fuelTypeList.isNotEmpty) {
+                                print("Onsubmitted : ${state.fuelTypeList} ");
+                                final data = await searchBox(
+                                    context, 'Fuel Type', state.fuelTypeList);
+                                fuel_type_Controller.text = data.var1??'';
+                                break;
+                              }
+                            }
+                          },
                           isMadatory: true,
                         ),
                       ),
@@ -268,7 +284,19 @@ class FuelFillingPage extends StatelessWidget {
                           cntrollr: station_name_Controller,
                           label: "Station Name",
                           suffixIcon: Icon(Icons.search),
-                          onSubmitted: () {},
+                          onSubmitted: () async {
+                            final bloc = context.read<FuelBloc>();
+                            bloc.add(FuelEvent.fetchStations());
+
+                            await for (final state in bloc.stream) {
+                              if (state.stationList.isNotEmpty) {
+                                final data = await searchBox(
+                                    context, 'Station List', state.stationList);
+                                station_name_Controller.text = data.var1;
+                                break;
+                              }
+                            }
+                          },
                         ),
                       ),
                       10.widthBox,
