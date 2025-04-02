@@ -2,7 +2,7 @@ import 'package:trans_module/BATTERY_INFO/battery_model.dart';
 
 import '../CONSTANTS.dart';
 
-class Battery_Repo {
+class BatteryRepository {
   fetchDocNo() async {
     try {
       final response = await dio.get('/battery_info/doc_no_search/:div_code');

@@ -12,6 +12,7 @@ class RegBloc extends Bloc<RegEvent, RegState> {
   RegBloc(this.repository) : super( RegState.initial()) {
     on<FetchDivCodes>(_fetchdivcodes);
     on<FetchDocNO>(_FetchDocNO);
+     on<SaveData>(_saveData);
   
   }
 
@@ -42,4 +43,18 @@ class RegBloc extends Bloc<RegEvent, RegState> {
           msg: 'Error While Fetching _FetchDocNO $e', isLoading: false));
     }
   }
+
+  Future<void> _saveData(SaveData event, Emitter<RegState> emit) async {
+    print("Saving registration data...");
+    emit(state.copyWith(isSaving: true));
+
+    try {
+      final data = await repository.registrationInsertFN();
+      print("Save response: $data");
+      emit(state.copyWith(msg: 'Save Successful', isSaving: false));
+    } catch (e) {
+      emit(state.copyWith(msg: 'Error saving data: $e', isSaving: false));
+    }
+  }
+
 }
