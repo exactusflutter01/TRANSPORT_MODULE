@@ -6,6 +6,7 @@ import 'package:trans_module/INSURANCE/test.dart';
 import 'package:trans_module/WIDGETS/SizedBoxExtension.dart';
 import 'package:trans_module/WIDGETS/TextfieldWidgets.dart';
 import 'package:trans_module/WIDGETS/TextfieldWithDate.dart';
+import 'package:trans_module/WIDGETS/commonButton.dart';
 import 'package:trans_module/WIDGETS/search_box.dart';
 import 'package:intl/intl.dart';
 
@@ -16,26 +17,16 @@ class Insurance_page extends StatelessWidget {
 
   @override
   TextEditingController vehclecode = TextEditingController();
-
   TextEditingController vehclecodedesc = TextEditingController();
-
   TextEditingController InsuranceCompany = TextEditingController();
-
   TextEditingController InsuranceCompanydes = TextEditingController();
-
   TextEditingController PolicyType = TextEditingController();
   TextEditingController PolicyTypedesc = TextEditingController();
-
   TextEditingController PolicyNo = TextEditingController();
-
   TextEditingController Amount = TextEditingController();
-
   TextEditingController docdate = TextEditingController();
-
   TextEditingController Startdate = TextEditingController();
-
   TextEditingController Expirydate = TextEditingController();
-
   TextEditingController InvoiceDate = TextEditingController();
   TextEditingController DebitAccCode = TextEditingController();
   TextEditingController DebitAccCodedesc = TextEditingController();
@@ -45,6 +36,8 @@ class Insurance_page extends StatelessWidget {
   TextEditingController driver = TextEditingController();
   TextEditingController drivdesc = TextEditingController();
   TextEditingController Remarks = TextEditingController();
+  TextEditingController divcode = TextEditingController();
+  TextEditingController docref = TextEditingController();
 
   Widget build(BuildContext context) {
     DateTime TimeNow = DateTime.now();
@@ -55,6 +48,50 @@ class Insurance_page extends StatelessWidget {
           "Insurance",
           style: appbarTextStyle,
         ),
+        actions: [
+          BlocBuilder<InsuBloc, InsuranceState>(
+            builder: (context, state) {
+              return CommonButton(
+                onSubmitted: () {
+                  context.read<InsuBloc>().add(InsuEvent.insuranceInsert(
+                      vehclecode.text,
+                      "",
+                      docdate.text,
+                      InvoiceNo.text,
+                      InvoiceDate.text,
+                      "",
+                      "",
+                      divcode.text,
+                      "",
+                      "",
+                      Startdate.text,
+                      Expirydate.text,
+                      PolicyType.text,
+                      PolicyNo.text,
+                      "",
+                      Remarks.text,
+                      "",
+                      "",
+                      "",
+                      "",
+                      smr,
+                      emr,
+                      "",
+                      DebitAccCode,
+                      docref.text,
+                      "",
+                      "",
+                      "",
+                      "",
+                      "",
+                      ""));
+                },
+                label: 'Save',
+                imagePath: 'assets/icons/save.png',
+              );
+            },
+          ),
+        ],
       ),
       body: BlocConsumer<InsuBloc, InsuranceState>(
         listenWhen: (previous, current) {
@@ -108,7 +145,7 @@ class Insurance_page extends StatelessWidget {
                       Flexible(
                         child: CustomTextfield(
                           isReadonly: true,
-                          cntrollr: Amount,
+                          cntrollr: divcode,
                           label: "Div code",
                           suffixIcon: Icon(Icons.search),
                         ),
@@ -250,7 +287,7 @@ class Insurance_page extends StatelessWidget {
                   ),
                   20.heightBox,
                   CustomTextfield(
-                    cntrollr: Remarks,
+                    cntrollr: docref,
                     label: "Document Ref",
                   ),
                   20.heightBox,
