@@ -4,8 +4,7 @@ import 'package:dio/dio.dart';
 
 var Gscompanycode = 'BSG';
 
-final Dio dio =
-    Dio(BaseOptions(baseUrl: "https://scm06.exactuscloud.com:4016/api"));
+final Dio dio = Dio(BaseOptions(baseUrl: "https://scm06.exactuscloud.com:4029/api"));
 
 final Color commonColor = Color.fromARGB(255, 29, 77, 37);
 

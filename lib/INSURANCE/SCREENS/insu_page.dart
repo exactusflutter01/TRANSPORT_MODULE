@@ -39,6 +39,19 @@ class Insurance_page extends StatelessWidget {
   TextEditingController divcode = TextEditingController();
   TextEditingController docref = TextEditingController();
 
+  void updateTextFields(
+      BuildContext context,
+      List<dynamic> list,
+      String title,
+      TextEditingController controller1,
+      TextEditingController controller2) async {
+    if (list.isNotEmpty) {
+      final data = await searchBox(context, title, list);
+      controller1.text = data.var1 ?? "";
+      controller2.text = data.var2 ?? "";
+    }
+  }
+
   Widget build(BuildContext context) {
     DateTime TimeNow = DateTime.now();
     docdate.text = DateFormat('dd-MM-yyyy').format(TimeNow);
@@ -74,8 +87,8 @@ class Insurance_page extends StatelessWidget {
                       "",
                       "",
                       "",
-                      smr,
-                      emr,
+                      smr.text,
+                      emr.text,
                       "",
                       DebitAccCode,
                       docref.text,
@@ -85,6 +98,8 @@ class Insurance_page extends StatelessWidget {
                       "",
                       "",
                       ""));
+
+                  print(state.Response);
                 },
                 label: 'Save',
                 imagePath: 'assets/icons/save.png',
@@ -98,24 +113,30 @@ class Insurance_page extends StatelessWidget {
           return previous.ItemsList != current.ItemsList;
         },
         listener: (context, state) async {
-          // print("state.ItemsList Listener ${state.ItemsList}");
-          if (state.ItemsList.isNotEmpty) {
+          // // print("state.ItemsList Listener ${state.ItemsList}");
+          if (state.SearchDialogueName == "Insurance Company" &&
+              state.isLoading == false &&
+              state.ItemsList.isNotEmpty) {
             final data =
                 await searchBox(context, "Insurance Company", state.ItemsList);
-            InsuranceCompany.text = data.var1;
-            InsuranceCompanydes.text = data.var2;
+            InsuranceCompany.text = data.var1.toString() ?? "";
+            InsuranceCompanydes.text = data.var2.toString() ?? "";
           }
-          if (state.PolicyList.isNotEmpty) {
-            final data =
-                await searchBox(context, "Policy Type", state.PolicyList);
-            PolicyType.text = data.var1;
-            PolicyNo.text = data.var2;
+          if (state.SearchDialogueName == "Policy Type" &&
+              state.isLoading == false &&
+              state.ItemsList.isNotEmpty) {
+            final data = await searchBox(
+                context, state.SearchDialogueName, state.ItemsList);
+            PolicyType.text = data.var1.toString() ?? "";
+            PolicyNo.text = data.var2.toString() ?? "";
           }
-          if (state.DebitCode.isNotEmpty) {
-            final data =
-                await searchBox(context, "Debit Account Code", state.DebitCode);
-            DebitAccCode.text = data.var1;
-            DebitAccCodedesc.text = data.var2;
+          if (state.SearchDialogueName == "Debit Code" &&
+              state.isLoading == false &&
+              state.ItemsList.isNotEmpty) {
+            final data = await searchBox(
+                context, state.SearchDialogueName, state.ItemsList);
+            DebitAccCode.text = data.var1.toString() ?? "";
+            DebitAccCodedesc.text = data.var2.toString() ?? "";
           }
         },
         builder: (context, state) {

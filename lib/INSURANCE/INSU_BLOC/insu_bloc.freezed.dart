@@ -402,8 +402,7 @@ class _$InsuranceInsertCopyWithImpl<$Res>
 /// @nodoc
 mixin _$InsuranceState {
   List get ItemsList;
-  List get PolicyList;
-  List get DebitCode;
+  String get SearchDialogueName;
   bool get isLoading;
   bool get isError;
   String get ResponseMessage;
@@ -423,9 +422,8 @@ mixin _$InsuranceState {
         (other.runtimeType == runtimeType &&
             other is InsuranceState &&
             const DeepCollectionEquality().equals(other.ItemsList, ItemsList) &&
-            const DeepCollectionEquality()
-                .equals(other.PolicyList, PolicyList) &&
-            const DeepCollectionEquality().equals(other.DebitCode, DebitCode) &&
+            (identical(other.SearchDialogueName, SearchDialogueName) ||
+                other.SearchDialogueName == SearchDialogueName) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isError, isError) || other.isError == isError) &&
@@ -438,8 +436,7 @@ mixin _$InsuranceState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(ItemsList),
-      const DeepCollectionEquality().hash(PolicyList),
-      const DeepCollectionEquality().hash(DebitCode),
+      SearchDialogueName,
       isLoading,
       isError,
       ResponseMessage,
@@ -447,7 +444,7 @@ mixin _$InsuranceState {
 
   @override
   String toString() {
-    return 'InsuranceState(ItemsList: $ItemsList, PolicyList: $PolicyList, DebitCode: $DebitCode, isLoading: $isLoading, isError: $isError, ResponseMessage: $ResponseMessage, Response: $Response)';
+    return 'InsuranceState(ItemsList: $ItemsList, SearchDialogueName: $SearchDialogueName, isLoading: $isLoading, isError: $isError, ResponseMessage: $ResponseMessage, Response: $Response)';
   }
 }
 
@@ -459,8 +456,7 @@ abstract mixin class $InsuranceStateCopyWith<$Res> {
   @useResult
   $Res call(
       {List<dynamic> ItemsList,
-      List<dynamic> PolicyList,
-      List<dynamic> DebitCode,
+      String SearchDialogueName,
       bool isLoading,
       bool isError,
       String ResponseMessage,
@@ -481,8 +477,7 @@ class _$InsuranceStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? ItemsList = null,
-    Object? PolicyList = null,
-    Object? DebitCode = null,
+    Object? SearchDialogueName = null,
     Object? isLoading = null,
     Object? isError = null,
     Object? ResponseMessage = null,
@@ -493,14 +488,10 @@ class _$InsuranceStateCopyWithImpl<$Res>
           ? _self.ItemsList!
           : ItemsList // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
-      PolicyList: null == PolicyList
-          ? _self.PolicyList!
-          : PolicyList // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
-      DebitCode: null == DebitCode
-          ? _self.DebitCode!
-          : DebitCode // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+      SearchDialogueName: null == SearchDialogueName
+          ? _self.SearchDialogueName
+          : SearchDialogueName // ignore: cast_nullable_to_non_nullable
+              as String,
       isLoading: null == isLoading
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -526,15 +517,12 @@ class _$InsuranceStateCopyWithImpl<$Res>
 class insuranceState implements InsuranceState {
   insuranceState(
       {required final List<dynamic> ItemsList,
-      required final List<dynamic> PolicyList,
-      required final List<dynamic> DebitCode,
+      required this.SearchDialogueName,
       required this.isLoading,
       required this.isError,
       required this.ResponseMessage,
       required this.Response})
-      : _ItemsList = ItemsList,
-        _PolicyList = PolicyList,
-        _DebitCode = DebitCode;
+      : _ItemsList = ItemsList;
 
   final List<dynamic> _ItemsList;
   @override
@@ -544,22 +532,8 @@ class insuranceState implements InsuranceState {
     return EqualUnmodifiableListView(_ItemsList);
   }
 
-  final List<dynamic> _PolicyList;
   @override
-  List<dynamic> get PolicyList {
-    if (_PolicyList is EqualUnmodifiableListView) return _PolicyList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_PolicyList);
-  }
-
-  final List<dynamic> _DebitCode;
-  @override
-  List<dynamic> get DebitCode {
-    if (_DebitCode is EqualUnmodifiableListView) return _DebitCode;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_DebitCode);
-  }
-
+  final String SearchDialogueName;
   @override
   final bool isLoading;
   @override
@@ -584,10 +558,8 @@ class insuranceState implements InsuranceState {
             other is insuranceState &&
             const DeepCollectionEquality()
                 .equals(other._ItemsList, _ItemsList) &&
-            const DeepCollectionEquality()
-                .equals(other._PolicyList, _PolicyList) &&
-            const DeepCollectionEquality()
-                .equals(other._DebitCode, _DebitCode) &&
+            (identical(other.SearchDialogueName, SearchDialogueName) ||
+                other.SearchDialogueName == SearchDialogueName) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isError, isError) || other.isError == isError) &&
@@ -600,8 +572,7 @@ class insuranceState implements InsuranceState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_ItemsList),
-      const DeepCollectionEquality().hash(_PolicyList),
-      const DeepCollectionEquality().hash(_DebitCode),
+      SearchDialogueName,
       isLoading,
       isError,
       ResponseMessage,
@@ -609,7 +580,7 @@ class insuranceState implements InsuranceState {
 
   @override
   String toString() {
-    return 'InsuranceState(ItemsList: $ItemsList, PolicyList: $PolicyList, DebitCode: $DebitCode, isLoading: $isLoading, isError: $isError, ResponseMessage: $ResponseMessage, Response: $Response)';
+    return 'InsuranceState(ItemsList: $ItemsList, SearchDialogueName: $SearchDialogueName, isLoading: $isLoading, isError: $isError, ResponseMessage: $ResponseMessage, Response: $Response)';
   }
 }
 
@@ -623,8 +594,7 @@ abstract mixin class $insuranceStateCopyWith<$Res>
   @useResult
   $Res call(
       {List<dynamic> ItemsList,
-      List<dynamic> PolicyList,
-      List<dynamic> DebitCode,
+      String SearchDialogueName,
       bool isLoading,
       bool isError,
       String ResponseMessage,
@@ -645,8 +615,7 @@ class _$insuranceStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? ItemsList = null,
-    Object? PolicyList = null,
-    Object? DebitCode = null,
+    Object? SearchDialogueName = null,
     Object? isLoading = null,
     Object? isError = null,
     Object? ResponseMessage = null,
@@ -657,14 +626,10 @@ class _$insuranceStateCopyWithImpl<$Res>
           ? _self._ItemsList
           : ItemsList // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
-      PolicyList: null == PolicyList
-          ? _self._PolicyList
-          : PolicyList // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
-      DebitCode: null == DebitCode
-          ? _self._DebitCode
-          : DebitCode // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+      SearchDialogueName: null == SearchDialogueName
+          ? _self.SearchDialogueName
+          : SearchDialogueName // ignore: cast_nullable_to_non_nullable
+              as String,
       isLoading: null == isLoading
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable

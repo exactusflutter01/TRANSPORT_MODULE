@@ -21,12 +21,10 @@ class InsuBloc extends Bloc<InsuEvent, InsuranceState> {
       final DocNoList = await insrepo.fetchinsCmpny();
       print("DocNoList in BLoc $DocNoList");
       emit(state.copyWith(
-        DebitCode: [],
-        PolicyList: [],
-        ItemsList: DocNoList,
-        isLoading: false,
-        isError: false,
-      ));
+          ItemsList: DocNoList,
+          isLoading: false,
+          isError: false,
+          SearchDialogueName: "Insurance Company"));
     } catch (e) {
       emit(state.copyWith(
           isLoading: false, isError: true, ResponseMessage: e.toString()));
@@ -37,12 +35,10 @@ class InsuBloc extends Bloc<InsuEvent, InsuranceState> {
     try {
       List PolicyTypeLIst = await insrepo.fetchPolicyType();
       emit(state.copyWith(
-        PolicyList: PolicyTypeLIst,
-        DebitCode: [],
-        ItemsList: [],
-        isLoading: false,
-        isError: false,
-      ));
+          ItemsList: PolicyTypeLIst,
+          isLoading: false,
+          isError: false,
+          SearchDialogueName: "Policy Type"));
     } catch (e) {
       emit(state.copyWith(
           isLoading: false, isError: true, ResponseMessage: e.toString()));
@@ -53,12 +49,10 @@ class InsuBloc extends Bloc<InsuEvent, InsuranceState> {
     try {
       var DebitCodeList = await insrepo.fetchDebitCode();
       emit(state.copyWith(
-        DebitCode: DebitCodeList,
-        ItemsList: [],
-        PolicyList: [],
-        isLoading: false,
-        isError: false,
-      ));
+          ItemsList: DebitCodeList,
+          isLoading: false,
+          isError: false,
+          SearchDialogueName: "Debit Code"));
     } catch (e) {
       emit(state.copyWith(
           isLoading: false, isError: true, ResponseMessage: e.toString()));
@@ -101,16 +95,11 @@ class InsuBloc extends Bloc<InsuEvent, InsuranceState> {
           event.verifiedby);
 
       emit(state.copyWith(
-          DebitCode: [],
-          ItemsList: [],
-          PolicyList: [],
-          isLoading: false,
-          isError: false,
-          Response: response));
+          ItemsList: [], isLoading: false, isError: false, Response: response));
     } catch (e) {
       print("$e");
       emit(state.copyWith(
-          isLoading: false, isError: true, ResponseMessage: e.toString()));
+          isLoading: false, isError: true, Response: e.toString()));
     }
   }
 }
