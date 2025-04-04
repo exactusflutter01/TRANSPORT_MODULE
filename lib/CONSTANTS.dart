@@ -4,14 +4,14 @@ import 'package:dio/dio.dart';
 // const String baseUrl = "http://scm06.exactuscloud.com:4016/api";
 
 final Dio dio =
-    Dio(BaseOptions(baseUrl: "https://scm06.exactuscloud.com:4029/api"));
+    Dio(BaseOptions(baseUrl: "https://scm06.exactuscloud.com:4030/api"));
 
 final Color commonColor = Color.fromARGB(255, 29, 77, 37);
 
 
 final TextStyle appbarTextStyle = GoogleFonts.mitr(
   fontWeight: FontWeight.w800,
-  color: const Color.fromARGB(255, 29, 77, 37),
+  color: const Color.fromARGB(255, 49, 117, 61),
   fontSize: 27,
 );
 
