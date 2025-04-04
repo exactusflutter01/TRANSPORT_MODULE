@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:trans_module/CONSTANTS.dart';
 
 class CustomDateField extends StatefulWidget {
@@ -76,7 +77,7 @@ class _CustomDateFieldState extends State<CustomDateField> {
     );
 
     if (selectedDate != null) {
-      String formattedDate = selectedDate.toIso8601String().substring(0, 10);
+   String formattedDate = DateFormat('dd/MM/yyyy').format(selectedDate);
       setState(() {
         widget.controller.text = formattedDate;
       });
