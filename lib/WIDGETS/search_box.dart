@@ -57,6 +57,7 @@ class _CommonDialogBoxState extends State<CommonDialogBox> {
                     alignment: Alignment.bottomRight,
                     child: TextButton(
                         onPressed: () {
+                          widget.onsubmitted('');
                           Navigator.pop(context);
                         },
                         child: Icon(
@@ -116,142 +117,70 @@ class _CommonDialogBoxState extends State<CommonDialogBox> {
                         fontWeight: FontWeight.bold),
                   ),
                 )
-              : Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ListView.builder(
-                        itemCount: FilterList.length,
-                        itemBuilder: (context, index) {
-                          final dataList = FilterList[index];
-                          return GestureDetector(
+              : Flexible(
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: FilterList.length,
+                      itemBuilder: (context, index) {
+                        final dataList = FilterList[index];
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
                               onTap: () {
                                 widget.onsubmitted(dataList);
                                 Navigator.pop(context);
                               },
-                              child: Container(
-                                  child: Card(
-                                      color: const Color.fromARGB(
-                                          255, 224, 223, 223),
-                                      elevation: 10,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: SingleChildScrollView(
-                                          scrollDirection: Axis.horizontal,
-                                          child: Column(
-                                            children: [
-                                              dataList.var1 == '' &&
-                                                      dataList.var2 == ''
-                                                  ? Container()
-                                                  : Row(
-                                                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                      children: [
-                                                        dataList.var1 == ''
-                                                            ? Container()
-                                                            : Container(
-                                                                width: 150,
-                                                                child: Text(
-                                                                  dataList.var1,
-                                                                  style: TextStyle(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                )),
-                                                        20.widthBox,
-                                                        dataList.var2 == ''
-                                                            ? Container()
-                                                            : Container(
-                                                                width: 150,
-                                                                child: Text(
-                                                                  dataList.var2,
-                                                                  style: TextStyle(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                )),
-                                                      ],
-                                                    ),
-                                              dataList.var3 == '' &&
-                                                      dataList.var3 == ''
-                                                  ? 0.heightBox
-                                                  : 20.heightBox,
-                                              dataList.var3 == '' &&
-                                                      dataList.var3 == ''
-                                                  ? Container()
-                                                  : Row(
-                                                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                      children: [
-                                                        dataList.var3 == ''
-                                                            ? Container()
-                                                            : Container(
-                                                                width: 150,
-                                                                child: Text(
-                                                                  dataList.var3,
-                                                                  style: TextStyle(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                )),
-                                                        20.widthBox,
-                                                        dataList.var4 == ''
-                                                            ? Container()
-                                                            : Container(
-                                                                width: 150,
-                                                                child: Text(
-                                                                  dataList.var4,
-                                                                  style: TextStyle(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                )),
-                                                      ],
-                                                    ),
-                                              dataList.var3 == '' &&
-                                                      dataList.var3 == ''
-                                                  ? 0.heightBox
-                                                  : 20.heightBox,
-                                              dataList.var5 == '' &&
-                                                      dataList.var6 == ''
-                                                  ? Container()
-                                                  : Row(
-                                                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                      children: [
-                                                        dataList.var5 == ''
-                                                            ? Container()
-                                                            : Container(
-                                                                width: 150,
-                                                                child: Text(
-                                                                  dataList.var5,
-                                                                  style: TextStyle(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                )),
-                                                        20.widthBox,
-                                                        dataList.var6 == ''
-                                                            ? Container()
-                                                            : Container(
-                                                                width: 150,
-                                                                child: Text(
-                                                                  dataList.var6,
-                                                                  style: TextStyle(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                )),
-                                                      ],
-                                                    ),
-                                              20.heightBox,
-                                            ],
-                                          ),
-                                        ),
-                                      ))));
-                        }),
-                  ),
+                              child: Card(
+                                  color:
+                                      const Color.fromARGB(255, 224, 223, 223),
+                                  elevation: 10,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Column(
+                                        children: [
+                                           _buildRow(dataList.var1, dataList.var2),
+                                           _buildRow(dataList.var3, dataList.var4),
+                                           _buildRow(dataList.var5, dataList.var6),
+                                          
+                                         
+                                        ],
+                                      ),
+                                    ),
+                                  ))),
+                        );
+                      }),
                 ),
+          20.heightBox
         ],
       ),
     );
   }
+
+  _buildRow(value1, value2) {
+    return
+    value1=='' && value2==''? SizedBox() :
+     Padding(
+       padding: const EdgeInsets.all(10),
+       child: Row(
+         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+         children: [
+           Container(
+               width: 150,
+               child: Text(
+                 value1,
+                 style: TextStyle(fontWeight: FontWeight.bold),
+               )),
+           20.widthBox,
+           Container(
+               width: 150,
+               child: Text(
+                 value2,
+                 style: TextStyle(fontWeight: FontWeight.bold),
+               )),
+         ],
+       ),
+     );
+  }
 }
-
-

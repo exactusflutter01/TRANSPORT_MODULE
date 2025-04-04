@@ -24,8 +24,8 @@ class MyApp extends StatelessWidget {
       providers: [
         RepositoryProvider(create: (context) => Insurance_Repo()),
         RepositoryProvider(
-            create: (context) => FuelFillingRepository()), // Moved here
-        RepositoryProvider(create: (context) => RegRepository()), // Moved here
+            create: (context) => FuelFillingRepository()), 
+        RepositoryProvider(create: (context) => RegRepository()), 
       ],
       child: MultiBlocProvider(
         providers: [
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) =>
-                FuelBloc(context.read<FuelFillingRepository>()), // Corrected
+                FuelBloc(context.read<FuelFillingRepository>()), 
           ),
           BlocProvider(
             create: (context) => RegBloc(context.read<RegRepository>()),

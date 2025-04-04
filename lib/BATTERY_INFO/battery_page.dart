@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trans_module/CONSTANTS.dart';
 import 'package:trans_module/WIDGETS/SizedBoxExtension.dart';
+import 'package:trans_module/WIDGETS/search_box.dart';
 
 import '../WIDGETS/TextfieldWidgets.dart';
 import '../WIDGETS/TextfieldWithDate.dart';
+import 'BATTERY_BLOC/battery_bloc.dart';
 
 class batteryInfoPage extends StatelessWidget {
   batteryInfoPage({super.key});
@@ -28,8 +31,12 @@ class batteryInfoPage extends StatelessWidget {
   TextEditingController remarks_controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(   appBar: AppBar(
-        title: Text("Battery Info",style: appbarTextStyle,),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Battery Info",
+          style: appbarTextStyle,
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -40,170 +47,204 @@ class batteryInfoPage extends StatelessWidget {
                 cntrollr: docNo_Controller,
                 label: "Doc NO",
                 // keyboardType: TextInputType.numberWithOptions(),
-                suffixIcon: Icon(Icons.search), onSubmitted: () {},
+                suffixIcon: Icon(Icons.search),
+                onSubmitted: () {
+                  context.read<BatteryBloc>().add(BatteryEvent.docnofetch());
+                  searchBox(context, 'DocNo', []);
+                },
+                isMadatory: true,
               ),
               30.heightBox,
-              Row(children: [
-                Flexible(
-                  flex: 2,
-                  child: CustomDateField(
-                  controller: docDate_Controller,
-                  label: "Doc Date",
-                ),),
-                15.widthBox,
-                Flexible(
-                  flex: 2,
-                  child: CustomTextfield(
-                    cntrollr: division_controller,
-                    label: "Division",
+              Row(
+                children: [
+                  Flexible(
+                    flex: 2,
+                    child: CustomDateField(
+                      controller: docDate_Controller,
+                      label: "Doc Date",
+                      isMadatory: true,
+                    ),
                   ),
-                ),
-              ],),
-
-              30.heightBox,Row(children: [
-                Flexible(
-                  flex: 1,
-                  child: CustomTextfield(
-                    cntrollr: suppcode_controller,
-                  label: "Supp code",
-                ),),
-                15.widthBox,
-                Flexible(
-                  flex: 2,
-                  child: CustomTextfield(
-                    cntrollr: suppname_controller,
-                    label: "",
+                  15.widthBox,
+                  Flexible(
+                    flex: 2,
+                    child: CustomTextfield(
+                        cntrollr: division_controller,
+                        label: "Division",
+                        suffixIcon: Icon(Icons.search),
+                        onSubmitted: () {
+                          searchBox(context, 'division', []);
+                        }),
                   ),
-                ),
-              ],),
-
+                ],
+              ),
               30.heightBox,
-              Row(children: [
-                Flexible(
-                  flex: 2,
-                  child: CustomTextfield(
-                    cntrollr: docDate_Controller,
-                  label: "Po No",
-                ),),
-                15.widthBox,
-                Flexible(
-                  flex: 2,
-                  child: CustomDateField(
-                    controller: division_controller,
-                    label: "Po Date",
+              Row(
+                children: [
+                  Flexible(
+                    flex: 1,
+                    child: CustomTextfield(
+                        cntrollr: suppcode_controller,
+                        label: "Supp code",
+                        isMadatory: true,
+                        suffixIcon: Icon(Icons.search),
+                        onSubmitted: () {
+                          searchBox(context, 'supp code', []);
+                        }),
                   ),
-                ),
-              ],),
-
-              30.heightBox,
-              Row(children: [  Flexible(
-                flex: 1,
-                child: CustomTextfield(
-                  cntrollr: assetId_controller,
-                  label: "Asset id",
-                ),),
-                15.widthBox,
-                Flexible(
-                  flex: 2,
-                  child: CustomTextfield(
-                    cntrollr: assetName_controller,
-                    label: "",
+                  15.widthBox,
+                  Flexible(
+                    flex: 2,
+                    child: CustomTextfield(
+                      cntrollr: suppname_controller,
+                      label: "",
+                      isReadonly: true,
+                    ),
                   ),
-                ),],),
-
-
+                ],
+              ),
               30.heightBox,
-              Row(children: [
-          Flexible(
-            flex: 1,
-            child: CustomTextfield(
-              cntrollr: DriverId_controller,
-              label: "Driver",
-            ),),
-          15.widthBox,
-          Flexible(
-            flex: 2,
-            child: CustomTextfield(
-              cntrollr: DriverName_controller,
-              label: "",
-            ),
-          ),
-        ],),
-
+              Row(
+                children: [
+                  Flexible(
+                    flex: 2,
+                    child: CustomTextfield(
+                      cntrollr: pono_controller,
+                      label: "Po No",
+                    ),
+                  ),
+                  15.widthBox,
+                  Flexible(
+                    flex: 2,
+                    child: CustomDateField(
+                      controller: division_controller,
+                      label: "Po Date",
+                    ),
+                  ),
+                ],
+              ),
               30.heightBox,
-        Row(children: [
-          Flexible(
-            flex: 1,
-            child: CustomTextfield(
-              cntrollr: city_controller,
-              label: "City",
-            ),),
-          15.widthBox,
-          Flexible(
-            flex: 2,
-            child: CustomTextfield(
-              cntrollr: value_controller,
-              label: "Value",
-            ),
-          ),
-        ],) ,
-
+              Row(
+                children: [
+                  Flexible(
+                    flex: 1,
+                    child: CustomTextfield(
+                        cntrollr: assetId_controller,
+                        label: "Asset id",
+                        isMadatory: true,
+                        suffixIcon: Icon(Icons.search),
+                        onSubmitted: () {
+                          searchBox(context, 'Asset', []);
+                        }),
+                  ),
+                  15.widthBox,
+                  Flexible(
+                    flex: 2,
+                    child: CustomTextfield(
+                      cntrollr: assetName_controller,
+                      label: "",
+                      isReadonly: true,
+                    ),
+                  ),
+                ],
+              ),
+              30.heightBox,
+              Row(
+                children: [
+                  Flexible(
+                    flex: 1,
+                    child: CustomTextfield(
+                        cntrollr: DriverId_controller,
+                        label: "Driver",
+                        suffixIcon: Icon(Icons.search),
+                        onSubmitted: () {
+                          searchBox(context, 'Driver', []);
+                        }),
+                  ),
+                  15.widthBox,
+                  Flexible(
+                    flex: 2,
+                    child: CustomTextfield(
+                      cntrollr: DriverName_controller,
+                      label: "",
+                    ),
+                  ),
+                ],
+              ),
+              30.heightBox,
+              Row(
+                children: [
+                  Flexible(
+                    flex: 1,
+                    child: CustomTextfield(
+                      cntrollr: city_controller,
+                      label: "City",
+                    ),
+                  ),
+                  15.widthBox,
+                  Flexible(
+                    flex: 2,
+                    child: CustomTextfield(
+                      cntrollr: value_controller,
+                      label: "Value",
+                    ),
+                  ),
+                ],
+              ),
               30.heightBox,
               CustomTextfield(
                 cntrollr: batteryslno_controller,
                 label: "Battery Serial No",
                 // keyboardType: TextInputType.numberWithOptions(),
-                suffixIcon: Icon(Icons.search), onSubmitted: () {},
+                isMadatory: true,
               ),
               30.heightBox,
-
-        Row(children: [
-          Flexible(
-            flex: 1,
-            child: CustomTextfield(
-              cntrollr: make_controller,
-              label: "Make",
-            ),),
-          15.widthBox,
-          Flexible(
-            flex: 2,
-            child: CustomTextfield(
-              cntrollr: batterySize_controller,
-              label: "Battery Size",
-            ),
-          ),
-        ],),
-
-
-
-              30.heightBox,
-              Row(children: [
-                Flexible(
-                  flex: 1,
-                  child: CustomTextfield(
-                    cntrollr: voltage_controller,
-                    label: "Voltage",
-                  ),),
-                15.widthBox,
-                Flexible(
-                  flex: 2,
-                  child: CustomTextfield(
-                    cntrollr: ampere_controller,
-                    label: "Ampere",
+              Row(
+                children: [
+                  Flexible(
+                    flex: 1,
+                    child: CustomTextfield(
+                      cntrollr: make_controller,
+                      label: "Make",
+                    ),
                   ),
-                ),
-              ],),
-
+                  15.widthBox,
+                  Flexible(
+                    flex: 2,
+                    child: CustomTextfield(
+                      cntrollr: batterySize_controller,
+                      label: "Battery Size",
+                    ),
+                  ),
+                ],
+              ),
+              30.heightBox,
+              Row(
+                children: [
+                  Flexible(
+                    flex: 1,
+                    child: CustomTextfield(
+                      cntrollr: voltage_controller,
+                      label: "Voltage",
+                    ),
+                  ),
+                  15.widthBox,
+                  Flexible(
+                    flex: 2,
+                    child: CustomTextfield(
+                      cntrollr: ampere_controller,
+                      label: "Ampere",
+                    ),
+                  ),
+                ],
+              ),
               30.heightBox,
               CustomTextfield(
-                  cntrollr: docDate_Controller,
-                  label: "remarks",
-                  Maxline: 3,
-                ),
-
-
+                cntrollr: remarks_controller,
+                label: "remarks",
+                Maxline: 3,
+              ),
               30.heightBox,
-
             ],
           ),
         ),

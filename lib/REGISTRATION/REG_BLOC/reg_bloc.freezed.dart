@@ -119,10 +119,95 @@ class _$FetchDocNOCopyWithImpl<$Res> implements $FetchDocNOCopyWith<$Res> {
 }
 
 /// @nodoc
+
+class FetchVehicleCode implements RegEvent {
+  const FetchVehicleCode(this.divcode);
+
+  final String divcode;
+
+  /// Create a copy of RegEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $FetchVehicleCodeCopyWith<FetchVehicleCode> get copyWith =>
+      _$FetchVehicleCodeCopyWithImpl<FetchVehicleCode>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is FetchVehicleCode &&
+            (identical(other.divcode, divcode) || other.divcode == divcode));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, divcode);
+
+  @override
+  String toString() {
+    return 'RegEvent.fetchVehicleCode(divcode: $divcode)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $FetchVehicleCodeCopyWith<$Res>
+    implements $RegEventCopyWith<$Res> {
+  factory $FetchVehicleCodeCopyWith(
+          FetchVehicleCode value, $Res Function(FetchVehicleCode) _then) =
+      _$FetchVehicleCodeCopyWithImpl;
+  @useResult
+  $Res call({String divcode});
+}
+
+/// @nodoc
+class _$FetchVehicleCodeCopyWithImpl<$Res>
+    implements $FetchVehicleCodeCopyWith<$Res> {
+  _$FetchVehicleCodeCopyWithImpl(this._self, this._then);
+
+  final FetchVehicleCode _self;
+  final $Res Function(FetchVehicleCode) _then;
+
+  /// Create a copy of RegEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? divcode = null,
+  }) {
+    return _then(FetchVehicleCode(
+      null == divcode
+          ? _self.divcode
+          : divcode // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class SaveData implements RegEvent {
+  const SaveData();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is SaveData);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'RegEvent.saveData()';
+  }
+}
+
+/// @nodoc
 mixin _$RegState {
-  List get divisionCode;
-  List get DocNo;
+  List get searchDialogData;
+  String get searchDialogTitle;
   bool get isLoading;
+  bool get isSaving;
   String get msg;
 
   /// Create a copy of RegState
@@ -138,24 +223,28 @@ mixin _$RegState {
         (other.runtimeType == runtimeType &&
             other is RegState &&
             const DeepCollectionEquality()
-                .equals(other.divisionCode, divisionCode) &&
-            const DeepCollectionEquality().equals(other.DocNo, DocNo) &&
+                .equals(other.searchDialogData, searchDialogData) &&
+            (identical(other.searchDialogTitle, searchDialogTitle) ||
+                other.searchDialogTitle == searchDialogTitle) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isSaving, isSaving) ||
+                other.isSaving == isSaving) &&
             (identical(other.msg, msg) || other.msg == msg));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(divisionCode),
-      const DeepCollectionEquality().hash(DocNo),
+      const DeepCollectionEquality().hash(searchDialogData),
+      searchDialogTitle,
       isLoading,
+      isSaving,
       msg);
 
   @override
   String toString() {
-    return 'RegState(divisionCode: $divisionCode, DocNo: $DocNo, isLoading: $isLoading, msg: $msg)';
+    return 'RegState(searchDialogData: $searchDialogData, searchDialogTitle: $searchDialogTitle, isLoading: $isLoading, isSaving: $isSaving, msg: $msg)';
   }
 }
 
@@ -165,9 +254,10 @@ abstract mixin class $RegStateCopyWith<$Res> {
       _$RegStateCopyWithImpl;
   @useResult
   $Res call(
-      {List<dynamic> divisionCode,
-      List<dynamic> DocNo,
+      {List<dynamic> searchDialogData,
+      String searchDialogTitle,
       bool isLoading,
+      bool isSaving,
       String msg});
 }
 
@@ -183,23 +273,28 @@ class _$RegStateCopyWithImpl<$Res> implements $RegStateCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? divisionCode = null,
-    Object? DocNo = null,
+    Object? searchDialogData = null,
+    Object? searchDialogTitle = null,
     Object? isLoading = null,
+    Object? isSaving = null,
     Object? msg = null,
   }) {
     return _then(_self.copyWith(
-      divisionCode: null == divisionCode
-          ? _self.divisionCode!
-          : divisionCode // ignore: cast_nullable_to_non_nullable
+      searchDialogData: null == searchDialogData
+          ? _self.searchDialogData!
+          : searchDialogData // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
-      DocNo: null == DocNo
-          ? _self.DocNo!
-          : DocNo // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+      searchDialogTitle: null == searchDialogTitle
+          ? _self.searchDialogTitle
+          : searchDialogTitle // ignore: cast_nullable_to_non_nullable
+              as String,
       isLoading: null == isLoading
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSaving: null == isSaving
+          ? _self.isSaving
+          : isSaving // ignore: cast_nullable_to_non_nullable
               as bool,
       msg: null == msg
           ? _self.msg
@@ -213,31 +308,28 @@ class _$RegStateCopyWithImpl<$Res> implements $RegStateCopyWith<$Res> {
 
 class regState implements RegState {
   regState(
-      {required final List<dynamic> divisionCode,
-      required final List<dynamic> DocNo,
+      {required final List<dynamic> searchDialogData,
+      required this.searchDialogTitle,
       required this.isLoading,
+      required this.isSaving,
       required this.msg})
-      : _divisionCode = divisionCode,
-        _DocNo = DocNo;
+      : _searchDialogData = searchDialogData;
 
-  final List<dynamic> _divisionCode;
+  final List<dynamic> _searchDialogData;
   @override
-  List<dynamic> get divisionCode {
-    if (_divisionCode is EqualUnmodifiableListView) return _divisionCode;
+  List<dynamic> get searchDialogData {
+    if (_searchDialogData is EqualUnmodifiableListView)
+      return _searchDialogData;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_divisionCode);
+    return EqualUnmodifiableListView(_searchDialogData);
   }
 
-  final List<dynamic> _DocNo;
   @override
-  List<dynamic> get DocNo {
-    if (_DocNo is EqualUnmodifiableListView) return _DocNo;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_DocNo);
-  }
-
+  final String searchDialogTitle;
   @override
   final bool isLoading;
+  @override
+  final bool isSaving;
   @override
   final String msg;
 
@@ -255,24 +347,28 @@ class regState implements RegState {
         (other.runtimeType == runtimeType &&
             other is regState &&
             const DeepCollectionEquality()
-                .equals(other._divisionCode, _divisionCode) &&
-            const DeepCollectionEquality().equals(other._DocNo, _DocNo) &&
+                .equals(other._searchDialogData, _searchDialogData) &&
+            (identical(other.searchDialogTitle, searchDialogTitle) ||
+                other.searchDialogTitle == searchDialogTitle) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isSaving, isSaving) ||
+                other.isSaving == isSaving) &&
             (identical(other.msg, msg) || other.msg == msg));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_divisionCode),
-      const DeepCollectionEquality().hash(_DocNo),
+      const DeepCollectionEquality().hash(_searchDialogData),
+      searchDialogTitle,
       isLoading,
+      isSaving,
       msg);
 
   @override
   String toString() {
-    return 'RegState(divisionCode: $divisionCode, DocNo: $DocNo, isLoading: $isLoading, msg: $msg)';
+    return 'RegState(searchDialogData: $searchDialogData, searchDialogTitle: $searchDialogTitle, isLoading: $isLoading, isSaving: $isSaving, msg: $msg)';
   }
 }
 
@@ -284,9 +380,10 @@ abstract mixin class $regStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<dynamic> divisionCode,
-      List<dynamic> DocNo,
+      {List<dynamic> searchDialogData,
+      String searchDialogTitle,
       bool isLoading,
+      bool isSaving,
       String msg});
 }
 
@@ -302,23 +399,28 @@ class _$regStateCopyWithImpl<$Res> implements $regStateCopyWith<$Res> {
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? divisionCode = null,
-    Object? DocNo = null,
+    Object? searchDialogData = null,
+    Object? searchDialogTitle = null,
     Object? isLoading = null,
+    Object? isSaving = null,
     Object? msg = null,
   }) {
     return _then(regState(
-      divisionCode: null == divisionCode
-          ? _self._divisionCode
-          : divisionCode // ignore: cast_nullable_to_non_nullable
+      searchDialogData: null == searchDialogData
+          ? _self._searchDialogData
+          : searchDialogData // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
-      DocNo: null == DocNo
-          ? _self._DocNo
-          : DocNo // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+      searchDialogTitle: null == searchDialogTitle
+          ? _self.searchDialogTitle
+          : searchDialogTitle // ignore: cast_nullable_to_non_nullable
+              as String,
       isLoading: null == isLoading
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSaving: null == isSaving
+          ? _self.isSaving
+          : isSaving // ignore: cast_nullable_to_non_nullable
               as bool,
       msg: null == msg
           ? _self.msg
