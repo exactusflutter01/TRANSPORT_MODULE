@@ -116,12 +116,148 @@ class FetchDebitCode implements InsuEvent {
 }
 
 /// @nodoc
+
+class InsuranceInsert implements InsuEvent {
+  const InsuranceInsert(final Map<dynamic, dynamic> data) : _data = data;
+
+  final Map<dynamic, dynamic> _data;
+  Map<dynamic, dynamic> get data {
+    if (_data is EqualUnmodifiableMapView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_data);
+  }
+
+  /// Create a copy of InsuEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $InsuranceInsertCopyWith<InsuranceInsert> get copyWith =>
+      _$InsuranceInsertCopyWithImpl<InsuranceInsert>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is InsuranceInsert &&
+            const DeepCollectionEquality().equals(other._data, _data));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
+
+  @override
+  String toString() {
+    return 'InsuEvent.insuranceInsert(data: $data)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $InsuranceInsertCopyWith<$Res>
+    implements $InsuEventCopyWith<$Res> {
+  factory $InsuranceInsertCopyWith(
+          InsuranceInsert value, $Res Function(InsuranceInsert) _then) =
+      _$InsuranceInsertCopyWithImpl;
+  @useResult
+  $Res call({Map<dynamic, dynamic> data});
+}
+
+/// @nodoc
+class _$InsuranceInsertCopyWithImpl<$Res>
+    implements $InsuranceInsertCopyWith<$Res> {
+  _$InsuranceInsertCopyWithImpl(this._self, this._then);
+
+  final InsuranceInsert _self;
+  final $Res Function(InsuranceInsert) _then;
+
+  /// Create a copy of InsuEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(InsuranceInsert(
+      null == data
+          ? _self._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as Map<dynamic, dynamic>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class Verifiedclicked implements InsuEvent {
+  const Verifiedclicked(this.clicked);
+
+  final bool clicked;
+
+  /// Create a copy of InsuEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $VerifiedclickedCopyWith<Verifiedclicked> get copyWith =>
+      _$VerifiedclickedCopyWithImpl<Verifiedclicked>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Verifiedclicked &&
+            (identical(other.clicked, clicked) || other.clicked == clicked));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, clicked);
+
+  @override
+  String toString() {
+    return 'InsuEvent.verifiedClicked(clicked: $clicked)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $VerifiedclickedCopyWith<$Res>
+    implements $InsuEventCopyWith<$Res> {
+  factory $VerifiedclickedCopyWith(
+          Verifiedclicked value, $Res Function(Verifiedclicked) _then) =
+      _$VerifiedclickedCopyWithImpl;
+  @useResult
+  $Res call({bool clicked});
+}
+
+/// @nodoc
+class _$VerifiedclickedCopyWithImpl<$Res>
+    implements $VerifiedclickedCopyWith<$Res> {
+  _$VerifiedclickedCopyWithImpl(this._self, this._then);
+
+  final Verifiedclicked _self;
+  final $Res Function(Verifiedclicked) _then;
+
+  /// Create a copy of InsuEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? clicked = null,
+  }) {
+    return _then(Verifiedclicked(
+      null == clicked
+          ? _self.clicked
+          : clicked // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
 mixin _$InsuranceState {
   List get ItemsList;
-  List get PolicyList;
-  List get DebitCode;
+  String get SearchDialogueName;
   bool get isLoading;
   bool get isError;
+  dynamic get Response;
+  dynamic get ResponseMessage;
+  bool get verified;
 
   /// Create a copy of InsuranceState
   /// with the given fields replaced by the non-null parameter values.
@@ -137,26 +273,32 @@ mixin _$InsuranceState {
         (other.runtimeType == runtimeType &&
             other is InsuranceState &&
             const DeepCollectionEquality().equals(other.ItemsList, ItemsList) &&
-            const DeepCollectionEquality()
-                .equals(other.PolicyList, PolicyList) &&
-            const DeepCollectionEquality().equals(other.DebitCode, DebitCode) &&
+            (identical(other.SearchDialogueName, SearchDialogueName) ||
+                other.SearchDialogueName == SearchDialogueName) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.isError, isError) || other.isError == isError));
+            (identical(other.isError, isError) || other.isError == isError) &&
+            const DeepCollectionEquality().equals(other.Response, Response) &&
+            const DeepCollectionEquality()
+                .equals(other.ResponseMessage, ResponseMessage) &&
+            (identical(other.verified, verified) ||
+                other.verified == verified));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(ItemsList),
-      const DeepCollectionEquality().hash(PolicyList),
-      const DeepCollectionEquality().hash(DebitCode),
+      SearchDialogueName,
       isLoading,
-      isError);
+      isError,
+      const DeepCollectionEquality().hash(Response),
+      const DeepCollectionEquality().hash(ResponseMessage),
+      verified);
 
   @override
   String toString() {
-    return 'InsuranceState(ItemsList: $ItemsList, PolicyList: $PolicyList, DebitCode: $DebitCode, isLoading: $isLoading, isError: $isError)';
+    return 'InsuranceState(ItemsList: $ItemsList, SearchDialogueName: $SearchDialogueName, isLoading: $isLoading, isError: $isError, Response: $Response, ResponseMessage: $ResponseMessage, verified: $verified)';
   }
 }
 
@@ -168,10 +310,12 @@ abstract mixin class $InsuranceStateCopyWith<$Res> {
   @useResult
   $Res call(
       {List<dynamic> ItemsList,
-      List<dynamic> PolicyList,
-      List<dynamic> DebitCode,
+      String SearchDialogueName,
       bool isLoading,
-      bool isError});
+      bool isError,
+      dynamic Response,
+      dynamic ResponseMessage,
+      bool verified});
 }
 
 /// @nodoc
@@ -188,24 +332,22 @@ class _$InsuranceStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? ItemsList = null,
-    Object? PolicyList = null,
-    Object? DebitCode = null,
+    Object? SearchDialogueName = null,
     Object? isLoading = null,
     Object? isError = null,
+    Object? Response = freezed,
+    Object? ResponseMessage = freezed,
+    Object? verified = null,
   }) {
     return _then(_self.copyWith(
       ItemsList: null == ItemsList
           ? _self.ItemsList!
           : ItemsList // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
-      PolicyList: null == PolicyList
-          ? _self.PolicyList!
-          : PolicyList // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
-      DebitCode: null == DebitCode
-          ? _self.DebitCode!
-          : DebitCode // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+      SearchDialogueName: null == SearchDialogueName
+          ? _self.SearchDialogueName
+          : SearchDialogueName // ignore: cast_nullable_to_non_nullable
+              as String,
       isLoading: null == isLoading
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -213,6 +355,18 @@ class _$InsuranceStateCopyWithImpl<$Res>
       isError: null == isError
           ? _self.isError
           : isError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      Response: freezed == Response
+          ? _self.Response
+          : Response // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      ResponseMessage: freezed == ResponseMessage
+          ? _self.ResponseMessage
+          : ResponseMessage // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      verified: null == verified
+          ? _self.verified
+          : verified // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -223,13 +377,13 @@ class _$InsuranceStateCopyWithImpl<$Res>
 class insuranceState implements InsuranceState {
   insuranceState(
       {required final List<dynamic> ItemsList,
-      required final List<dynamic> PolicyList,
-      required final List<dynamic> DebitCode,
+      required this.SearchDialogueName,
       required this.isLoading,
-      required this.isError})
-      : _ItemsList = ItemsList,
-        _PolicyList = PolicyList,
-        _DebitCode = DebitCode;
+      required this.isError,
+      required this.Response,
+      required this.ResponseMessage,
+      required this.verified})
+      : _ItemsList = ItemsList;
 
   final List<dynamic> _ItemsList;
   @override
@@ -239,26 +393,18 @@ class insuranceState implements InsuranceState {
     return EqualUnmodifiableListView(_ItemsList);
   }
 
-  final List<dynamic> _PolicyList;
   @override
-  List<dynamic> get PolicyList {
-    if (_PolicyList is EqualUnmodifiableListView) return _PolicyList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_PolicyList);
-  }
-
-  final List<dynamic> _DebitCode;
-  @override
-  List<dynamic> get DebitCode {
-    if (_DebitCode is EqualUnmodifiableListView) return _DebitCode;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_DebitCode);
-  }
-
+  final String SearchDialogueName;
   @override
   final bool isLoading;
   @override
   final bool isError;
+  @override
+  final dynamic Response;
+  @override
+  final dynamic ResponseMessage;
+  @override
+  final bool verified;
 
   /// Create a copy of InsuranceState
   /// with the given fields replaced by the non-null parameter values.
@@ -275,27 +421,32 @@ class insuranceState implements InsuranceState {
             other is insuranceState &&
             const DeepCollectionEquality()
                 .equals(other._ItemsList, _ItemsList) &&
-            const DeepCollectionEquality()
-                .equals(other._PolicyList, _PolicyList) &&
-            const DeepCollectionEquality()
-                .equals(other._DebitCode, _DebitCode) &&
+            (identical(other.SearchDialogueName, SearchDialogueName) ||
+                other.SearchDialogueName == SearchDialogueName) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.isError, isError) || other.isError == isError));
+            (identical(other.isError, isError) || other.isError == isError) &&
+            const DeepCollectionEquality().equals(other.Response, Response) &&
+            const DeepCollectionEquality()
+                .equals(other.ResponseMessage, ResponseMessage) &&
+            (identical(other.verified, verified) ||
+                other.verified == verified));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_ItemsList),
-      const DeepCollectionEquality().hash(_PolicyList),
-      const DeepCollectionEquality().hash(_DebitCode),
+      SearchDialogueName,
       isLoading,
-      isError);
+      isError,
+      const DeepCollectionEquality().hash(Response),
+      const DeepCollectionEquality().hash(ResponseMessage),
+      verified);
 
   @override
   String toString() {
-    return 'InsuranceState(ItemsList: $ItemsList, PolicyList: $PolicyList, DebitCode: $DebitCode, isLoading: $isLoading, isError: $isError)';
+    return 'InsuranceState(ItemsList: $ItemsList, SearchDialogueName: $SearchDialogueName, isLoading: $isLoading, isError: $isError, Response: $Response, ResponseMessage: $ResponseMessage, verified: $verified)';
   }
 }
 
@@ -309,10 +460,12 @@ abstract mixin class $insuranceStateCopyWith<$Res>
   @useResult
   $Res call(
       {List<dynamic> ItemsList,
-      List<dynamic> PolicyList,
-      List<dynamic> DebitCode,
+      String SearchDialogueName,
       bool isLoading,
-      bool isError});
+      bool isError,
+      dynamic Response,
+      dynamic ResponseMessage,
+      bool verified});
 }
 
 /// @nodoc
@@ -329,24 +482,22 @@ class _$insuranceStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? ItemsList = null,
-    Object? PolicyList = null,
-    Object? DebitCode = null,
+    Object? SearchDialogueName = null,
     Object? isLoading = null,
     Object? isError = null,
+    Object? Response = freezed,
+    Object? ResponseMessage = freezed,
+    Object? verified = null,
   }) {
     return _then(insuranceState(
       ItemsList: null == ItemsList
           ? _self._ItemsList
           : ItemsList // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
-      PolicyList: null == PolicyList
-          ? _self._PolicyList
-          : PolicyList // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
-      DebitCode: null == DebitCode
-          ? _self._DebitCode
-          : DebitCode // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+      SearchDialogueName: null == SearchDialogueName
+          ? _self.SearchDialogueName
+          : SearchDialogueName // ignore: cast_nullable_to_non_nullable
+              as String,
       isLoading: null == isLoading
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -354,6 +505,18 @@ class _$insuranceStateCopyWithImpl<$Res>
       isError: null == isError
           ? _self.isError
           : isError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      Response: freezed == Response
+          ? _self.Response
+          : Response // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      ResponseMessage: freezed == ResponseMessage
+          ? _self.ResponseMessage
+          : ResponseMessage // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      verified: null == verified
+          ? _self.verified
+          : verified // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
