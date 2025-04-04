@@ -11,8 +11,8 @@ class TyrePuncturePage extends StatelessWidget {
   TextEditingController docNo_Controller = TextEditingController();
   TextEditingController docDate_Controller = TextEditingController();
   TextEditingController division_controller = TextEditingController();
-  TextEditingController suppcode_controller = TextEditingController();
-  TextEditingController suppname_controller = TextEditingController();
+  TextEditingController vehiclecode_controller = TextEditingController();
+  TextEditingController vehiclename_controller = TextEditingController();
   TextEditingController pono_controller = TextEditingController();
   TextEditingController poDate_controller = TextEditingController();
   TextEditingController assetId_controller = TextEditingController();
@@ -81,19 +81,19 @@ class TyrePuncturePage extends StatelessWidget {
                   Flexible(
                     flex: 1,
                     child: CustomTextfield(
-                        cntrollr: suppcode_controller,
-                        label: "Supp code",
+                        cntrollr: vehiclecode_controller,
+                        label: "Vehicle code",
                         isMadatory: true,
                         suffixIcon: Icon(Icons.search),
                         onSubmitted: () {
-                          searchBox(context, 'supp code', []);
+                          searchBox(context, 'vehicle code', []);
                         }),
                   ),
                   15.widthBox,
                   Flexible(
                     flex: 2,
                     child: CustomTextfield(
-                      cntrollr: suppname_controller,
+                      cntrollr: vehiclename_controller,
                       label: "",
                       isReadonly: true,
                     ),
