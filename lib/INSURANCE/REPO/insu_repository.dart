@@ -8,7 +8,7 @@ class Insurance_Repo {
   fetchinsCmpny() async {
     try {
       final response = await dio.get('/insurance/insurance_company_get');
-      print(dio);
+      print("response.url ${response.realUri}");
       print("response.data ${response.data}");
       final modelData = (response.data)
           .map((item) => Ins_cmpny_model.fromJson(item as Map<String, dynamic>))
@@ -24,7 +24,7 @@ class Insurance_Repo {
   fetchPolicyType() async {
     try {
       final response = await dio.get('/insurance/policy_type_get');
-      print(dio);
+      print(response.realUri);
       print("response.data ${response.data}");
       final modelData = (response.data)
           .map((item) => PolicyTypeModel.fromJson(item as Map<String, dynamic>))
@@ -37,9 +37,11 @@ class Insurance_Repo {
   }
 
   fetchDebitCode() async {
+    print("repository  page: debit code");
     try {
       final response = await dio.get('/insurance/debit_code_get');
-      print(dio);
+
+      print("response.url ${response.realUri}");
       print("response.data ${response.data}");
       final modelData = (response.data)
           .map((item) =>
@@ -52,79 +54,11 @@ class Insurance_Repo {
     }
   }
 
-  InsuranaceInsert(
-      vehcode,
-      docno,
-      docdate,
-      invno,
-      invdate,
-      supcode,
-      costbookno,
-      divcode,
-      deptcode,
-      inscompany,
-      strtdte,
-      expdate,
-      policytype,
-      policyno,
-      amount,
-      remarks,
-      currcode,
-      exrate,
-      active,
-      userid,
-      strtread,
-      endreading,
-      empid,
-      accodedr,
-      docref,
-      exptypecode,
-      expsubtype_code,
-      exp_code,
-      verified,
-      verifieddate,
-      verifiedby) async {
+  InsuranaceInsert(Map data) async {
     try {
-      Map data = {
-        "COMPANY_CODE": "$Gscompanycode",
-        "VEHICLE_CODE": vehcode,
-        "DOC_NO": docno,
-        "DOC_DATE": docdate,
-        "INVOICE_NO": invno,
-        "INVOICE_DATE": invdate,
-        "SUP_CODE": supcode,
-        "COST_BOOK_NO": costbookno,
-        "DIV_CODE": divcode,
-        "DEPT_CODE": deptcode,
-        "INSURANCE_COMPANY": inscompany,
-        "START_DATE": strtdte,
-        "EXP_DATE": expdate,
-        "POLICY_TYPE": policytype,
-        "POLICY_NO": policyno,
-        "AMOUNT": amount,
-        "REMARKS": remarks,
-        "CURR_CODE": currcode,
-        "EX_RATE": exrate,
-        "ACTIVE": active,
-        "USER_ID": userid,
-        "START_METER_READING": strtread,
-        "END_METER_READING": endreading,
-        "EMP_ID": empid,
-        "AC_CODE_DR": accodedr,
-        "DOC_REF": docref,
-        "EXPTYPE_CODE": exptypecode,
-        "EXPSUBTYPE_CODE": expsubtype_code,
-        "EXP_CODE": exp_code,
-        "VERIFIED": verified,
-        "VERIFIED_DATE": verifieddate,
-        "VERIFIED_BY": verifiedby
-      };
-      final response = await dio.post('/insurance/insurance_insert',
-          data: data,
-          options: Options(headers: {
-            'Content-Type': 'application/json',
-          }));
-
+      final response =
+          await dio.post('/insurance/insurance_insert', data: data);
+      print("response.url ${response.realUri}");
       if (response.statusCode == 200) {
         print('Data inserted successfully');
       } else {

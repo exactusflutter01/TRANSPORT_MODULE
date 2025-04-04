@@ -17,57 +17,42 @@ class RegistrationPage extends StatefulWidget {
 
 class _RegistrationPageState extends State<RegistrationPage> {
   TextEditingController docNo_Controller = TextEditingController();
-
   TextEditingController docDate_Controller = TextEditingController();
-
   TextEditingController division_controller = TextEditingController();
-
   TextEditingController vehicleCode_controller = TextEditingController();
-
+  TextEditingController vehicleName_controller = TextEditingController();
   TextEditingController regStartDate_controller = TextEditingController();
-
   TextEditingController regExpDate_controller = TextEditingController();
-
   TextEditingController startMeterReading_controller = TextEditingController();
-
   TextEditingController endMeterReading_controller = TextEditingController();
-
   TextEditingController amt_controller = TextEditingController();
-
   TextEditingController otherRegExpDate_controller = TextEditingController();
-
   TextEditingController driver_controller = TextEditingController();
-
   final TextEditingController remarks_controller = TextEditingController();
-
   final TextEditingController documentRef_controller = TextEditingController();
-
   final TextEditingController debitAcc_controller = TextEditingController();
-
   final TextEditingController creditAcc_controller = TextEditingController();
+  final TextEditingController regType_Controller = TextEditingController();
   String? selectedItem;
   bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RegBloc, RegState>(
-      listenWhen: (previous, current) {
-        return previous.divisionCode != current.divisionCode ||
-            previous.DocNo != current.DocNo;
-      },
       listener: (context, state) async {
-        // if (state.divisionCode.isNotEmpty) {
-        //   print("reg divcode ${state.divisionCode}");
-        //   final data = await searchBox(context, 'Division', state.divisionCode);
-        //   division_controller.text = data.var1;
-
-        //   context.read<RegBloc>().add(FetchDocNO(data.var1));
-        // }
-        // if (state.DocNo.isNotEmpty) {
-        //   print("reg docNo ${state.DocNo}");
-        //   final docNoData =
-        //       await searchBox(context, 'Document Number', state.DocNo);
-        //   docNo_Controller.text = docNoData.var1;
-        // }
+        if (state.searchDialogData.isNotEmpty && state.isLoading == false) {
+          final data = await searchBox(
+              context, state.searchDialogTitle, state.searchDialogData);
+          if (state.searchDialogTitle == 'Division Code') {
+            division_controller.text = data.var1;
+          }
+          if (state.searchDialogTitle == 'Doc No') {
+            docNo_Controller.text = data.var1;
+          }
+          if (state.searchDialogTitle == 'Vehicle Code') {
+            vehicleCode_controller.text = data.var1;
+            vehicleName_controller.text = data.var2;
+          }
+        }
       },
       builder: (context, state) {
         return Scaffold(
@@ -99,17 +84,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       keyboardType: TextInputType.numberWithOptions(),
                       suffixIcon: Icon(Icons.search),
                       onSubmitted: () async {
-                        final bloc = context.read<RegBloc>();
-
-                        bloc.add(RegEvent.fetchDocNO(division_controller.text));
-                        await for (final state in bloc.stream) {
-                          if (state.DocNo.isNotEmpty) {
-                            print("reg docNo ${state.DocNo}");
-                            final docNoData = await searchBox(
-                                context, 'Document Number', state.DocNo);
-                            docNo_Controller.text = docNoData.var1;
-                          }
-                        }
+                        context
+                            .read<RegBloc>()
+                            .add(RegEvent.fetchDocNO(division_controller.text));
                       },
                     ),
                     30.heightBox,
@@ -131,17 +108,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             label: "Division",
                             suffixIcon: Icon(Icons.search),
                             onSubmitted: () async {
-                              final bloc = context.read<RegBloc>();
-                              bloc.add(RegEvent.fetchdivcodes());
-
-                              await for (final state in bloc.stream) {
-                                if (state.divisionCode.isNotEmpty) {
-                                  print("reg divcode ${state.divisionCode}");
-                                  final data = await searchBox(
-                                      context, 'Division', state.divisionCode);
-                                  division_controller.text = data.var1;
-                                }
-                              }
+                              context
+                                  .read<RegBloc>()
+                                  .add(RegEvent.fetchdivcodes());
                             },
                           ),
                         ),
@@ -157,7 +126,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             cntrollr: vehicleCode_controller,
                             label: "Vehicle Code",
                             suffixIcon: Icon(Icons.search),
-                            onSubmitted: () {},
+                            onSubmitted: () {
+                              context
+                                  .read<RegBloc>()
+                                  .add(RegEvent.fetchVehicleCode(division_controller.text));
+                            },
                           ),
                         ),
                         15.widthBox,
@@ -165,7 +138,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           flex: 1,
                           child: CustomTextfield(
                             isMadatory: true,
-                            cntrollr: vehicleCode_controller,
+                            cntrollr: vehicleName_controller,
                             label: "",
                           ),
                         ),
@@ -255,14 +228,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     CustomTextfield(
                       Maxline: 3,
                       isMadatory: true,
-                      cntrollr: docNo_Controller,
+                      cntrollr: remarks_controller,
                       label: "Remarks",
                       keyboardType: TextInputType.numberWithOptions(),
                       // onSubmitted: (p0) {},
                     ),
                     30.heightBox,
                     CustomTextfield(
-                      cntrollr: docDate_Controller,
+                      cntrollr: documentRef_controller,
                       label: "Document Ref",
                     ),
                     30.heightBox,
@@ -270,7 +243,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       children: [
                         Expanded(
                           child: CustomTextfield(
-                            cntrollr: docNo_Controller,
+                            cntrollr: debitAcc_controller,
                             label: "Debit Account Code",
                             keyboardType: TextInputType.numberWithOptions(),
                             suffixIcon: Icon(Icons.search),
@@ -291,7 +264,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       children: [
                         Expanded(
                           child: CustomTextfield(
-                            cntrollr: docNo_Controller,
+                            cntrollr: creditAcc_controller,
                             label: "Credit Account Code",
                             keyboardType: TextInputType.numberWithOptions(),
                             suffixIcon: Icon(Icons.search),
@@ -322,20 +295,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           "Verified",
                           style: TextStyle(fontWeight: FontWeight.w800),
                         ),
-                        15.widthBox,
-                        // Expanded(
-                        //   child: CustomDropdown(
-                        //     width: 180,
-                        //     items: ['type1', 'type2'],
-                        //     hint: 'Select Reg Type',
-                        //     selectedValue: selectedItem,
-                        //     onChanged: (value) {
-                        //       setState(() {
-                        //         selectedItem = value;
-                        //       });
-                        //     },
-                        //   ),
-                        // ),
+                        45.widthBox,
+                        Expanded(
+                            child: CustomDropdown(
+                                hintText: 'Reg Type',
+                                ontap: () {},
+                                controller: regType_Controller,
+                                dropDownList: ["Type 1", "Type 2"]))
                       ],
                     ),
                   ],

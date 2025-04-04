@@ -7,8 +7,9 @@ abstract class InsuranceState with _$InsuranceState {
       required String SearchDialogueName,
       required bool isLoading,
       required bool isError,
-      required String ResponseMessage,
-      required dynamic Response}) = insuranceState;
+      required dynamic Response,
+      required dynamic ResponseMessage,
+      required bool verified}) = insuranceState;
 
   factory InsuranceState.initial() {
     return InsuranceState(
@@ -16,7 +17,8 @@ abstract class InsuranceState with _$InsuranceState {
         isLoading: true,
         isError: false,
         Response: '',
-        ResponseMessage: '',
-        SearchDialogueName: '');
+        SearchDialogueName: '',
+        verified: false,
+        ResponseMessage: '');
   }
 }

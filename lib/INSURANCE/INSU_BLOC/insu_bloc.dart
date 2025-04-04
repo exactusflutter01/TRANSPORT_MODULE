@@ -14,6 +14,7 @@ class InsuBloc extends Bloc<InsuEvent, InsuranceState> {
     on<FetchPolicy>(_FetchPolicy_type);
     on<FetchDebitCode>(_FetchDebitcode);
     on<InsuranceInsert>(_Insert_Insurance);
+    on<Verifiedclicked>(_CheckBoxClicked);
   }
 
   _FetchInsuranace_cmpny(FetchDoc event, Emitter<InsuranceState> emit) async {
@@ -61,45 +62,18 @@ class InsuBloc extends Bloc<InsuEvent, InsuranceState> {
 
   _Insert_Insurance(InsuranceInsert event, Emitter<InsuranceState> emit) async {
     try {
-      final response = await insrepo.InsuranaceInsert(
-          event.vehcode,
-          event.docno,
-          event.docdate,
-          event.invno,
-          event.invdate,
-          event.supcode,
-          event.costbookno,
-          event.divcode,
-          event.deptcode,
-          event.inscompany,
-          event.strtdte,
-          event.expdate,
-          event.policytype,
-          event.policyno,
-          event.amount,
-          event.remarks,
-          event.currcode,
-          event.exrate,
-          event.active,
-          event.userid,
-          event.strtread,
-          event.endreading,
-          event.empid,
-          event.accodedr,
-          event.docref,
-          event.exptypecode,
-          event.expsubtype_code,
-          event.exp_code,
-          event.verified,
-          event.verifieddate,
-          event.verifiedby);
-
+      final response = await insrepo.InsuranaceInsert(event.data);
       emit(state.copyWith(
           ItemsList: [], isLoading: false, isError: false, Response: response));
+      print("Insert response in Bloc $response");
     } catch (e) {
       print("$e");
       emit(state.copyWith(
           isLoading: false, isError: true, Response: e.toString()));
     }
+  }
+
+  _CheckBoxClicked(Verifiedclicked event, Emitter<InsuranceState> emit) {
+    emit(state.copyWith(verified: event.clicked));
   }
 }

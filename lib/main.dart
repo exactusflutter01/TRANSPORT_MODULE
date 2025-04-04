@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) =>
-                FuelBloc(context.read<FuelFillingRepository>()), // Corrected
+                FuelBloc(context.read<FuelFillingRepository>()), 
           ),
           BlocProvider(
             create: (context) => RegBloc(context.read<RegRepository>()),

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:dio/dio.dart';
 
-var Gscompanycode = 'BSG';
 
-final Dio dio = Dio(BaseOptions(baseUrl: "https://scm06.exactuscloud.com:4029/api"));
+const String baseUrl = "https://scm06.exactuscloud.com:4030/api";
+
+final Dio dio = Dio(BaseOptions(baseUrl: baseUrl));
 
 final Color commonColor = Color.fromARGB(255, 29, 77, 37);
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:trans_module/CONSTANTS.dart';
 
 class CustomDateField extends StatefulWidget {
@@ -38,7 +39,7 @@ class _CustomDateFieldState extends State<CustomDateField> {
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),
             borderSide: const BorderSide(
-              color: Colors.green, 
+              color: Colors.green,
               width: 2,
             ),
           ),
@@ -51,13 +52,14 @@ class _CustomDateFieldState extends State<CustomDateField> {
           ),
           labelText: widget.label,
           labelStyle: TextStyle(
-              color: widget.isMadatory == true ? Color.fromARGB(255, 170, 51, 51) : Colors.black,
+              color: widget.isMadatory == true
+                  ? Color.fromARGB(255, 170, 51, 51)
+                  : Colors.black,
               fontWeight: FontWeight.w700),
           suffixIcon: IconButton(
             icon: const Icon(Icons.calendar_month),
             onPressed: () => _selectDate(context),
           ),
-          
           suffixIconColor: commonColor),
       onTap: () => _selectDate(context),
       readOnly: widget.readOnly,
@@ -67,7 +69,6 @@ class _CustomDateFieldState extends State<CustomDateField> {
   Future<void> _selectDate(BuildContext context) async {
     widget.controller.clear();
     DateTime? selectedDate = await showDatePicker(
-      
       context: context,
       firstDate: DateTime(1900),
       lastDate: DateTime(2100),
@@ -76,7 +77,8 @@ class _CustomDateFieldState extends State<CustomDateField> {
     );
 
     if (selectedDate != null) {
-      String formattedDate = selectedDate.toIso8601String().substring(0, 10);
+      // String formattedDate = selectedDate.toIso8601String().substring(0, 10);
+      String formattedDate = DateFormat('dd-MM-yyyy').format(selectedDate);
       setState(() {
         widget.controller.text = formattedDate;
       });

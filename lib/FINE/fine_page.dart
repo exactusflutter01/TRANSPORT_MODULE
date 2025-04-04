@@ -50,25 +50,10 @@ class _FinePageState extends State<FinePage> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RegBloc, RegState>(
-      listenWhen: (previous, current) {
-        return previous.divisionCode != current.divisionCode ||
-            previous.DocNo != current.DocNo;
-      },
+  
       listener: (context, state) async {
-        if (state.divisionCode.isNotEmpty) {
-          print("reg divcode ${state.divisionCode}");
-          final data = await searchBox(context, 'Division', state.divisionCode);
-          division_controller.text = data.var1;
-
-          context.read<RegBloc>().add(FetchDocNO(data.var1));
-        }
-        if (state.DocNo.isNotEmpty) {
-          print("reg docNo ${state.DocNo}");
-          final docNoData =
-              await searchBox(context, 'Document Number', state.DocNo);
-          docNo_Controller.text = docNoData.var1;
-        }
-        ;
+     
+    
       },
       builder: (context, state) {
         return Scaffold(
