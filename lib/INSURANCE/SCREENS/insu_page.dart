@@ -74,12 +74,7 @@ class Insurance_page extends StatelessWidget {
             PolicyType.text = data.var1;
             PolicyNo.text = data.var2;
           }
-          if (state.DebitCode.isNotEmpty) {
-            final data =
-                await searchBox(context, "Debit Account Code", state.DebitCode);
-            DebitAccCode.text = data.var1;
-            DebitAccCodedesc.text = data.var2;
-          }
+        
         },
         builder: (context, state) {
           return SingleChildScrollView(
