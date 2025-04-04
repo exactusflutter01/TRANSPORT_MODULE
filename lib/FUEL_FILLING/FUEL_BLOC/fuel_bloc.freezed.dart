@@ -96,12 +96,251 @@ class FetchFuelType implements FuelEvent {
 }
 
 /// @nodoc
+
+class FetchFuelCard implements FuelEvent {
+  const FetchFuelCard();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is FetchFuelCard);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'FuelEvent.fetchFuelCard()';
+  }
+}
+
+/// @nodoc
+
+class FetchDocNo implements FuelEvent {
+  const FetchDocNo(this.divCode);
+
+  final String divCode;
+
+  /// Create a copy of FuelEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $FetchDocNoCopyWith<FetchDocNo> get copyWith =>
+      _$FetchDocNoCopyWithImpl<FetchDocNo>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is FetchDocNo &&
+            (identical(other.divCode, divCode) || other.divCode == divCode));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, divCode);
+
+  @override
+  String toString() {
+    return 'FuelEvent.fetchDocNo(divCode: $divCode)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $FetchDocNoCopyWith<$Res>
+    implements $FuelEventCopyWith<$Res> {
+  factory $FetchDocNoCopyWith(
+          FetchDocNo value, $Res Function(FetchDocNo) _then) =
+      _$FetchDocNoCopyWithImpl;
+  @useResult
+  $Res call({String divCode});
+}
+
+/// @nodoc
+class _$FetchDocNoCopyWithImpl<$Res> implements $FetchDocNoCopyWith<$Res> {
+  _$FetchDocNoCopyWithImpl(this._self, this._then);
+
+  final FetchDocNo _self;
+  final $Res Function(FetchDocNo) _then;
+
+  /// Create a copy of FuelEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? divCode = null,
+  }) {
+    return _then(FetchDocNo(
+      null == divCode
+          ? _self.divCode
+          : divCode // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class IncrementDocNo implements FuelEvent {
+  const IncrementDocNo();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is IncrementDocNo);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'FuelEvent.incrementDocNo()';
+  }
+}
+
+/// @nodoc
+
+class IsVerified implements FuelEvent {
+  const IsVerified(this.isVerify);
+
+  final bool isVerify;
+
+  /// Create a copy of FuelEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $IsVerifiedCopyWith<IsVerified> get copyWith =>
+      _$IsVerifiedCopyWithImpl<IsVerified>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is IsVerified &&
+            (identical(other.isVerify, isVerify) ||
+                other.isVerify == isVerify));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isVerify);
+
+  @override
+  String toString() {
+    return 'FuelEvent.isVerified(isVerify: $isVerify)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $IsVerifiedCopyWith<$Res>
+    implements $FuelEventCopyWith<$Res> {
+  factory $IsVerifiedCopyWith(
+          IsVerified value, $Res Function(IsVerified) _then) =
+      _$IsVerifiedCopyWithImpl;
+  @useResult
+  $Res call({bool isVerify});
+}
+
+/// @nodoc
+class _$IsVerifiedCopyWithImpl<$Res> implements $IsVerifiedCopyWith<$Res> {
+  _$IsVerifiedCopyWithImpl(this._self, this._then);
+
+  final IsVerified _self;
+  final $Res Function(IsVerified) _then;
+
+  /// Create a copy of FuelEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? isVerify = null,
+  }) {
+    return _then(IsVerified(
+      null == isVerify
+          ? _self.isVerify
+          : isVerify // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class InsertFuelFilling implements FuelEvent {
+  const InsertFuelFilling(final Map<String, dynamic> fuelData)
+      : _fuelData = fuelData;
+
+  final Map<String, dynamic> _fuelData;
+  Map<String, dynamic> get fuelData {
+    if (_fuelData is EqualUnmodifiableMapView) return _fuelData;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_fuelData);
+  }
+
+  /// Create a copy of FuelEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $InsertFuelFillingCopyWith<InsertFuelFilling> get copyWith =>
+      _$InsertFuelFillingCopyWithImpl<InsertFuelFilling>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is InsertFuelFilling &&
+            const DeepCollectionEquality().equals(other._fuelData, _fuelData));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_fuelData));
+
+  @override
+  String toString() {
+    return 'FuelEvent.insertFuelFilling(fuelData: $fuelData)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $InsertFuelFillingCopyWith<$Res>
+    implements $FuelEventCopyWith<$Res> {
+  factory $InsertFuelFillingCopyWith(
+          InsertFuelFilling value, $Res Function(InsertFuelFilling) _then) =
+      _$InsertFuelFillingCopyWithImpl;
+  @useResult
+  $Res call({Map<String, dynamic> fuelData});
+}
+
+/// @nodoc
+class _$InsertFuelFillingCopyWithImpl<$Res>
+    implements $InsertFuelFillingCopyWith<$Res> {
+  _$InsertFuelFillingCopyWithImpl(this._self, this._then);
+
+  final InsertFuelFilling _self;
+  final $Res Function(InsertFuelFilling) _then;
+
+  /// Create a copy of FuelEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? fuelData = null,
+  }) {
+    return _then(InsertFuelFilling(
+      null == fuelData
+          ? _self._fuelData
+          : fuelData // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+    ));
+  }
+}
+
+/// @nodoc
 mixin _$FuelState {
-  List get paymentMood;
-  List get stationList;
-  List get fuelTypeList;
+  List<dynamic> get searchDialogData;
+  String get maxDocNo;
   bool get isLoading;
   String get msg;
+  String get searchDialogTitle;
+  bool get isVerified;
 
   /// Create a copy of FuelState
   /// with the given fields replaced by the non-null parameter values.
@@ -116,28 +355,31 @@ mixin _$FuelState {
         (other.runtimeType == runtimeType &&
             other is FuelState &&
             const DeepCollectionEquality()
-                .equals(other.paymentMood, paymentMood) &&
-            const DeepCollectionEquality()
-                .equals(other.stationList, stationList) &&
-            const DeepCollectionEquality()
-                .equals(other.fuelTypeList, fuelTypeList) &&
+                .equals(other.searchDialogData, searchDialogData) &&
+            (identical(other.maxDocNo, maxDocNo) ||
+                other.maxDocNo == maxDocNo) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.msg, msg) || other.msg == msg));
+            (identical(other.msg, msg) || other.msg == msg) &&
+            (identical(other.searchDialogTitle, searchDialogTitle) ||
+                other.searchDialogTitle == searchDialogTitle) &&
+            (identical(other.isVerified, isVerified) ||
+                other.isVerified == isVerified));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(paymentMood),
-      const DeepCollectionEquality().hash(stationList),
-      const DeepCollectionEquality().hash(fuelTypeList),
+      const DeepCollectionEquality().hash(searchDialogData),
+      maxDocNo,
       isLoading,
-      msg);
+      msg,
+      searchDialogTitle,
+      isVerified);
 
   @override
   String toString() {
-    return 'FuelState(paymentMood: $paymentMood, stationList: $stationList, fuelTypeList: $fuelTypeList, isLoading: $isLoading, msg: $msg)';
+    return 'FuelState(searchDialogData: $searchDialogData, maxDocNo: $maxDocNo, isLoading: $isLoading, msg: $msg, searchDialogTitle: $searchDialogTitle, isVerified: $isVerified)';
   }
 }
 
@@ -147,11 +389,12 @@ abstract mixin class $FuelStateCopyWith<$Res> {
       _$FuelStateCopyWithImpl;
   @useResult
   $Res call(
-      {List<dynamic> paymentMood,
-      List<dynamic> stationList,
-      List<dynamic> fuelTypeList,
+      {List<dynamic> searchDialogData,
+      String maxDocNo,
       bool isLoading,
-      String msg});
+      String msg,
+      String searchDialogTitle,
+      bool isVerified});
 }
 
 /// @nodoc
@@ -166,25 +409,22 @@ class _$FuelStateCopyWithImpl<$Res> implements $FuelStateCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? paymentMood = null,
-    Object? stationList = null,
-    Object? fuelTypeList = null,
+    Object? searchDialogData = null,
+    Object? maxDocNo = null,
     Object? isLoading = null,
     Object? msg = null,
+    Object? searchDialogTitle = null,
+    Object? isVerified = null,
   }) {
     return _then(_self.copyWith(
-      paymentMood: null == paymentMood
-          ? _self.paymentMood!
-          : paymentMood // ignore: cast_nullable_to_non_nullable
+      searchDialogData: null == searchDialogData
+          ? _self.searchDialogData
+          : searchDialogData // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
-      stationList: null == stationList
-          ? _self.stationList!
-          : stationList // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
-      fuelTypeList: null == fuelTypeList
-          ? _self.fuelTypeList!
-          : fuelTypeList // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+      maxDocNo: null == maxDocNo
+          ? _self.maxDocNo
+          : maxDocNo // ignore: cast_nullable_to_non_nullable
+              as String,
       isLoading: null == isLoading
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -193,6 +433,14 @@ class _$FuelStateCopyWithImpl<$Res> implements $FuelStateCopyWith<$Res> {
           ? _self.msg
           : msg // ignore: cast_nullable_to_non_nullable
               as String,
+      searchDialogTitle: null == searchDialogTitle
+          ? _self.searchDialogTitle
+          : searchDialogTitle // ignore: cast_nullable_to_non_nullable
+              as String,
+      isVerified: null == isVerified
+          ? _self.isVerified
+          : isVerified // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -201,43 +449,33 @@ class _$FuelStateCopyWithImpl<$Res> implements $FuelStateCopyWith<$Res> {
 
 class fuelState implements FuelState {
   fuelState(
-      {required final List<dynamic> paymentMood,
-      required final List<dynamic> stationList,
-      required final List<dynamic> fuelTypeList,
+      {required final List<dynamic> searchDialogData,
+      required this.maxDocNo,
       required this.isLoading,
-      required this.msg})
-      : _paymentMood = paymentMood,
-        _stationList = stationList,
-        _fuelTypeList = fuelTypeList;
+      required this.msg,
+      required this.searchDialogTitle,
+      required this.isVerified})
+      : _searchDialogData = searchDialogData;
 
-  final List<dynamic> _paymentMood;
+  final List<dynamic> _searchDialogData;
   @override
-  List<dynamic> get paymentMood {
-    if (_paymentMood is EqualUnmodifiableListView) return _paymentMood;
+  List<dynamic> get searchDialogData {
+    if (_searchDialogData is EqualUnmodifiableListView)
+      return _searchDialogData;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_paymentMood);
+    return EqualUnmodifiableListView(_searchDialogData);
   }
 
-  final List<dynamic> _stationList;
   @override
-  List<dynamic> get stationList {
-    if (_stationList is EqualUnmodifiableListView) return _stationList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_stationList);
-  }
-
-  final List<dynamic> _fuelTypeList;
-  @override
-  List<dynamic> get fuelTypeList {
-    if (_fuelTypeList is EqualUnmodifiableListView) return _fuelTypeList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_fuelTypeList);
-  }
-
+  final String maxDocNo;
   @override
   final bool isLoading;
   @override
   final String msg;
+  @override
+  final String searchDialogTitle;
+  @override
+  final bool isVerified;
 
   /// Create a copy of FuelState
   /// with the given fields replaced by the non-null parameter values.
@@ -253,28 +491,31 @@ class fuelState implements FuelState {
         (other.runtimeType == runtimeType &&
             other is fuelState &&
             const DeepCollectionEquality()
-                .equals(other._paymentMood, _paymentMood) &&
-            const DeepCollectionEquality()
-                .equals(other._stationList, _stationList) &&
-            const DeepCollectionEquality()
-                .equals(other._fuelTypeList, _fuelTypeList) &&
+                .equals(other._searchDialogData, _searchDialogData) &&
+            (identical(other.maxDocNo, maxDocNo) ||
+                other.maxDocNo == maxDocNo) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.msg, msg) || other.msg == msg));
+            (identical(other.msg, msg) || other.msg == msg) &&
+            (identical(other.searchDialogTitle, searchDialogTitle) ||
+                other.searchDialogTitle == searchDialogTitle) &&
+            (identical(other.isVerified, isVerified) ||
+                other.isVerified == isVerified));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_paymentMood),
-      const DeepCollectionEquality().hash(_stationList),
-      const DeepCollectionEquality().hash(_fuelTypeList),
+      const DeepCollectionEquality().hash(_searchDialogData),
+      maxDocNo,
       isLoading,
-      msg);
+      msg,
+      searchDialogTitle,
+      isVerified);
 
   @override
   String toString() {
-    return 'FuelState(paymentMood: $paymentMood, stationList: $stationList, fuelTypeList: $fuelTypeList, isLoading: $isLoading, msg: $msg)';
+    return 'FuelState(searchDialogData: $searchDialogData, maxDocNo: $maxDocNo, isLoading: $isLoading, msg: $msg, searchDialogTitle: $searchDialogTitle, isVerified: $isVerified)';
   }
 }
 
@@ -286,11 +527,12 @@ abstract mixin class $fuelStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<dynamic> paymentMood,
-      List<dynamic> stationList,
-      List<dynamic> fuelTypeList,
+      {List<dynamic> searchDialogData,
+      String maxDocNo,
       bool isLoading,
-      String msg});
+      String msg,
+      String searchDialogTitle,
+      bool isVerified});
 }
 
 /// @nodoc
@@ -305,25 +547,22 @@ class _$fuelStateCopyWithImpl<$Res> implements $fuelStateCopyWith<$Res> {
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? paymentMood = null,
-    Object? stationList = null,
-    Object? fuelTypeList = null,
+    Object? searchDialogData = null,
+    Object? maxDocNo = null,
     Object? isLoading = null,
     Object? msg = null,
+    Object? searchDialogTitle = null,
+    Object? isVerified = null,
   }) {
     return _then(fuelState(
-      paymentMood: null == paymentMood
-          ? _self._paymentMood
-          : paymentMood // ignore: cast_nullable_to_non_nullable
+      searchDialogData: null == searchDialogData
+          ? _self._searchDialogData
+          : searchDialogData // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
-      stationList: null == stationList
-          ? _self._stationList
-          : stationList // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
-      fuelTypeList: null == fuelTypeList
-          ? _self._fuelTypeList
-          : fuelTypeList // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+      maxDocNo: null == maxDocNo
+          ? _self.maxDocNo
+          : maxDocNo // ignore: cast_nullable_to_non_nullable
+              as String,
       isLoading: null == isLoading
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -332,6 +571,14 @@ class _$fuelStateCopyWithImpl<$Res> implements $fuelStateCopyWith<$Res> {
           ? _self.msg
           : msg // ignore: cast_nullable_to_non_nullable
               as String,
+      searchDialogTitle: null == searchDialogTitle
+          ? _self.searchDialogTitle
+          : searchDialogTitle // ignore: cast_nullable_to_non_nullable
+              as String,
+      isVerified: null == isVerified
+          ? _self.isVerified
+          : isVerified // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
