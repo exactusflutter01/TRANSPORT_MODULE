@@ -15,6 +15,8 @@ class RegBloc extends Bloc<RegEvent, RegState> {
     on<FetchDocNO>(_FetchDocNO);
     on<FetchVehicleCode>(_fetchVehicleCode);
     on<SaveData>(_saveData);
+    //  on<IncrementDocNo>(_incrementDocNo);
+    on<IsVerified>(_isVerified);
   }
 
   _fetchdivcodes(FetchDivCodes event, Emitter<RegState> emit) async {
@@ -68,16 +70,55 @@ class RegBloc extends Bloc<RegEvent, RegState> {
     }
   }
 
+  // Future<void> _saveData(SaveData event, Emitter<RegState> emit) async {
+  //   print("Saving registration data...");
+  //   emit(state.copyWith(isSaving: true));
+
+  //   try {
+  //     final data =
+  //         await repository.registrationInsertFN(event.registrationData);
+  //     print("Save response: $data");
+  //     emit(state.copyWith(
+  //       isLoading: false,
+  //       msg: data,
+  //       searchDialogData: [],
+  //     ));
+  //   } catch (e) {
+  //     emit(state.copyWith(isLoading: false, searchDialogData: []));
+  //   }
+  // }
   Future<void> _saveData(SaveData event, Emitter<RegState> emit) async {
     print("Saving registration data...");
     emit(state.copyWith(isSaving: true));
 
     try {
-      final data = await repository.registrationInsertFN();
+      final data =
+          await repository.registrationInsertFN(event.registrationData);
       print("Save response: $data");
-      emit(state.copyWith(msg: 'Save Successful', isSaving: false));
+
+      emit(state.copyWith(
+        isSaving: false, 
+        isLoading: false,
+        msg: data,
+        searchDialogData: [],
+      ));
     } catch (e) {
-      emit(state.copyWith(msg: 'Error saving data: $e', isSaving: false));
+      emit(state.copyWith(
+        isSaving: false, 
+        isLoading: false,
+        msg: "Failed to save: ${e.toString()}",
+        searchDialogData: [],
+      ));
     }
+  }
+
+  _isVerified(IsVerified event, Emitter<RegState> emit) async {
+    print("in bloc code");
+    emit(state.copyWith(
+      isVerified: event.isVerify,
+      searchDialogData: [],
+      // maxDocNo: '',
+      msg: '',
+    ));
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trans_module/CONSTANTS.dart';
+import 'package:trans_module/FINE/bloc/fine_bloc_bloc.dart';
 import 'package:trans_module/REGISTRATION/REG_BLOC/reg_bloc.dart';
 import 'package:trans_module/REGISTRATION/reg_model.dart';
 import 'package:trans_module/WIDGETS/SizedBoxExtension.dart';
@@ -48,12 +49,23 @@ class _FinePageState extends State<FinePage> {
   String? selectedItem;
   bool isChecked = false;
   @override
+  void initState() {
+    // TODO: implement initState
+    division_controller.text = "10";
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocConsumer<RegBloc, RegState>(
-  
+    return BlocConsumer<FineBlocBloc, FineBlocState>(
       listener: (context, state) async {
-     
-    
+        if (state.searchDialogData.isNotEmpty && !state.isLoading) {
+          final data = await searchBox(
+              context, state.searchDialogTitle, state.searchDialogData);
+          if (state.searchDialogTitle == 'Doc No') {
+            docNo_Controller.text = data.var1;
+          }
+        }
       },
       builder: (context, state) {
         return Scaffold(
@@ -84,8 +96,8 @@ class _FinePageState extends State<FinePage> {
                       suffixIcon: Icon(Icons.search),
                       onSubmitted: () {
                         context
-                            .read<RegBloc>()
-                            .add(RegEvent.fetchDocNO(division_controller.text));
+                            .read<FineBlocBloc>()
+                            .add(FineBlocEvent.fetchDocNo(division_controller.text));
                       },
                     ),
                     30.heightBox,
@@ -301,8 +313,6 @@ class _FinePageState extends State<FinePage> {
                           "Verified",
                           style: TextStyle(fontWeight: FontWeight.w800),
                         ),
-                    
-                    
                       ],
                     ),
                   ],
