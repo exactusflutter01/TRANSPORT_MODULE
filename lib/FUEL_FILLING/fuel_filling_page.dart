@@ -4,11 +4,14 @@ import 'package:trans_module/CONSTANTS.dart';
 import 'package:trans_module/FUEL_FILLING/FUEL_BLOC/fuel_bloc.dart';
 import 'package:trans_module/FUEL_FILLING/fuel_filling_repository.dart';
 import 'package:trans_module/REGISTRATION/REG_BLOC/reg_bloc.dart';
+
 import 'package:trans_module/WIDGETS/SizedBoxExtension.dart';
 import 'package:trans_module/WIDGETS/TextfieldWidgets.dart';
 import 'package:trans_module/WIDGETS/TextfieldWithDate.dart';
 import 'package:trans_module/WIDGETS/commonButton.dart';
 import 'package:trans_module/WIDGETS/search_box.dart';
+
+import '../WIDGETS/CustomAlertDialog.dart';
 
 class FuelFillingPage extends StatefulWidget {
   FuelFillingPage({super.key});
@@ -95,9 +98,21 @@ class _FuelFillingPageState extends State<FuelFillingPage> {
           }
         }
 
-        if (state.msg == "Success" && state.isLoading == false) {
-          print("INLISTENER ${state.msg}");
+        if (state.alertTitle == "Success" && state.isLoading == false) {
+          CustomAlertDialog.show(
+              context: context,
+              title: state.alertTitle,
+              message: state.msg,
+              imagePath: succesAnimation);
         }
+         if (state.alertTitle =="Failed" && state.isLoading == false) {
+          CustomAlertDialog.show(
+              context: context,
+              title: state.alertTitle,
+              message: state.msg,
+              imagePath: warningAnimation);
+        }
+
         if ((state.maxDocNo.isNotEmpty || state.maxDocNo != '') &&
             state.isLoading == false) {
           print("INLISTENER  maxDocNo ${state.maxDocNo}");
@@ -185,12 +200,14 @@ class _FuelFillingPageState extends State<FuelFillingPage> {
                       10.widthBox,
                       BlocListener<RegBloc, RegState>(
                         listener: (context, state) async {
-                          print("INLISTENER DIVISION ${state.searchDialogData}");
+                          print(
+                              "INLISTENER DIVISION ${state.searchDialogData}");
 
-                          if (state.searchDialogData.isNotEmpty && state.isLoading==false) {
-                            final data = await searchBox(
-                              context, 'Division Codes', state.searchDialogData);
-                          div_Controller.text = data.var1;
+                          if (state.searchDialogData.isNotEmpty &&
+                              state.isLoading == false) {
+                            final data = await searchBox(context,
+                                'Division Codes', state.searchDialogData);
+                            div_Controller.text = data.var1;
                           }
                         },
                         child: Expanded(

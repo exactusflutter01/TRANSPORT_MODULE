@@ -109,7 +109,7 @@ Future<dynamic> increamentDocNo() async {
     }
   }
 
-  Future<String> insertFuelFilling(Map<String, dynamic> fuelData) async {
+  Future<int> insertFuelFilling(Map<String, dynamic> fuelData) async {
     print("in repository page fuelData $fuelData");
     try {
       final response = await dio.post(
@@ -121,13 +121,13 @@ Future<dynamic> increamentDocNo() async {
       print("response.statusCode ${response.statusCode}");
 
       if (response.statusCode == 200) {
-        return "Success"; // Successfully inserted
+        return 1; // Successfully inserted
       } else {
-        return "Failed"; // Failed to insert
+        return 0; // Failed to insert
       }
     } catch (e) {
-      print("Error :  $e");
-      return "Failed";
+     
+      return 0;
     }
   }
 }
