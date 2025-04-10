@@ -13,26 +13,25 @@ class TyrePuncturePage extends StatelessWidget {
   TextEditingController division_controller = TextEditingController();
   TextEditingController vehiclecode_controller = TextEditingController();
   TextEditingController vehiclename_controller = TextEditingController();
-  TextEditingController pono_controller = TextEditingController();
-  TextEditingController poDate_controller = TextEditingController();
-  TextEditingController assetId_controller = TextEditingController();
-  TextEditingController assetName_controller = TextEditingController();
+  TextEditingController Tyreposition_controller = TextEditingController();
+  TextEditingController Tyrepositiondes_controller = TextEditingController();
+  TextEditingController punctureDate_controller = TextEditingController();
+  TextEditingController meterReading_controller = TextEditingController();
+  TextEditingController Amount_controller = TextEditingController();
   TextEditingController DriverId_controller = TextEditingController();
   TextEditingController DriverName_controller = TextEditingController();
-  TextEditingController city_controller = TextEditingController();
-  TextEditingController value_controller = TextEditingController();
-  TextEditingController batteryslno_controller = TextEditingController();
-  TextEditingController make_controller = TextEditingController();
-  TextEditingController batterySize_controller = TextEditingController();
-  TextEditingController voltage_controller = TextEditingController();
-  TextEditingController ampere_controller = TextEditingController();
+  TextEditingController DocumentRef_controller = TextEditingController();
   TextEditingController remarks_controller = TextEditingController();
+  TextEditingController debitAccCode_controller = TextEditingController();
+  TextEditingController debitAccname_controller = TextEditingController();
+  TextEditingController creditAccCode_controller = TextEditingController();
+  TextEditingController creditAccname_controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Battery Info",
+          "Tyre Puncture",
           style: appbarTextStyle,
         ),
       ),
@@ -104,43 +103,62 @@ class TyrePuncturePage extends StatelessWidget {
               Row(
                 children: [
                   Flexible(
-                    flex: 2,
-                    child: CustomTextfield(
-                      cntrollr: pono_controller,
-                      label: "Po No",
-                    ),
-                  ),
-                  15.widthBox,
-                  Flexible(
-                    flex: 2,
-                    child: CustomDateField(
-                      controller: division_controller,
-                      label: "Po Date",
-                    ),
-                  ),
-                ],
-              ),
-              30.heightBox,
-              Row(
-                children: [
-                  Flexible(
                     flex: 1,
                     child: CustomTextfield(
-                        cntrollr: assetId_controller,
-                        label: "Asset id",
+                        cntrollr: Tyreposition_controller,
+                        label: "Tyre Position",
                         isMadatory: true,
                         suffixIcon: Icon(Icons.search),
                         onSubmitted: () {
-                          searchBox(context, 'Asset', []);
+                          searchBox(context, 'Positions', []);
                         }),
                   ),
                   15.widthBox,
                   Flexible(
                     flex: 2,
                     child: CustomTextfield(
-                      cntrollr: assetName_controller,
+                      cntrollr: Tyrepositiondes_controller,
                       label: "",
-                      isReadonly: true,
+                    ),
+                  ),
+                ],
+              ),
+
+              30.heightBox,
+              Row(
+                children: [
+                  Flexible(
+                    flex: 2,
+                    child: CustomDateField(
+                      controller: punctureDate_controller,
+                      label: "Puncture Date",
+                      isMadatory: true,
+                    ),
+                  ),
+                  15.widthBox,
+                  Flexible(
+                    flex: 2,
+                    child: CustomTextfield(
+                      cntrollr: meterReading_controller,
+                      label: "Meter Reading",
+                      isMadatory: true,
+                    ),
+                  ),
+
+
+                ],
+              ),
+              30.heightBox,
+              Row(
+                children: [
+
+                  Flexible(
+                    flex: 2,
+                    child: CustomTextfield(
+                      cntrollr: Amount_controller,
+                      label: "Amount",
+                      isReadonly: false,
+                      isMadatory: true,
                     ),
                   ),
                 ],
@@ -156,7 +174,9 @@ class TyrePuncturePage extends StatelessWidget {
                         suffixIcon: Icon(Icons.search),
                         onSubmitted: () {
                           searchBox(context, 'Driver', []);
-                        }),
+                        },
+                      isMadatory: true,
+                        ),
                   ),
                   15.widthBox,
                   Flexible(
@@ -169,48 +189,21 @@ class TyrePuncturePage extends StatelessWidget {
                 ],
               ),
               30.heightBox,
-              Row(
-                children: [
-                  Flexible(
-                    flex: 1,
-                    child: CustomTextfield(
-                      cntrollr: city_controller,
-                      label: "City",
-                    ),
-                  ),
-                  15.widthBox,
-                  Flexible(
-                    flex: 2,
-                    child: CustomTextfield(
-                      cntrollr: value_controller,
-                      label: "Value",
-                    ),
-                  ),
-                ],
-              ),
-              30.heightBox,
               CustomTextfield(
-                cntrollr: batteryslno_controller,
-                label: "Battery Serial No",
-                // keyboardType: TextInputType.numberWithOptions(),
+                cntrollr: remarks_controller,
+                label: "remarks",
+                Maxline: 3,
                 isMadatory: true,
               ),
               30.heightBox,
               Row(
                 children: [
                   Flexible(
-                    flex: 1,
-                    child: CustomTextfield(
-                      cntrollr: make_controller,
-                      label: "Make",
-                    ),
-                  ),
-                  15.widthBox,
-                  Flexible(
                     flex: 2,
                     child: CustomTextfield(
-                      cntrollr: batterySize_controller,
-                      label: "Battery Size",
+                      cntrollr: DocumentRef_controller,
+                      label: "Document Ref",
+                      isReadonly: false,
                     ),
                   ),
                 ],
@@ -221,25 +214,60 @@ class TyrePuncturePage extends StatelessWidget {
                   Flexible(
                     flex: 1,
                     child: CustomTextfield(
-                      cntrollr: voltage_controller,
-                      label: "Voltage",
-                    ),
+                        cntrollr: debitAccCode_controller,
+                        label: "Debit Account Code",
+                        suffixIcon: Icon(Icons.search),
+                        onSubmitted: () {
+                          searchBox(context, 'code', []);
+                        }),
                   ),
                   15.widthBox,
                   Flexible(
                     flex: 2,
                     child: CustomTextfield(
-                      cntrollr: ampere_controller,
-                      label: "Ampere",
+                      cntrollr: debitAccname_controller,
+                      label: "",
                     ),
                   ),
                 ],
               ),
               30.heightBox,
-              CustomTextfield(
-                cntrollr: remarks_controller,
-                label: "remarks",
-                Maxline: 3,
+              Row(
+                children: [
+                  Flexible(
+                    flex: 1,
+                    child: CustomTextfield(
+                        cntrollr: creditAccCode_controller,
+                        label: "Credit Account Code",
+                        suffixIcon: Icon(Icons.search),
+                        onSubmitted: () {
+                          searchBox(context, 'code', []);
+                        }),
+                  ),
+                  15.widthBox,
+                  Flexible(
+                    flex: 2,
+                    child: CustomTextfield(
+                      cntrollr: creditAccname_controller,
+                      label: "",
+                    ),
+                  ),
+                ],
+              ),
+              20.heightBox,
+              Row(
+                children: [
+                  // BlocBuilder<>(
+                  //   builder: (context, state) {
+                  //     return Checkbox(
+                  //         value: state.isVerified,
+                  //         onChanged: (value) {
+                  //
+                  //         });
+                  //   },
+                  // ),
+                  Text("Verified")
+                ],
               ),
               30.heightBox,
             ],
