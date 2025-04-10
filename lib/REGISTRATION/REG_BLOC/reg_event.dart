@@ -13,7 +13,8 @@ class RegEvent with _$RegEvent {
   const factory RegEvent.fetchdivcodes() = FetchDivCodes;
   const factory RegEvent.fetchDocNO(String divcode) = FetchDocNO;
   const factory RegEvent.fetchVehicleCode(String divcode) = FetchVehicleCode;
-  const factory RegEvent.saveData() = SaveData;
+  const factory RegEvent.saveData(Map<String, dynamic> registrationData) = SaveData;
+  const factory RegEvent.isVerified(bool isVerify) = IsVerified;
  
 
  

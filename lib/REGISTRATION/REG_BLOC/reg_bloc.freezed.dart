@@ -185,29 +185,144 @@ class _$FetchVehicleCodeCopyWithImpl<$Res>
 /// @nodoc
 
 class SaveData implements RegEvent {
-  const SaveData();
+  const SaveData(final Map<String, dynamic> registrationData)
+      : _registrationData = registrationData;
+
+  final Map<String, dynamic> _registrationData;
+  Map<String, dynamic> get registrationData {
+    if (_registrationData is EqualUnmodifiableMapView) return _registrationData;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_registrationData);
+  }
+
+  /// Create a copy of RegEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $SaveDataCopyWith<SaveData> get copyWith =>
+      _$SaveDataCopyWithImpl<SaveData>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is SaveData);
+        (other.runtimeType == runtimeType &&
+            other is SaveData &&
+            const DeepCollectionEquality()
+                .equals(other._registrationData, _registrationData));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_registrationData));
 
   @override
   String toString() {
-    return 'RegEvent.saveData()';
+    return 'RegEvent.saveData(registrationData: $registrationData)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $SaveDataCopyWith<$Res>
+    implements $RegEventCopyWith<$Res> {
+  factory $SaveDataCopyWith(SaveData value, $Res Function(SaveData) _then) =
+      _$SaveDataCopyWithImpl;
+  @useResult
+  $Res call({Map<String, dynamic> registrationData});
+}
+
+/// @nodoc
+class _$SaveDataCopyWithImpl<$Res> implements $SaveDataCopyWith<$Res> {
+  _$SaveDataCopyWithImpl(this._self, this._then);
+
+  final SaveData _self;
+  final $Res Function(SaveData) _then;
+
+  /// Create a copy of RegEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? registrationData = null,
+  }) {
+    return _then(SaveData(
+      null == registrationData
+          ? _self._registrationData
+          : registrationData // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class IsVerified implements RegEvent {
+  const IsVerified(this.isVerify);
+
+  final bool isVerify;
+
+  /// Create a copy of RegEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $IsVerifiedCopyWith<IsVerified> get copyWith =>
+      _$IsVerifiedCopyWithImpl<IsVerified>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is IsVerified &&
+            (identical(other.isVerify, isVerify) ||
+                other.isVerify == isVerify));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isVerify);
+
+  @override
+  String toString() {
+    return 'RegEvent.isVerified(isVerify: $isVerify)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $IsVerifiedCopyWith<$Res>
+    implements $RegEventCopyWith<$Res> {
+  factory $IsVerifiedCopyWith(
+          IsVerified value, $Res Function(IsVerified) _then) =
+      _$IsVerifiedCopyWithImpl;
+  @useResult
+  $Res call({bool isVerify});
+}
+
+/// @nodoc
+class _$IsVerifiedCopyWithImpl<$Res> implements $IsVerifiedCopyWith<$Res> {
+  _$IsVerifiedCopyWithImpl(this._self, this._then);
+
+  final IsVerified _self;
+  final $Res Function(IsVerified) _then;
+
+  /// Create a copy of RegEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? isVerify = null,
+  }) {
+    return _then(IsVerified(
+      null == isVerify
+          ? _self.isVerify
+          : isVerify // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
   }
 }
 
 /// @nodoc
 mixin _$RegState {
-  List get searchDialogData;
+  List<dynamic> get searchDialogData;
   String get searchDialogTitle;
   bool get isLoading;
   bool get isSaving;
+  bool get isVerified;
   String get msg;
 
   /// Create a copy of RegState
@@ -230,6 +345,8 @@ mixin _$RegState {
                 other.isLoading == isLoading) &&
             (identical(other.isSaving, isSaving) ||
                 other.isSaving == isSaving) &&
+            (identical(other.isVerified, isVerified) ||
+                other.isVerified == isVerified) &&
             (identical(other.msg, msg) || other.msg == msg));
   }
 
@@ -240,11 +357,12 @@ mixin _$RegState {
       searchDialogTitle,
       isLoading,
       isSaving,
+      isVerified,
       msg);
 
   @override
   String toString() {
-    return 'RegState(searchDialogData: $searchDialogData, searchDialogTitle: $searchDialogTitle, isLoading: $isLoading, isSaving: $isSaving, msg: $msg)';
+    return 'RegState(searchDialogData: $searchDialogData, searchDialogTitle: $searchDialogTitle, isLoading: $isLoading, isSaving: $isSaving, isVerified: $isVerified, msg: $msg)';
   }
 }
 
@@ -258,6 +376,7 @@ abstract mixin class $RegStateCopyWith<$Res> {
       String searchDialogTitle,
       bool isLoading,
       bool isSaving,
+      bool isVerified,
       String msg});
 }
 
@@ -277,11 +396,12 @@ class _$RegStateCopyWithImpl<$Res> implements $RegStateCopyWith<$Res> {
     Object? searchDialogTitle = null,
     Object? isLoading = null,
     Object? isSaving = null,
+    Object? isVerified = null,
     Object? msg = null,
   }) {
     return _then(_self.copyWith(
       searchDialogData: null == searchDialogData
-          ? _self.searchDialogData!
+          ? _self.searchDialogData
           : searchDialogData // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
       searchDialogTitle: null == searchDialogTitle
@@ -295,6 +415,10 @@ class _$RegStateCopyWithImpl<$Res> implements $RegStateCopyWith<$Res> {
       isSaving: null == isSaving
           ? _self.isSaving
           : isSaving // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isVerified: null == isVerified
+          ? _self.isVerified
+          : isVerified // ignore: cast_nullable_to_non_nullable
               as bool,
       msg: null == msg
           ? _self.msg
@@ -312,6 +436,7 @@ class regState implements RegState {
       required this.searchDialogTitle,
       required this.isLoading,
       required this.isSaving,
+      required this.isVerified,
       required this.msg})
       : _searchDialogData = searchDialogData;
 
@@ -330,6 +455,8 @@ class regState implements RegState {
   final bool isLoading;
   @override
   final bool isSaving;
+  @override
+  final bool isVerified;
   @override
   final String msg;
 
@@ -354,6 +481,8 @@ class regState implements RegState {
                 other.isLoading == isLoading) &&
             (identical(other.isSaving, isSaving) ||
                 other.isSaving == isSaving) &&
+            (identical(other.isVerified, isVerified) ||
+                other.isVerified == isVerified) &&
             (identical(other.msg, msg) || other.msg == msg));
   }
 
@@ -364,11 +493,12 @@ class regState implements RegState {
       searchDialogTitle,
       isLoading,
       isSaving,
+      isVerified,
       msg);
 
   @override
   String toString() {
-    return 'RegState(searchDialogData: $searchDialogData, searchDialogTitle: $searchDialogTitle, isLoading: $isLoading, isSaving: $isSaving, msg: $msg)';
+    return 'RegState(searchDialogData: $searchDialogData, searchDialogTitle: $searchDialogTitle, isLoading: $isLoading, isSaving: $isSaving, isVerified: $isVerified, msg: $msg)';
   }
 }
 
@@ -384,6 +514,7 @@ abstract mixin class $regStateCopyWith<$Res>
       String searchDialogTitle,
       bool isLoading,
       bool isSaving,
+      bool isVerified,
       String msg});
 }
 
@@ -403,6 +534,7 @@ class _$regStateCopyWithImpl<$Res> implements $regStateCopyWith<$Res> {
     Object? searchDialogTitle = null,
     Object? isLoading = null,
     Object? isSaving = null,
+    Object? isVerified = null,
     Object? msg = null,
   }) {
     return _then(regState(
@@ -421,6 +553,10 @@ class _$regStateCopyWithImpl<$Res> implements $regStateCopyWith<$Res> {
       isSaving: null == isSaving
           ? _self.isSaving
           : isSaving // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isVerified: null == isVerified
+          ? _self.isVerified
+          : isVerified // ignore: cast_nullable_to_non_nullable
               as bool,
       msg: null == msg
           ? _self.msg
