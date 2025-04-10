@@ -148,7 +148,7 @@ class _FuelFillingPageState extends State<FuelFillingPage> {
                           "EXP_CODE": "",
                           "VERIFIED_DATE": await systemDateFetch(),
                           "VERIFIED_BY": userId,
-                          "VERIFIED": state.isVerified==true ? "Y":"N",
+                          "VERIFIED": state.isVerified == true ? "Y" : "N",
                           "BALANCE_QTY": bal_qty_Controller.text,
                           "TANK_QTY": tank_qty_Controller.text,
                           "COST_BOOK_NO": "",
@@ -185,11 +185,12 @@ class _FuelFillingPageState extends State<FuelFillingPage> {
                       10.widthBox,
                       BlocListener<RegBloc, RegState>(
                         listener: (context, state) async {
-                          if (state.searchDialogTitle.isNotEmpty &&
-                              div_Controller.text.isEmpty) {
+                          print("INLISTENER DIVISION ${state.searchDialogData}");
+
+                          if (state.searchDialogData.isNotEmpty && state.isLoading==false) {
                             final data = await searchBox(
-                                context, 'Division Codes', state.searchDialogTitle);
-                            div_Controller.text = data.var1;
+                              context, 'Division Codes', state.searchDialogData);
+                          div_Controller.text = data.var1;
                           }
                         },
                         child: Expanded(

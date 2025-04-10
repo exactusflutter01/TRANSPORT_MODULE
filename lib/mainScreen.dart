@@ -181,7 +181,8 @@ import 'package:trans_module/INSURANCE/SCREENS/insu_page.dart';
 import 'package:trans_module/REGISTRATION/reg_page.dart';
 import 'package:trans_module/TOOLS_ISSUE/tools_issue_page.dart';
 import 'package:trans_module/TYRE_INFO/tyreInfo_page.dart';
-import 'package:trans_module/TYRE_PUNCHER/tyre_puncher_page.dart';
+
+import 'TYRE_PUNCTURE/puncture_page.dart';
 
 class MainScreen extends StatelessWidget {
   MainScreen({super.key});
@@ -219,9 +220,9 @@ class MainScreen extends StatelessWidget {
       'page': TyreInfoPage()
     },
     {
-      'title': 'Tyre Puncher',
+      'title': 'Tyre Puncture',
       'icon': 'assets/icons/puncher.png',
-      'page': TyrePuncherPage()
+      'page': TyrePuncturePage()
     },
     {
       'title': 'Tools Issue',

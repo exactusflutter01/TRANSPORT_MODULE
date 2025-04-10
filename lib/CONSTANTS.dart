@@ -3,12 +3,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 
+var baseUrl = 'http://192.168.1.89:3000/api/';
+// var baseUrl = 'https://scm06.exactuscloud.com:4030/api';
 final Dio dio =
-    Dio(BaseOptions(baseUrl: "https://scm06.exactuscloud.com:4030/api"));
+    Dio(BaseOptions(baseUrl: baseUrl));
 
 final Color commonColor = Color.fromARGB(255, 29, 77, 37);
-const String cmpCode ="BSG";
-const String userId ="AWAREARN";
+const String cmpCode = "BSG";
+const String userId = "AWAREARN";
 final TextStyle appbarTextStyle = GoogleFonts.mitr(
   fontWeight: FontWeight.w800,
   color: const Color.fromARGB(255, 49, 117, 61),
