@@ -341,6 +341,7 @@ mixin _$FuelState {
   String get msg;
   String get searchDialogTitle;
   bool get isVerified;
+  String get alertTitle;
 
   /// Create a copy of FuelState
   /// with the given fields replaced by the non-null parameter values.
@@ -364,7 +365,9 @@ mixin _$FuelState {
             (identical(other.searchDialogTitle, searchDialogTitle) ||
                 other.searchDialogTitle == searchDialogTitle) &&
             (identical(other.isVerified, isVerified) ||
-                other.isVerified == isVerified));
+                other.isVerified == isVerified) &&
+            (identical(other.alertTitle, alertTitle) ||
+                other.alertTitle == alertTitle));
   }
 
   @override
@@ -375,11 +378,12 @@ mixin _$FuelState {
       isLoading,
       msg,
       searchDialogTitle,
-      isVerified);
+      isVerified,
+      alertTitle);
 
   @override
   String toString() {
-    return 'FuelState(searchDialogData: $searchDialogData, maxDocNo: $maxDocNo, isLoading: $isLoading, msg: $msg, searchDialogTitle: $searchDialogTitle, isVerified: $isVerified)';
+    return 'FuelState(searchDialogData: $searchDialogData, maxDocNo: $maxDocNo, isLoading: $isLoading, msg: $msg, searchDialogTitle: $searchDialogTitle, isVerified: $isVerified, alertTitle: $alertTitle)';
   }
 }
 
@@ -394,7 +398,8 @@ abstract mixin class $FuelStateCopyWith<$Res> {
       bool isLoading,
       String msg,
       String searchDialogTitle,
-      bool isVerified});
+      bool isVerified,
+      String alertTitle});
 }
 
 /// @nodoc
@@ -415,6 +420,7 @@ class _$FuelStateCopyWithImpl<$Res> implements $FuelStateCopyWith<$Res> {
     Object? msg = null,
     Object? searchDialogTitle = null,
     Object? isVerified = null,
+    Object? alertTitle = null,
   }) {
     return _then(_self.copyWith(
       searchDialogData: null == searchDialogData
@@ -441,6 +447,10 @@ class _$FuelStateCopyWithImpl<$Res> implements $FuelStateCopyWith<$Res> {
           ? _self.isVerified
           : isVerified // ignore: cast_nullable_to_non_nullable
               as bool,
+      alertTitle: null == alertTitle
+          ? _self.alertTitle
+          : alertTitle // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -454,7 +464,8 @@ class fuelState implements FuelState {
       required this.isLoading,
       required this.msg,
       required this.searchDialogTitle,
-      required this.isVerified})
+      required this.isVerified,
+      required this.alertTitle})
       : _searchDialogData = searchDialogData;
 
   final List<dynamic> _searchDialogData;
@@ -476,6 +487,8 @@ class fuelState implements FuelState {
   final String searchDialogTitle;
   @override
   final bool isVerified;
+  @override
+  final String alertTitle;
 
   /// Create a copy of FuelState
   /// with the given fields replaced by the non-null parameter values.
@@ -500,7 +513,9 @@ class fuelState implements FuelState {
             (identical(other.searchDialogTitle, searchDialogTitle) ||
                 other.searchDialogTitle == searchDialogTitle) &&
             (identical(other.isVerified, isVerified) ||
-                other.isVerified == isVerified));
+                other.isVerified == isVerified) &&
+            (identical(other.alertTitle, alertTitle) ||
+                other.alertTitle == alertTitle));
   }
 
   @override
@@ -511,11 +526,12 @@ class fuelState implements FuelState {
       isLoading,
       msg,
       searchDialogTitle,
-      isVerified);
+      isVerified,
+      alertTitle);
 
   @override
   String toString() {
-    return 'FuelState(searchDialogData: $searchDialogData, maxDocNo: $maxDocNo, isLoading: $isLoading, msg: $msg, searchDialogTitle: $searchDialogTitle, isVerified: $isVerified)';
+    return 'FuelState(searchDialogData: $searchDialogData, maxDocNo: $maxDocNo, isLoading: $isLoading, msg: $msg, searchDialogTitle: $searchDialogTitle, isVerified: $isVerified, alertTitle: $alertTitle)';
   }
 }
 
@@ -532,7 +548,8 @@ abstract mixin class $fuelStateCopyWith<$Res>
       bool isLoading,
       String msg,
       String searchDialogTitle,
-      bool isVerified});
+      bool isVerified,
+      String alertTitle});
 }
 
 /// @nodoc
@@ -553,6 +570,7 @@ class _$fuelStateCopyWithImpl<$Res> implements $fuelStateCopyWith<$Res> {
     Object? msg = null,
     Object? searchDialogTitle = null,
     Object? isVerified = null,
+    Object? alertTitle = null,
   }) {
     return _then(fuelState(
       searchDialogData: null == searchDialogData
@@ -579,6 +597,10 @@ class _$fuelStateCopyWithImpl<$Res> implements $fuelStateCopyWith<$Res> {
           ? _self.isVerified
           : isVerified // ignore: cast_nullable_to_non_nullable
               as bool,
+      alertTitle: null == alertTitle
+          ? _self.alertTitle
+          : alertTitle // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }

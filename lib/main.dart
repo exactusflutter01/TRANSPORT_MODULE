@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:trans_module/ACCIDENT/ACCIDENT_BLOC/accident_bloc.dart';
+import 'package:trans_module/ACCIDENT/accident_repository.dart';
 import 'package:trans_module/FINE/bloc/fine_bloc_bloc.dart';
 import 'package:trans_module/FINE/repository.dart';
 import 'package:trans_module/FUEL_FILLING/FUEL_BLOC/fuel_bloc.dart';
@@ -27,9 +29,9 @@ class MyApp extends StatelessWidget {
         RepositoryProvider(create: (context) => Insurance_Repo()),
         RepositoryProvider(create: (context) => FuelFillingRepository()),
         RepositoryProvider(create: (context) => RegRepository()),
-        RepositoryProvider(
-          create: (context) => FineRepository(),
-        )
+      
+        RepositoryProvider(create: (context) => FineRepository()), 
+        RepositoryProvider(create: (context) => AccidentRepository()), 
       ],
       child: MultiBlocProvider(
         providers: [
@@ -45,6 +47,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => RegBloc(context.read<RegRepository>()),
+          ),
+          BlocProvider(
+            create: (context) => AccidentBloc(context.read<AccidentRepository>()),
           ),
         ],
         child: MaterialApp(

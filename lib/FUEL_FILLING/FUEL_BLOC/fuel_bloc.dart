@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:trans_module/CONSTANTS.dart';
 import 'package:trans_module/FUEL_FILLING/fuel_filling_model.dart';
 import 'package:trans_module/FUEL_FILLING/fuel_filling_repository.dart';
 import 'package:trans_module/REGISTRATION/reg_repository.dart';
@@ -37,11 +38,13 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
           searchDialogData: data,
           isLoading: false,
           searchDialogTitle: 'Payment Mood',
-          maxDocNo: ''));
+          maxDocNo: '',
+          alertTitle: ''));
     } catch (e) {
       emit(state.copyWith(
         isLoading: false,
         searchDialogData: [],
+        alertTitle: ''
       ));
     }
   }
@@ -58,11 +61,12 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
           searchDialogData: data,
           isLoading: false,
           searchDialogTitle: 'Stations',
-          maxDocNo: ''));
+          maxDocNo: '',alertTitle: ''));
     } catch (e) {
       emit(state.copyWith(
         isLoading: false,
         searchDialogData: [],
+        alertTitle: ''
       ));
     }
   }
@@ -79,9 +83,9 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
           isLoading: false,
           searchDialogData: data,
           searchDialogTitle: 'Fuel Types',
-          maxDocNo: ''));
+          maxDocNo: '',alertTitle: ''));
     } catch (e) {
-      emit(state.copyWith(isLoading: false, searchDialogData: []));
+      emit(state.copyWith(isLoading: false, searchDialogData: [],alertTitle: ''));
     }
   }
 
@@ -97,9 +101,9 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
           isLoading: false,
           searchDialogData: data,
           searchDialogTitle: 'Fuel Card',
-          maxDocNo: ''));
+          maxDocNo: '',alertTitle: ''));
     } catch (e) {
-      emit(state.copyWith(isLoading: false, searchDialogData: []));
+      emit(state.copyWith(isLoading: false, searchDialogData: [],alertTitle: ''));
     }
   }
 
@@ -115,9 +119,9 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
           isLoading: false,
           searchDialogData: data,
           searchDialogTitle: 'Document Number',
-          maxDocNo: ''));
+          maxDocNo: '',));
     } catch (e) {
-      emit(state.copyWith(isLoading: false, searchDialogData: []));
+      emit(state.copyWith(isLoading: false, searchDialogData: [],alertTitle: ''));
     }
   }
 
@@ -127,13 +131,19 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
       isLoading: true,
     ));
     try {
-      final data =
+      final response =
           await fuelFillingrepository.insertFuelFilling(event.fuelData);
-      print("in bloc code data $data");
-      emit(state.copyWith(
-          isLoading: false, msg: data, searchDialogData: [], maxDocNo: ''));
+      print("in bloc code data $response");
+      if (response==1) {
+           emit(state.copyWith(
+          isLoading: false, msg: "Insertion Successful", searchDialogData: [], maxDocNo: '',alertTitle: 'Success'));
+      } else {
+          emit(state.copyWith(
+          isLoading: false, msg: "Insertion Failed", searchDialogData: [], maxDocNo: '',alertTitle: 'Failed'));
+      }
+   
     } catch (e) {
-      emit(state.copyWith(isLoading: false, searchDialogData: []));
+      emit(state.copyWith(isLoading: false, searchDialogData: [],alertTitle: 'Failed', msg: "Insertion failed",));
     }
   }
 
@@ -156,9 +166,9 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
       }
    
       emit(state.copyWith(
-          isLoading: false, maxDocNo: docNo.toString(), searchDialogData: []));
+          isLoading: false, maxDocNo: docNo.toString(), searchDialogData: [],msg: '',alertTitle: ''));
     } catch (e) {
-      emit(state.copyWith(isLoading: false, searchDialogData: []));
+      emit(state.copyWith(isLoading: false, searchDialogData: [],alertTitle: ''));
     }
   }
   _isVerified(IsVerified event, Emitter<FuelState> emit) async {
@@ -168,6 +178,7 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
     searchDialogData: [],
     maxDocNo: '',
     msg:'',
+    alertTitle: ''
     ));
    
   }
