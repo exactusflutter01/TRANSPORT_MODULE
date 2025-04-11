@@ -29,22 +29,36 @@ class CommonButton extends StatelessWidget {
                       size: 30, color: Colors.red);
                 },
               ),
-            ))
-        // ElevatedButton(
-        //   onPressed: onSubmitted,
-        //   // label: const Text(
-        //   //   "S a v e",
-        //   //   style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        //   // ),
-        //   label: label,
-        //   icon: const Icon(
-        //     Icons.save_alt_sharp,
-        //     color: Colors.white,
-        //   ),
-        //   style: ButtonStyle(
-        //     backgroundColor: WidgetStatePropertyAll(commonColor),
-        //   ),
-        // ),
-        );
+            )));
+  }
+}
+
+class CommonIconButton extends StatelessWidget {
+  final Function()? onSubmitted;
+  final String label;
+  final IconData Icons;
+
+  const CommonIconButton(
+      {super.key,
+      required this.onSubmitted,
+      required this.label,
+      required this.Icons,  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: GestureDetector(
+            onTap: onSubmitted,
+            child: Column(
+              children: [
+                Icon(Icons),
+                Text(
+                  "$label",
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                )
+              ],
+            )));
   }
 }

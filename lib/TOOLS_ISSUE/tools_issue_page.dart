@@ -21,7 +21,9 @@ class ToolsIssuePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+ 
       appBar: AppBar(
+      
         title: Text(
           "Tools Issue",
           style: appbarTextStyle,

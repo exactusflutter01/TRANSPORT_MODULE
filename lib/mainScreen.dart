@@ -1,172 +1,3 @@
-// import 'package:flutter/material.dart';
-// import 'package:google_fonts/google_fonts.dart';
-// import 'package:trans_module/ACCIDENT/accident_page.dart';
-// import 'package:trans_module/BATTERY_INFO/battery_page.dart';
-// import 'package:trans_module/CHECK_LIST/check_list_page.dart';
-// import 'package:trans_module/CONSTANTS.dart';
-// import 'package:trans_module/FINE/fine_page.dart';
-// import 'package:trans_module/FUEL_FILLING/fuel_filling_page.dart';
-// import 'package:trans_module/GATE_PASS/gate_pass_page.dart';
-// import 'package:trans_module/INSURANCE/SCREENS/insu_page.dart';
-// import 'package:trans_module/REGISTRATION/reg_page.dart';
-// import 'package:trans_module/TOOLS_ISSUE/tools_issue_page.dart';
-// import 'package:trans_module/TYRE_INFO/tyreInfo_page.dart';
-// import 'package:trans_module/TYRE_PUNCHER/tyre_puncher_page.dart';
-
-// class MainScreen extends StatelessWidget {
-//   MainScreen({super.key});
-
-//   final List<Map<String, dynamic>> menuItems = [
-//     {
-//       'title': 'Insurance',
-//       'icon': 'assets/icons/insurance.png',
-//       'page': Insurance_page()
-//     },
-//     {
-//       'title': 'Registration',
-//       'icon': 'assets/icons/registration.png',
-//       'page': RegistrationPage()
-//     },
-//     {
-//       'title': 'Battery Info',
-//       'icon': 'assets/icons/info.png',
-//       'page': batteryInfoPage()
-//     },
-//     {
-//       'title': 'Fuel Filling',
-//       'icon': 'assets/icons/gas.png',
-//       'page': FuelFillingPage()
-//     },
-//         {
-//       'title': 'Fine',
-//       'icon': 'assets/icons/police.png',
-//       'page': FinePage()
-//     },
-//     {
-//       'title': 'Accident',
-//       'icon': 'assets/icons/accident.png',
-//       'page': AccidentPage()
-//     },
-//     {
-//       'title': 'Tyre Info',
-//       'icon': 'assets/icons/vehicle.png',
-//       'page': TyreInfoPage()
-//     },
-//     {
-//       'title': 'Tyre Puncher',
-//       'icon': 'assets/icons/puncher.png',
-//       'page': TyrePuncherPage()
-//     },
-//     {
-//       'title': 'Tools Issue',
-//       'icon': 'assets/icons/toolsissue.png',
-//       'page': ToolsIssuePage()
-//     },
-//     {
-//       'title': 'Check List',
-//       'icon': 'assets/icons/checklist.png',
-//       'page': CheckListPage()
-//     },
-//     {
-//       'title': 'Gate Pass',
-//       'icon': 'assets/icons/gate.png',
-//       'page': GatePassPage()
-//     },
-//   ];
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: const Color.fromARGB(255, 29, 77, 37),
-//       body: CustomScrollView(
-//         slivers: [
-//           SliverAppBar(
-//             // backgroundColor: const Color.fromARGB(255, 85, 146, 85),
-//             backgroundColor: const Color.fromARGB(255, 29, 77, 37),
-//             expandedHeight: 100,
-//             floating: false,
-//             pinned: true,
-//             elevation: 18,
-//             flexibleSpace: FlexibleSpaceBar(
-//               title: Text(
-//                 'TRANSPORTATION',
-//                 style: GoogleFonts.lilitaOne(
-//                     fontSize: 24,
-//                     color: Colors.white,
-//                     fontWeight: FontWeight.w400),
-//               ),
-//               centerTitle: true,
-//             ),
-//           ),
-//           SliverPadding(
-//             padding: const EdgeInsets.all(16.0),
-//             sliver: SliverGrid(
-//               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-//                 crossAxisCount: 2,
-//                 crossAxisSpacing: 13,
-//                 mainAxisSpacing: 13,
-//                 childAspectRatio: 1.2,
-//               ),
-//               delegate: SliverChildBuilderDelegate(
-//                 (context, index) {
-//                   return GestureDetector(
-//                     onTap: () {
-//                       Navigator.push(
-//                         context,
-//                         MaterialPageRoute(
-//                           builder: (context) => menuItems[index]['page'],
-//                         ),
-//                       );
-//                     },
-//                     child: AnimatedContainer(
-//                       decoration: BoxDecoration(
-//                         color: Colors.white,
-//                         borderRadius: BorderRadius.circular(15),
-//                         boxShadow: [
-//                           BoxShadow(
-//                             color: const Color.fromARGB(255, 255, 255, 255)
-//                                 .withOpacity(0.8),
-//                             spreadRadius: 0,
-//                             blurRadius: 0,
-//                             offset: const Offset(1, 1),
-//                           ),
-//                         ],
-//                       ),
-//                       transform: Matrix4.identity()..scale(0.98),
-//                       duration: Duration(milliseconds: 200),
-//                       child: Column(
-//                         mainAxisAlignment: MainAxisAlignment.center,
-//                         children: [
-//                           Image.asset(
-//                             menuItems[index]['icon'],
-//                             width: 50,
-//                             height: 50,
-//                             fit: BoxFit.contain,
-//                             errorBuilder: (context, error, stackTrace) {
-//                               return Icon(Icons.image_not_supported,
-//                                   size: 50, color: Colors.red);
-//                             },
-//                           ),
-//                           const SizedBox(height: 10),
-//                           Text(
-//                             menuItems[index]['title'],
-//                             style: mainscreenTextStyle,
-//                             textAlign: TextAlign.center,
-//                           ),
-//                         ],
-//                       ),
-//                     ),
-//                   );
-//                 },
-//                 childCount: menuItems.length,
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -179,167 +10,106 @@ import 'package:trans_module/FUEL_FILLING/fuel_filling_page.dart';
 import 'package:trans_module/GATE_PASS/gate_pass_page.dart';
 import 'package:trans_module/INSURANCE/SCREENS/insu_page.dart';
 import 'package:trans_module/REGISTRATION/reg_page.dart';
+import 'package:trans_module/REPAIR/repair_page.dart';
+import 'package:trans_module/SERVICE/service_page.dart';
 import 'package:trans_module/TOOLS_ISSUE/tools_issue_page.dart';
 import 'package:trans_module/TYRE_INFO/tyreInfo_page.dart';
+import 'package:trans_module/WORK_SHOP/work_shop_page.dart';
 
 import 'TYRE_PUNCTURE/puncture_page.dart';
 
-class MainScreen extends StatelessWidget {
-  MainScreen({super.key});
+import 'package:flutter/material.dart';
 
-  final List<Map<String, dynamic>> menuItems = [
-    {
-      'title': 'Insurance',
-      'icon': 'assets/icons/insurance.png',
-      'page': Insurance_page()
-    },
-    {
-      'title': 'Registration',
-      'icon': 'assets/icons/registration.png',
-      'page': RegistrationPage()
-    },
-    {
-      'title': 'Battery Info',
-      'icon': 'assets/icons/info.png',
-      'page': batteryInfoPage()
-    },
-    {
-      'title': 'Fuel Filling',
-      'icon': 'assets/icons/gas.png',
-      'page': FuelFillingPage()
-    },
-    {'title': 'Fine', 'icon': 'assets/icons/police.png', 'page': FinePage()},
-    {
-      'title': 'Accident',
-      'icon': 'assets/icons/accident.png',
-      'page': AccidentPage()
-    },
-    {
-      'title': 'Tyre Info',
-      'icon': 'assets/icons/vehicle.png',
-      'page': TyreInfoPage()
-    },
-    {
-      'title': 'Tyre Puncture',
-      'icon': 'assets/icons/puncher.png',
-      'page': TyrePuncturePage()
-    },
-    {
-      'title': 'Tools Issue',
-      'icon': 'assets/icons/toolsissue.png',
-      'page': ToolsIssuePage()
-    },
-    {
-      'title': 'Check List',
-      'icon': 'assets/icons/checklist.png',
-      'page': CheckListPage()
-    },
-    {
-      'title': 'Gate Pass',
-      'icon': 'assets/icons/gate.png',
-      'page': GatePassPage()
-    },
-  ];
+class MainScreen extends StatelessWidget {
+final List<Map<String, dynamic>> menuItemsPage1 = [
+  {'title': 'Insurance', 'icon': 'assets/icons/insurance.png', 'page': Insurance_page()},
+  {'title': 'Registration', 'icon': 'assets/icons/registration.png', 'page': RegistrationPage()},
+  {'title': 'Battery Info', 'icon': 'assets/icons/info.png', 'page': batteryInfoPage()},
+  {'title': 'Fuel Filling', 'icon': 'assets/icons/gas.png', 'page': FuelFillingPage()},
+  {'title': 'Fine', 'icon': 'assets/icons/police.png', 'page': FinePage()},
+  {'title': 'Accident', 'icon': 'assets/icons/accident.png', 'page': AccidentPage()},
+  {'title': 'Tyre Info', 'icon': 'assets/icons/vehicle.png', 'page': TyreInfoPage()},
+  {'title': 'Tyre\nPuncture', 'icon': 'assets/icons/puncher.png', 'page': TyrePuncturePage()},
+  {'title': 'Tools Issue', 'icon': 'assets/icons/toolsissue.png', 'page': ToolsIssuePage()},
+  {'title': 'Check List', 'icon': 'assets/icons/checklist.png', 'page': CheckListPage()},
+   {'title': 'Gate Pass', 'icon': 'assets/icons/gate.png', 'page': GatePassPage()},
+  {'title': 'Service', 'icon': 'assets/icons/customer-service.png', 'page': ServicePage()},
+    {'title': 'Workshop ', 'icon': 'assets/icons/business-presentation.png', 'page': WorkShopPage()},
+  {'title': 'Repair', 'icon': 'assets/icons/repair-tools.png', 'page': RepairPage()},
+];
+
+final List<Map<String, dynamic>> menuItemsPage2 = [
+ 
+
+];
 
   @override
   Widget build(BuildContext context) {
+    
+   
+
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 29, 77, 37),
-      body: Column(
-        children: [
-        
-          Container(
-            padding: const EdgeInsets.all(16),
-            color: const Color.fromARGB(255, 29, 77, 37),
-            child: Center(
-              child: Text(
-                'TRANSPORTATION',
-                style: GoogleFonts.lilitaOne(
-                    fontSize: 28,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w400),
-              ),
-            ),
-          ),
-
-          Expanded(
-            child: PageView.builder(
-              itemCount: (menuItems.length / 6).ceil(),
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, pageIndex) {
-              
-                final startIndex = pageIndex * 10;
-                final endIndex = (startIndex + 10) > menuItems.length
-                    ? menuItems.length
-                    : (startIndex + 10);
-                final items = menuItems.sublist(startIndex, endIndex);
-
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: GridView.builder(
-                    padding: const EdgeInsets.all(16),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 13,
-                      mainAxisSpacing: 13,
-                      childAspectRatio: 1.2,
-                    ),
-                    itemCount: items.length,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => items[index]['page'],
-                            ),
-                          );
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.white.withOpacity(0.8),
-                                spreadRadius: 0,
-                                blurRadius: 0,
-                                offset: const Offset(1, 1),
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                items[index]['icon'],
-                                width: 55,
-                                height: 55,
-                                fit: BoxFit.contain,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return const Icon(Icons.image_not_supported,
-                                      size: 50, color: Colors.red);
-                                },
-                              ),
-                              const SizedBox(height: 10),
-                              Text(
-                                items[index]['title'],
-                                style: mainscreenTextStyle,
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
+      backgroundColor: commonColor,
+      appBar: AppBar(
+        backgroundColor: commonColor,
+        title: const Text('Menu',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
+      body: PageView(
+  children: [
+    MenuGrid(menuItems: menuItemsPage1),
+    // MenuGrid(menuItems: menuItemsPage2),
+  ],
+)
     );
   }
 }
+
+class MenuGrid extends StatelessWidget {
+  final List<Map<String, dynamic>> menuItems;
+
+  const MenuGrid({super.key, required this.menuItems});
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      padding: const EdgeInsets.all(20),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        mainAxisSpacing: 20,
+        crossAxisSpacing: 20,
+        childAspectRatio: 0.8,
+      ),
+      itemCount: menuItems.length,
+      itemBuilder: (context, index) {
+        final item = menuItems[index];
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => item['page']),
+            );
+          },
+          child: Container(
+           decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+             color:Colors.white,
+           ),
+            
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(item['icon'], width: 50, height: 50),
+                const SizedBox(height: 8),
+                Text(
+                  item['title'],
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 16,color: Colors.black,fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
