@@ -78,3 +78,30 @@ class DebitaccountModel {
     );
   }
 }
+class VehicleCodeModel {
+  final String var1;
+  final String var2;
+  final String var3;
+  final String var4;
+  final String var5;
+  final String var6;
+  VehicleCodeModel(
+      {required this.var1,
+      required this.var2,
+      required this.var3,
+      required this.var4,
+      required this.var5,
+      required this.var6});
+
+  factory VehicleCodeModel.fromJson(Map<String, dynamic> json) {
+    return VehicleCodeModel(
+      var1: json['ASSET_ID']??'',
+      var2: json['ASSET_NAME']??'',
+      var3:  json['REG_START_DATE']??'',
+      var4:  json['REG_EXP_DATE']??'',
+      var5:  json['VTYPE_NAME']??'',
+      var6:  json['CURRENT_MILEAGE']??'',
+     
+    );
+  }
+}

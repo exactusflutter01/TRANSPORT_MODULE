@@ -15,66 +15,24 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$AccidentEvent {
-  Map<String, dynamic> get accidentData;
-
-  /// Create a copy of AccidentEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $AccidentEventCopyWith<AccidentEvent> get copyWith =>
-      _$AccidentEventCopyWithImpl<AccidentEvent>(
-          this as AccidentEvent, _$identity);
-
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is AccidentEvent &&
-            const DeepCollectionEquality()
-                .equals(other.accidentData, accidentData));
+        (other.runtimeType == runtimeType && other is AccidentEvent);
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(accidentData));
+  int get hashCode => runtimeType.hashCode;
 
   @override
   String toString() {
-    return 'AccidentEvent(accidentData: $accidentData)';
+    return 'AccidentEvent()';
   }
 }
 
 /// @nodoc
-abstract mixin class $AccidentEventCopyWith<$Res> {
-  factory $AccidentEventCopyWith(
-          AccidentEvent value, $Res Function(AccidentEvent) _then) =
-      _$AccidentEventCopyWithImpl;
-  @useResult
-  $Res call({Map<String, dynamic> accidentData});
-}
-
-/// @nodoc
-class _$AccidentEventCopyWithImpl<$Res>
-    implements $AccidentEventCopyWith<$Res> {
-  _$AccidentEventCopyWithImpl(this._self, this._then);
-
-  final AccidentEvent _self;
-  final $Res Function(AccidentEvent) _then;
-
-  /// Create a copy of AccidentEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? accidentData = null,
-  }) {
-    return _then(_self.copyWith(
-      accidentData: null == accidentData
-          ? _self.accidentData!
-          : accidentData // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-    ));
-  }
+class $AccidentEventCopyWith<$Res> {
+  $AccidentEventCopyWith(AccidentEvent _, $Res Function(AccidentEvent) __);
 }
 
 /// @nodoc
@@ -84,7 +42,6 @@ class InsertAccidentData implements AccidentEvent {
       : _accidentData = accidentData;
 
   final Map<String, dynamic> _accidentData;
-  @override
   Map<String, dynamic> get accidentData {
     if (_accidentData is EqualUnmodifiableMapView) return _accidentData;
     // ignore: implicit_dynamic_type
@@ -93,7 +50,6 @@ class InsertAccidentData implements AccidentEvent {
 
   /// Create a copy of AccidentEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
   $InsertAccidentDataCopyWith<InsertAccidentData> get copyWith =>
@@ -124,7 +80,6 @@ abstract mixin class $InsertAccidentDataCopyWith<$Res>
   factory $InsertAccidentDataCopyWith(
           InsertAccidentData value, $Res Function(InsertAccidentData) _then) =
       _$InsertAccidentDataCopyWithImpl;
-  @override
   @useResult
   $Res call({Map<String, dynamic> accidentData});
 }
@@ -139,7 +94,6 @@ class _$InsertAccidentDataCopyWithImpl<$Res>
 
   /// Create a copy of AccidentEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @pragma('vm:prefer-inline')
   $Res call({
     Object? accidentData = null,
@@ -150,6 +104,98 @@ class _$InsertAccidentDataCopyWithImpl<$Res>
           : accidentData // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
     ));
+  }
+}
+
+/// @nodoc
+
+class FetchDocNo implements AccidentEvent {
+  const FetchDocNo(this.div_code, this.doc_type);
+
+  final String div_code;
+  final String doc_type;
+
+  /// Create a copy of AccidentEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $FetchDocNoCopyWith<FetchDocNo> get copyWith =>
+      _$FetchDocNoCopyWithImpl<FetchDocNo>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is FetchDocNo &&
+            (identical(other.div_code, div_code) ||
+                other.div_code == div_code) &&
+            (identical(other.doc_type, doc_type) ||
+                other.doc_type == doc_type));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, div_code, doc_type);
+
+  @override
+  String toString() {
+    return 'AccidentEvent.fetchDocNo(div_code: $div_code, doc_type: $doc_type)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $FetchDocNoCopyWith<$Res>
+    implements $AccidentEventCopyWith<$Res> {
+  factory $FetchDocNoCopyWith(
+          FetchDocNo value, $Res Function(FetchDocNo) _then) =
+      _$FetchDocNoCopyWithImpl;
+  @useResult
+  $Res call({String div_code, String doc_type});
+}
+
+/// @nodoc
+class _$FetchDocNoCopyWithImpl<$Res> implements $FetchDocNoCopyWith<$Res> {
+  _$FetchDocNoCopyWithImpl(this._self, this._then);
+
+  final FetchDocNo _self;
+  final $Res Function(FetchDocNo) _then;
+
+  /// Create a copy of AccidentEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? div_code = null,
+    Object? doc_type = null,
+  }) {
+    return _then(FetchDocNo(
+      null == div_code
+          ? _self.div_code
+          : div_code // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == doc_type
+          ? _self.doc_type
+          : doc_type // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class FetchFineCode implements AccidentEvent {
+  const FetchFineCode();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is FetchFineCode);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'AccidentEvent.fetchFineCode()';
   }
 }
 
