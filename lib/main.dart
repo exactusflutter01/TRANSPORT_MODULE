@@ -12,6 +12,8 @@ import 'package:trans_module/INSURANCE/REPO/insu_repository.dart';
 import 'package:trans_module/INSURANCE/SCREENS/insu_page.dart';
 import 'package:trans_module/REGISTRATION/REG_BLOC/reg_bloc.dart';
 import 'package:trans_module/REGISTRATION/reg_repository.dart';
+import 'package:trans_module/TOOLS_ISSUE/TOOLS_BLOC/tools_bloc.dart';
+import 'package:trans_module/TOOLS_ISSUE/tools_issue_repository.dart';
 import 'package:trans_module/mainScreen.dart';
 import 'package:trans_module/REGISTRATION/reg_page.dart';
 
@@ -32,6 +34,7 @@ class MyApp extends StatelessWidget {
       
         RepositoryProvider(create: (context) => FineRepository()), 
         RepositoryProvider(create: (context) => AccidentRepository()), 
+        RepositoryProvider(create: (context) => ToolsIssueRepository()), 
       ],
       child: MultiBlocProvider(
         providers: [
@@ -50,6 +53,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => AccidentBloc(context.read<AccidentRepository>()),
+          ),
+          BlocProvider(
+            create: (context) => ToolsBloc(context.read<ToolsIssueRepository>()),
           ),
         ],
         child: MaterialApp(
