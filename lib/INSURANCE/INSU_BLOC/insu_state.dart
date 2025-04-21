@@ -8,8 +8,12 @@ abstract class InsuranceState with _$InsuranceState {
       required bool isLoading,
       required bool isError,
       required dynamic Response,
-      required dynamic ResponseMessage,
-      required bool verified}) = insuranceState;
+      required dynamic AlertMessage,
+      required dynamic AlertTitle,
+
+      required bool verified,
+      
+      }) = insuranceState;
 
   factory InsuranceState.initial() {
     return InsuranceState(
@@ -19,6 +23,6 @@ abstract class InsuranceState with _$InsuranceState {
         Response: '',
         SearchDialogueName: '',
         verified: false,
-        ResponseMessage: '');
+        AlertMessage: '', AlertTitle: '');
   }
 }

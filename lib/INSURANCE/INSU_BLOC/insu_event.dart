@@ -6,6 +6,7 @@ class InsuEvent with _$InsuEvent {
   const factory InsuEvent.fetchdoc() = FetchDoc;
   const factory InsuEvent.fetchPolicy() = FetchPolicy;
   const factory InsuEvent.fetchDebitCode() = FetchDebitCode;
+  const factory InsuEvent.fetchVehicleCode(String division) = FetchVehicleCode;
   const factory InsuEvent.insuranceInsert(Map data) =InsuranceInsert;
   const factory InsuEvent.verifiedClicked(bool clicked) = Verifiedclicked;
 }

@@ -3,10 +3,11 @@ part of 'reg_bloc.dart';
 @freezed
 abstract class RegState with _$RegState {
   factory RegState(
-      {required List searchDialogData,
+      {required List <dynamic>searchDialogData,
       required String searchDialogTitle,
       required bool isLoading,
       required bool isSaving,
+      required bool isVerified,
       required String msg}) = regState;
 
   factory RegState.initial() {
@@ -15,7 +16,7 @@ abstract class RegState with _$RegState {
         isLoading: false,
         msg: '',
         isSaving: false,
-        searchDialogTitle: '');
+        searchDialogTitle: '', isVerified: false);
   }
 }
 

@@ -13,6 +13,7 @@ class InsuBloc extends Bloc<InsuEvent, InsuranceState> {
     on<FetchDoc>(_FetchInsuranace_cmpny);
     on<FetchPolicy>(_FetchPolicy_type);
     on<FetchDebitCode>(_FetchDebitcode);
+    on<FetchVehicleCode>(_fetchVehicleCode);
     on<InsuranceInsert>(_Insert_Insurance);
     on<Verifiedclicked>(_CheckBoxClicked);
   }
@@ -28,7 +29,7 @@ class InsuBloc extends Bloc<InsuEvent, InsuranceState> {
           SearchDialogueName: "Insurance Company"));
     } catch (e) {
       emit(state.copyWith(
-          isLoading: false, isError: true, ResponseMessage: e.toString()));
+          isLoading: false, isError: true, AlertMessage: e.toString()));
     }
   }
 
@@ -42,7 +43,7 @@ class InsuBloc extends Bloc<InsuEvent, InsuranceState> {
           SearchDialogueName: "Policy Type"));
     } catch (e) {
       emit(state.copyWith(
-          isLoading: false, isError: true, ResponseMessage: e.toString()));
+          isLoading: false, isError: true, AlertMessage: e.toString()));
     }
   }
 
@@ -56,7 +57,27 @@ class InsuBloc extends Bloc<InsuEvent, InsuranceState> {
           SearchDialogueName: "Debit Code"));
     } catch (e) {
       emit(state.copyWith(
-          isLoading: false, isError: true, ResponseMessage: e.toString()));
+          isLoading: false, isError: true, AlertMessage: e.toString()));
+    }
+  }
+  _fetchVehicleCode(FetchVehicleCode event, Emitter<InsuranceState> emit) async {
+    try {
+      var DebitCodeList = await insrepo.fetchVehicleCode(event.division);
+
+      if (DebitCodeList.isNotEmpty) {
+             emit(state.copyWith(
+          ItemsList: DebitCodeList,
+          isLoading: false,
+          isError: false,
+          SearchDialogueName: "Vechicle Code"));
+        
+      } else {
+        
+      }
+ 
+    } catch (e) {
+      emit(state.copyWith(
+          isLoading: false, isError: true, AlertMessage: e.toString()));
     }
   }
 

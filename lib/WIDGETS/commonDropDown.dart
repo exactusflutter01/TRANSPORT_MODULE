@@ -123,7 +123,7 @@ class CustomDropdown extends StatelessWidget {
               style: const TextStyle(
                   color: Colors.black,
                   fontSize: 15,
-                  // fontWeight: FontWeight.bold
+                  fontWeight: FontWeight.bold
                   )),
           suffixIcon: PopupMenuButton(
               icon: Icon(

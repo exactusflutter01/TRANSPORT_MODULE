@@ -54,6 +54,36 @@ class Insurance_Repo {
     }
   }
 
+  fetchVehicleCode(division) async {
+    print("repository  page: Vechicle code");
+    try {
+      final response = await dio.get(
+          '/insurance/vehicle_code_get/$division/$cmpCode', options: Options(
+        validateStatus: (status) {
+          return status != null && status < 500;
+        },
+      ));
+        print("response.url ${response.realUri}");
+        print("response.data ${response.data}");
+      if (response.statusCode == 200) {
+        final modelData = (response.data as List)
+            .map((item) =>
+                VehicleCodeModel.fromJson(item as Map<String, dynamic>))
+            .toList();
+        print("modelData $modelData");
+      
+        return modelData;
+      } else if (response.statusCode == 404) {
+        return [];
+      } else {
+        throw Exception("Failed to fetch documents: ${response.statusCode}");
+      }
+    } catch (e) {
+      print("Error in Insurance Repo $e");
+      throw Exception("Failed to fetch documents: ${e}");
+    }
+  }
+
   InsuranaceInsert(Map data) async {
     try {
       final response =
