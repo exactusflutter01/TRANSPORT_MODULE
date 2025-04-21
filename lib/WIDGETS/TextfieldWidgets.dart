@@ -45,6 +45,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      
       readOnly: widget.isReadonly,
       maxLines: widget.Maxline ?? 1,
       controller: widget.cntrollr,
@@ -52,6 +53,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
       onTap: widget.onSubmitted,
       onChanged: widget.onChanged,
       decoration: InputDecoration(
+   
 //  prefixIcon: widget.isMadatory == true
 //     ? Icon(
 //         Icons.star,
