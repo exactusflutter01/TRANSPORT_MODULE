@@ -26,6 +26,7 @@ class TyrePuncturePage extends StatelessWidget {
   TextEditingController debitAccname_controller = TextEditingController();
   TextEditingController creditAccCode_controller = TextEditingController();
   TextEditingController creditAccname_controller = TextEditingController();
+   bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -257,16 +258,18 @@ class TyrePuncturePage extends StatelessWidget {
               20.heightBox,
               Row(
                 children: [
-                  // BlocBuilder<>(
-                  //   builder: (context, state) {
-                  //     return Checkbox(
-                  //         value: state.isVerified,
-                  //         onChanged: (value) {
-                  //
-                  //         });
-                  //   },
-                  // ),
-                  Text("Verified")
+                  Checkbox(
+                    value: isChecked,
+                    onChanged: (value) {
+                      // setState(() {
+                      //   isChecked = value!;
+                      // });
+                    },
+                  ),
+                  Text(
+                    "Verified",
+                    style: TextStyle(fontWeight: FontWeight.w800),
+                  ),
                 ],
               ),
               30.heightBox,
