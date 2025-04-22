@@ -16,6 +16,7 @@ class InsuBloc extends Bloc<InsuEvent, InsuranceState> {
     on<FetchVehicleCode>(_fetchVehicleCode);
     on<InsuranceInsert>(_Insert_Insurance);
     on<Verifiedclicked>(_CheckBoxClicked);
+    on<MaxdocNo>(_Maxdocget);
   }
 
   _FetchInsuranace_cmpny(FetchDoc event, Emitter<InsuranceState> emit) async {
@@ -60,21 +61,19 @@ class InsuBloc extends Bloc<InsuEvent, InsuranceState> {
           isLoading: false, isError: true, AlertMessage: e.toString()));
     }
   }
-  _fetchVehicleCode(FetchVehicleCode event, Emitter<InsuranceState> emit) async {
+
+  _fetchVehicleCode(
+      FetchVehicleCode event, Emitter<InsuranceState> emit) async {
     try {
       var DebitCodeList = await insrepo.fetchVehicleCode(event.division);
 
       if (DebitCodeList.isNotEmpty) {
-             emit(state.copyWith(
-          ItemsList: DebitCodeList,
-          isLoading: false,
-          isError: false,
-          SearchDialogueName: "Vechicle Code"));
-        
-      } else {
-        
-      }
- 
+        emit(state.copyWith(
+            ItemsList: DebitCodeList,
+            isLoading: false,
+            isError: false,
+            SearchDialogueName: "Vechicle Code"));
+      } else {}
     } catch (e) {
       emit(state.copyWith(
           isLoading: false, isError: true, AlertMessage: e.toString()));
@@ -85,16 +84,48 @@ class InsuBloc extends Bloc<InsuEvent, InsuranceState> {
     try {
       final response = await insrepo.InsuranaceInsert(event.data);
       emit(state.copyWith(
-          ItemsList: [], isLoading: false, isError: false, Response: response));
+          AlertMessage: "Data Created successfully",
+          AlertTitle: "Success",
+          ItemsList: [],
+          isLoading: false,
+          isError: false,
+          Response: response));
       print("Insert response in Bloc $response");
     } catch (e) {
       print("$e");
       emit(state.copyWith(
-          isLoading: false, isError: true, Response: e.toString()));
+        AlertMessage: e.toString(),
+        AlertTitle: "Error",
+        isLoading: false,
+        isError: true,
+      ));
     }
   }
 
   _CheckBoxClicked(Verifiedclicked event, Emitter<InsuranceState> emit) {
     emit(state.copyWith(verified: event.clicked));
+  }
+
+  _Maxdocget(MaxdocNo event, Emitter<InsuranceState> emit) async {
+    try {
+      final response = await insrepo.fetchMatchDocNo();
+      print("_Maxdocget response in Bloc $response");
+
+      var DocNo;
+      if (response != 0) {
+        print("respomse != 0");
+        var Data = int.parse(response) + 1;
+        DocNo = Data.toString().padLeft(6, '0');
+        print("response $response");
+        print("DocNo $DocNo");
+      } else {
+        print("respomse == 0");
+        DocNo = 0;
+      }
+      emit(state.copyWith(isLoading: false, Response: DocNo));
+    } catch (e) {
+      emit(state.copyWith(
+          isLoading: false, isError: true, Response: e.toString()));
+    }
   }
 }

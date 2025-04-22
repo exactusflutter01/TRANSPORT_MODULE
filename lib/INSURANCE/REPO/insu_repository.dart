@@ -63,15 +63,15 @@ class Insurance_Repo {
           return status != null && status < 500;
         },
       ));
-        print("response.url ${response.realUri}");
-        print("response.data ${response.data}");
+      print("response.url ${response.realUri}");
+      print("response.data ${response.data}");
       if (response.statusCode == 200) {
         final modelData = (response.data as List)
             .map((item) =>
                 VehicleCodeModel.fromJson(item as Map<String, dynamic>))
             .toList();
         print("modelData $modelData");
-      
+
         return modelData;
       } else if (response.statusCode == 404) {
         return [];
@@ -91,11 +91,25 @@ class Insurance_Repo {
       print("response.url ${response.realUri}");
       if (response.statusCode == 200) {
         print('Data inserted successfully');
+        return 1;
       } else {
         print('Failed to insert data: ${response.statusCode}');
+        return 0;
       }
     } catch (e) {
       print('Error during data insertion: $e');
+    }
+  }
+
+  fetchMatchDocNo() async {
+    print("FETCH MAX DOC DATA");
+    try {
+      final response = await dio.get('/insurance/max_docno_get');
+      print("response ${response}");
+      final DocNo = response.data;
+      return DocNo[0]['DOC_NO'] ?? 0000;
+    } catch (e) {
+      print("Error in Insurance Repo $e");
     }
   }
 }

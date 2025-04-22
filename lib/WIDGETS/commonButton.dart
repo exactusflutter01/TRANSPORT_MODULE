@@ -38,27 +38,29 @@ class CommonIconButton extends StatelessWidget {
   final String label;
   final IconData Icons;
 
-  const CommonIconButton(
-      {super.key,
-      required this.onSubmitted,
-      required this.label,
-      required this.Icons,  });
+  const CommonIconButton({
+    super.key,
+    required this.onSubmitted,
+    required this.label,
+    required this.Icons,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: GestureDetector(
-            onTap: onSubmitted,
-            child: Column(
-              children: [
-                Icon(Icons),
-                Text(
-                  "$label",
-                  style: TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.bold),
-                )
-              ],
-            )));
+    return GestureDetector(
+        onTap: onSubmitted,
+        child: Column(
+          children: [
+            Icon(
+              Icons,
+              size: 35,
+            ),
+            Text(
+              "$label",
+              style:
+                  TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            )
+          ],
+        ));
   }
 }

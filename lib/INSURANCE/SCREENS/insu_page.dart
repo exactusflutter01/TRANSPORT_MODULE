@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trans_module/CONSTANTS.dart';
 import 'package:trans_module/INSURANCE/INSU_BLOC/insu_bloc.dart';
 import 'package:trans_module/INSURANCE/test.dart';
+import 'package:trans_module/WIDGETS/CustomAlertDialog.dart';
 import 'package:trans_module/WIDGETS/SizedBoxExtension.dart';
 import 'package:trans_module/WIDGETS/TextfieldWidgets.dart';
 import 'package:trans_module/WIDGETS/TextfieldWithDate.dart';
@@ -10,38 +11,99 @@ import 'package:trans_module/WIDGETS/commonButton.dart';
 import 'package:trans_module/WIDGETS/search_box.dart';
 import 'package:intl/intl.dart';
 
-class Insurance_page extends StatelessWidget {
+class Insurance_page extends StatefulWidget {
   Insurance_page({
     super.key,
   });
 
   @override
-  TextEditingController vehclecode = TextEditingController();
-  TextEditingController vehclecodedesc = TextEditingController();
-  TextEditingController InsuranceCompany = TextEditingController();
-  TextEditingController InsuranceCompanydes = TextEditingController();
-  TextEditingController PolicyType = TextEditingController();
-  TextEditingController PolicyTypedesc = TextEditingController();
-  TextEditingController PolicyNo = TextEditingController();
-  TextEditingController Amount = TextEditingController();
-  TextEditingController docdate = TextEditingController();
-  TextEditingController Startdate = TextEditingController();
-  TextEditingController Expirydate = TextEditingController();
-  TextEditingController InvoiceDate = TextEditingController();
-  TextEditingController DebitAccCode = TextEditingController();
-  TextEditingController DebitAccCodedesc = TextEditingController();
-  TextEditingController smr = TextEditingController();
-  TextEditingController emr = TextEditingController();
-  TextEditingController InvoiceNo = TextEditingController();
-  TextEditingController driver = TextEditingController();
-  TextEditingController drivdesc = TextEditingController();
-  TextEditingController Remarks = TextEditingController();
-  TextEditingController divcode = TextEditingController();
-  TextEditingController docref = TextEditingController();
+  State<Insurance_page> createState() => _Insurance_pageState();
+}
 
-  Widget build(BuildContext context) {
+class _Insurance_pageState extends State<Insurance_page> {
+  @override
+  void initState() {
     DateTime TimeNow = DateTime.now();
     docdate.text = DateFormat('dd-MM-yyyy').format(TimeNow);
+    super.initState();
+  }
+
+  @override
+  TextEditingController vehclecode = TextEditingController();
+
+  TextEditingController vehclecodedesc = TextEditingController();
+
+  TextEditingController InsuranceCompany = TextEditingController();
+
+  TextEditingController InsuranceCompanydes = TextEditingController();
+
+  TextEditingController PolicyType = TextEditingController();
+
+  TextEditingController PolicyTypedesc = TextEditingController();
+
+  TextEditingController PolicyNo = TextEditingController();
+
+  TextEditingController Amount = TextEditingController();
+
+  TextEditingController docdate = TextEditingController();
+
+  TextEditingController Startdate = TextEditingController();
+
+  TextEditingController Expirydate = TextEditingController();
+
+  TextEditingController InvoiceDate = TextEditingController();
+
+  TextEditingController DebitAccCode = TextEditingController();
+
+  TextEditingController DebitAccCodedesc = TextEditingController();
+
+  TextEditingController smr = TextEditingController();
+
+  TextEditingController emr = TextEditingController();
+
+  TextEditingController InvoiceNo = TextEditingController();
+
+  TextEditingController driver = TextEditingController();
+
+  TextEditingController drivdesc = TextEditingController();
+
+  TextEditingController Remarks = TextEditingController();
+
+  TextEditingController divcode = TextEditingController();
+
+  TextEditingController docref = TextEditingController();
+
+  TextEditingController docNo = TextEditingController();
+
+  void clearAllFields() {
+    vehclecode.clear();
+    vehclecodedesc.clear();
+    InsuranceCompany.clear();
+    InsuranceCompanydes.clear();
+    PolicyType.clear();
+    PolicyTypedesc.clear();
+    PolicyNo.clear();
+    Amount.clear();
+    docdate.clear();
+    Startdate.clear();
+    Expirydate.clear();
+    InvoiceDate.clear();
+    DebitAccCode.clear();
+    DebitAccCodedesc.clear();
+    smr.clear();
+    emr.clear();
+    InvoiceNo.clear();
+    driver.clear();
+    drivdesc.clear();
+    Remarks.clear();
+    divcode.clear();
+    docref.clear();
+    docNo.clear();
+  }
+
+  var Verified;
+
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -49,15 +111,54 @@ class Insurance_page extends StatelessWidget {
           style: appbarTextStyle,
         ),
         actions: [
-          BlocBuilder<InsuBloc, InsuranceState>(
+          CommonIconButton(
+            onSubmitted: () {
+              Navigator.push(context,
+                  (MaterialPageRoute(builder: (context) => Insurance_page())));
+            },
+            label: 'New',
+            Icons: Icons.add,
+          ),
+          10.widthBox,
+          BlocConsumer<InsuBloc, InsuranceState>(
+            listener: (context, state) {
+              if (state.Response != '0' && docNo.text.isEmpty) {
+                print(" state.Response ${state.Response}");
+                docNo.text = state.Response;
+              }
+              print("state.verified ${state.verified}");
+              if (state.verified == true) {
+                Verified = 'Y';
+                print("verified ${Verified}");
+              } else {
+                Verified = 'N';
+              }
+
+              if (state.AlertTitle == 'Success' && state.isLoading == false) {
+                CustomAlertDialog.show(
+                    context: context,
+                    title: state.AlertTitle,
+                    message: state.AlertMessage,
+                    imagePath: succesAnimation);
+                // clearAllFields();
+              }
+              if (state.AlertTitle == 'Error' && state.isLoading == false) {
+                CustomAlertDialog.show(
+                    context: context,
+                    title: state.AlertTitle,
+                    message: state.AlertMessage,
+                    imagePath: errorAnimation);
+              }
+            },
             builder: (context, state) {
               return CommonButton(
-                onSubmitted: () {
-                  print("${state.verified}  befoere insrtng");
-                  context.read<InsuBloc>().add(InsuEvent.insuranceInsert({
+                onSubmitted: () async {
+                   context.read<InsuBloc>().add(InsuEvent.maxdocNo());
+                  print(state.verified);
+                   context.read<InsuBloc>().add(InsuEvent.insuranceInsert({
                         "COMPANY_CODE": "BSG",
                         "VEHICLE_CODE": '000',
-                        "DOC_NO": 00003,
+                        "DOC_NO": docNo.text,
                         "DOC_DATE": docdate.text,
                         "INVOICE_NO": InvoiceNo.text,
                         "INVOICE_DATE": InvoiceDate.text,
@@ -84,12 +185,12 @@ class Insurance_page extends StatelessWidget {
                         "EXPTYPE_CODE": "",
                         "EXPSUBTYPE_CODE": "",
                         "EXP_CODE": "",
-                        "VERIFIED": state.verified,
+                        "VERIFIED": Verified,
                         "VERIFIED_DATE": "",
                         "VERIFIED_BY": ""
                       }));
 
-                  print("${state.Response} state response");
+                  // print("${state.Response} state response");
                 },
                 label: 'Save',
                 imagePath: 'assets/icons/save.png',
@@ -136,7 +237,7 @@ class Insurance_page extends StatelessWidget {
                 children: [
                   CustomTextfield(
                     isReadonly: true,
-                    cntrollr: vehclecode,
+                    cntrollr: docNo,
                     label: "Doc No",
                     suffixIcon: Icon(Icons.search),
                     isMadatory: true,

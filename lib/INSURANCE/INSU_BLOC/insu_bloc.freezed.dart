@@ -315,6 +315,26 @@ class _$VerifiedclickedCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
+class MaxdocNo implements InsuEvent {
+  const MaxdocNo();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is MaxdocNo);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'InsuEvent.maxdocNo()';
+  }
+}
+
+/// @nodoc
 mixin _$InsuranceState {
   List get ItemsList;
   String get SearchDialogueName;
