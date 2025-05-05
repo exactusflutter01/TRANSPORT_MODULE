@@ -9,7 +9,7 @@ import 'package:trans_module/FUEL_FILLING/FUEL_BLOC/fuel_bloc.dart';
 import 'package:trans_module/FUEL_FILLING/fuel_filling_repository.dart';
 import 'package:trans_module/INSURANCE/INSU_BLOC/insu_bloc.dart';
 import 'package:trans_module/INSURANCE/REPO/insu_repository.dart';
-import 'package:trans_module/INSURANCE/SCREENS/insu_page.dart';
+import 'package:trans_module/INSURANCE/SCREENS/Insurance_page.dart';
 import 'package:trans_module/REGISTRATION/REG_BLOC/reg_bloc.dart';
 import 'package:trans_module/REGISTRATION/reg_repository.dart';
 import 'package:trans_module/TOOLS_ISSUE/TOOLS_BLOC/tools_bloc.dart';

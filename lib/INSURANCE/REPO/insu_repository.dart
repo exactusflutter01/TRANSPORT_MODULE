@@ -109,7 +109,7 @@ class Insurance_Repo {
       final DocNo = response.data;
       return DocNo[0]['DOC_NO'] ?? 0000;
     } catch (e) {
-      print("Error in Insurance Repo $e");
+      print("Error in FETCH MAX $e");
     }
   }
 }

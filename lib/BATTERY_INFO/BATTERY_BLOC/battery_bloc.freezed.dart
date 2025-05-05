@@ -37,6 +37,26 @@ class $BatteryEventCopyWith<$Res> {
 
 /// @nodoc
 
+class _Started implements BatteryEvent {
+  const _Started();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Started);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'BatteryEvent.started()';
+  }
+}
+
+/// @nodoc
+
 class DocNoFetch implements BatteryEvent {
   const DocNoFetch();
 

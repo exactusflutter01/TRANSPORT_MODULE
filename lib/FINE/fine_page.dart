@@ -24,6 +24,7 @@ class _FinePageState extends State<FinePage> {
   TextEditingController division_controller = TextEditingController();
 
   TextEditingController vehicleCode_controller = TextEditingController();
+  TextEditingController vehicledesc_controller = TextEditingController();
 
   TextEditingController regStartDate_controller = TextEditingController();
 
@@ -46,11 +47,12 @@ class _FinePageState extends State<FinePage> {
   final TextEditingController debitAcc_controller = TextEditingController();
 
   final TextEditingController creditAcc_controller = TextEditingController();
+  final TextEditingController finecode_controller = TextEditingController();
+  final TextEditingController finedesc_controller = TextEditingController();
   String? selectedItem;
   bool isChecked = false;
   @override
   void initState() {
-    // TODO: implement initState
     division_controller.text = "10";
     super.initState();
   }
@@ -64,6 +66,11 @@ class _FinePageState extends State<FinePage> {
               context, state.searchDialogTitle, state.searchDialogData);
           if (state.searchDialogTitle == 'Doc No') {
             docNo_Controller.text = data.var1;
+          }
+
+          if (state.searchDialogTitle == 'Fine Code') {
+            finecode_controller.text = data.var1;
+            finedesc_controller.text = data.var2;
           }
         }
       },
@@ -95,9 +102,8 @@ class _FinePageState extends State<FinePage> {
                       keyboardType: TextInputType.numberWithOptions(),
                       suffixIcon: Icon(Icons.search),
                       onSubmitted: () {
-                        context
-                            .read<FineBlocBloc>()
-                            .add(FineBlocEvent.fetchDocNo(division_controller.text));
+                        context.read<FineBlocBloc>().add(
+                            FineBlocEvent.fetchDocNo(division_controller.text));
                       },
                     ),
                     30.heightBox,
@@ -118,7 +124,7 @@ class _FinePageState extends State<FinePage> {
                             cntrollr: division_controller,
                             label: "Division",
                             suffixIcon: Icon(Icons.search),
-                            onSubmitted: () async {
+                            onSubmitted: () {
                               context
                                   .read<RegBloc>()
                                   .add(RegEvent.fetchdivcodes());
@@ -128,32 +134,48 @@ class _FinePageState extends State<FinePage> {
                       ],
                     ),
                     30.heightBox,
-                    Row(
-                      children: [
-                        Flexible(
-                          flex: 1,
-                          child: CustomTextfield(
-                            isMadatory: true,
-                            cntrollr: vehicleCode_controller,
-                            label: "Vehicle Code",
-                            suffixIcon: Icon(Icons.search),
-                            onSubmitted: () {},
+                    BlocListener<RegBloc, RegState>(
+                      listener: (context, state) async {
+                        print(state.searchDialogData);
+                        if (state.searchDialogData.isNotEmpty &&
+                            !state.isLoading) {
+                          final data = await searchBox(context,
+                              state.searchDialogTitle, state.searchDialogData);
+                          if (state.searchDialogTitle == 'Vehicle Code') {
+                            vehicleCode_controller.text = data.var1;
+                            vehicledesc_controller.text = data.var2;
+                          }
+                        }
+                      },
+                      child: Row(
+                        children: [
+                          Flexible(
+                            flex: 1,
+                            child: CustomTextfield(
+                              isMadatory: true,
+                              cntrollr: vehicleCode_controller,
+                              label: "Vehicle Code",
+                              suffixIcon: Icon(Icons.search),
+                              onSubmitted: () {
+                                context.read<RegBloc>().add(
+                                    RegEvent.fetchVehicleCode(
+                                        division_controller.text));
+                              },
+                            ),
                           ),
-                        ),
-                        15.widthBox,
-                        Flexible(
-                          flex: 1,
-                          child: CustomTextfield(
-                            isMadatory: true,
-                            cntrollr: vehicleCode_controller,
-                            label: "",
-                            suffixIcon: Icon(Icons.search),
-                            onSubmitted: () {},
+                          15.widthBox,
+                          Flexible(
+                            flex: 1,
+                            child: CustomTextfield(
+                              isMadatory: true,
+                              cntrollr: vehicledesc_controller,
+                              label: "",
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                    30.heightBox,
+                    20.heightBox,
                     Row(
                       children: [
                         Expanded(
@@ -173,7 +195,6 @@ class _FinePageState extends State<FinePage> {
                         ),
                       ],
                     ),
-                    30.heightBox,
                     Row(
                       children: [
                         // CustomDropdown(
@@ -197,7 +218,11 @@ class _FinePageState extends State<FinePage> {
                             isMadatory: true,
                             label: "Fine Type",
                             suffixIcon: Icon(Icons.search),
-                            onSubmitted: () {},
+                            onSubmitted: () {
+                              context
+                                  .read<FineBlocBloc>()
+                                  .add(FineBlocEvent.fetchFineCode());
+                            },
                             cntrollr: amt_controller,
                           ),
                         ),

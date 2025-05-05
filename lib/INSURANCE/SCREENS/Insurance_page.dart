@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trans_module/CONSTANTS.dart';
 import 'package:trans_module/INSURANCE/INSU_BLOC/insu_bloc.dart';
 import 'package:trans_module/INSURANCE/test.dart';
+import 'package:trans_module/REGISTRATION/REG_BLOC/reg_bloc.dart';
 import 'package:trans_module/WIDGETS/CustomAlertDialog.dart';
 import 'package:trans_module/WIDGETS/SizedBoxExtension.dart';
 import 'package:trans_module/WIDGETS/TextfieldWidgets.dart';
@@ -153,9 +154,9 @@ class _Insurance_pageState extends State<Insurance_page> {
             builder: (context, state) {
               return CommonButton(
                 onSubmitted: () async {
-                   context.read<InsuBloc>().add(InsuEvent.maxdocNo());
+                  context.read<InsuBloc>().add(InsuEvent.maxdocNo());
                   print(state.verified);
-                   context.read<InsuBloc>().add(InsuEvent.insuranceInsert({
+                  context.read<InsuBloc>().add(InsuEvent.insuranceInsert({
                         "COMPANY_CODE": "BSG",
                         "VEHICLE_CODE": '000',
                         "DOC_NO": docNo.text,
@@ -254,11 +255,30 @@ class _Insurance_pageState extends State<Insurance_page> {
                       ),
                       5.widthBox,
                       Flexible(
-                        child: CustomTextfield(
-                          isReadonly: true,
-                          cntrollr: divcode,
-                          label: "Div code",
-                          suffixIcon: Icon(Icons.search),
+                        child: BlocListener<RegBloc, RegState>(
+                          listener: (context, state) async {
+                            if (state.searchDialogData.isNotEmpty &&
+                                !state.isLoading) {
+                              final data = await searchBox(
+                                  context,
+                                  state.searchDialogTitle,
+                                  state.searchDialogData);
+                              if (state.searchDialogTitle == 'Division Code') {
+                                divcode.text = data.var1;
+                              }
+                            }
+                          },
+                          child: CustomTextfield(
+                            onSubmitted: () {
+                              context
+                                  .read<RegBloc>()
+                                  .add(RegEvent.fetchdivcodes());
+                            },
+                            isReadonly: true,
+                            cntrollr: divcode,
+                            label: "Div code",
+                            suffixIcon: Icon(Icons.search),
+                          ),
                         ),
                       ),
                     ],
@@ -467,7 +487,6 @@ class _Insurance_pageState extends State<Insurance_page> {
                         value: state.verified,
                         onChanged: (value) {
                           context.read<InsuBloc>().add(Verifiedclicked(value!));
-
                           print(" ${state.verified} state.verified");
                           print("$value  value of checkbox");
                         },

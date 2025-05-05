@@ -120,6 +120,26 @@ class _$FineFetchDocNOCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
+class FetchFineCode implements FineBlocEvent {
+  const FetchFineCode();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is FetchFineCode);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'FineBlocEvent.fetchFineCode()';
+  }
+}
+
+/// @nodoc
 mixin _$FineBlocState {
   List<dynamic> get searchDialogData;
   String get searchDialogTitle;

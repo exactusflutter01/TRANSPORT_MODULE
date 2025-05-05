@@ -28,4 +28,31 @@ class FineRepository {
       return [];
     }
   }
+
+  Future<List<FinecodeModel>> fetchFineCode() async {
+    print("Fetching division codes...");
+    try {
+      final response = await dio.get('/fine_code_search');
+      print("Response Data: ${response.data}");
+      if (response.statusCode == 200) {
+        if (response.data is List) {
+          final modelData = (response.data as List)
+              .map((item) =>
+                  FinecodeModel.fromJson(item as Map<String, dynamic>))
+              .toList();
+          print("Parsed Model Data: $modelData");
+          return modelData;
+        } else {
+          print("Unexpected data format: ${response.data.runtimeType}");
+          return [];
+        }
+      } else {
+        print('Failed to load fine code: ${response.statusCode}');
+        return [];
+      }
+    } catch (e) {
+      print("Network error: $e");
+      return [];
+    }
+  }
 }

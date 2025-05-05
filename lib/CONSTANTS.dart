@@ -8,7 +8,7 @@ String warningAnimation = "assets/animations/warning.json";
 String errorAnimation = "assets/animations/error.json";
 String loadingAnimation = "assets/animations/loading.json";
 
-// var baseUrl = 'http://192.168.1.89:3000/api/';
+// var baseUrl = 'http://192.168.1.13:3000/api/';
 var baseUrl = 'https://scm06.exactuscloud.com:4030/api';
 final Dio dio = Dio(BaseOptions(baseUrl: baseUrl));
 
