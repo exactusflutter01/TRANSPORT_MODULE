@@ -15,11 +15,11 @@ class Battery_Docno_model {
 
   factory Battery_Docno_model.fromJson(Map<String, dynamic> json) {
     return Battery_Docno_model(
-      var1: json['DOC_NO'],
-      var2: json['DOC_DATE'],
-      var3: json['ASSET_ID'],
-      var4: json['BATTERY_SERIAL_NO'],
-      var5: json['DIV_CODE'],
+      var1: json['DOC_NO'] ??'',
+      var2: json['DOC_DATE']??'',
+      var3: json['ASSET_ID']??'',
+      var4: json['BATTERY_SERIAL_NO']??'',
+      var5: json['DIV_CODE']??'',
       var6: '',
     );
   }

@@ -184,6 +184,26 @@ class _$FetchVehicleCodeCopyWithImpl<$Res>
 
 /// @nodoc
 
+class FetchCreditCode implements RegEvent {
+  const FetchCreditCode();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is FetchCreditCode);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'RegEvent.fetchCreditCode()';
+  }
+}
+
+/// @nodoc
+
 class SaveData implements RegEvent {
   const SaveData(final Map<String, dynamic> registrationData)
       : _registrationData = registrationData;
@@ -317,13 +337,34 @@ class _$IsVerifiedCopyWithImpl<$Res> implements $IsVerifiedCopyWith<$Res> {
 }
 
 /// @nodoc
+
+class FetchMaxDocNo implements RegEvent {
+  const FetchMaxDocNo();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is FetchMaxDocNo);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'RegEvent.fetchMaxDocNo()';
+  }
+}
+
+/// @nodoc
 mixin _$RegState {
   List<dynamic> get searchDialogData;
   String get searchDialogTitle;
   bool get isLoading;
-  bool get isSaving;
+  String get alertTitle;
   bool get isVerified;
-  String get msg;
+  String get alertMsg;
+  String get maxDocNo;
 
   /// Create a copy of RegState
   /// with the given fields replaced by the non-null parameter values.
@@ -343,11 +384,14 @@ mixin _$RegState {
                 other.searchDialogTitle == searchDialogTitle) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.isSaving, isSaving) ||
-                other.isSaving == isSaving) &&
+            (identical(other.alertTitle, alertTitle) ||
+                other.alertTitle == alertTitle) &&
             (identical(other.isVerified, isVerified) ||
                 other.isVerified == isVerified) &&
-            (identical(other.msg, msg) || other.msg == msg));
+            (identical(other.alertMsg, alertMsg) ||
+                other.alertMsg == alertMsg) &&
+            (identical(other.maxDocNo, maxDocNo) ||
+                other.maxDocNo == maxDocNo));
   }
 
   @override
@@ -356,13 +400,14 @@ mixin _$RegState {
       const DeepCollectionEquality().hash(searchDialogData),
       searchDialogTitle,
       isLoading,
-      isSaving,
+      alertTitle,
       isVerified,
-      msg);
+      alertMsg,
+      maxDocNo);
 
   @override
   String toString() {
-    return 'RegState(searchDialogData: $searchDialogData, searchDialogTitle: $searchDialogTitle, isLoading: $isLoading, isSaving: $isSaving, isVerified: $isVerified, msg: $msg)';
+    return 'RegState(searchDialogData: $searchDialogData, searchDialogTitle: $searchDialogTitle, isLoading: $isLoading, alertTitle: $alertTitle, isVerified: $isVerified, alertMsg: $alertMsg, maxDocNo: $maxDocNo)';
   }
 }
 
@@ -375,9 +420,10 @@ abstract mixin class $RegStateCopyWith<$Res> {
       {List<dynamic> searchDialogData,
       String searchDialogTitle,
       bool isLoading,
-      bool isSaving,
+      String alertTitle,
       bool isVerified,
-      String msg});
+      String alertMsg,
+      String maxDocNo});
 }
 
 /// @nodoc
@@ -395,9 +441,10 @@ class _$RegStateCopyWithImpl<$Res> implements $RegStateCopyWith<$Res> {
     Object? searchDialogData = null,
     Object? searchDialogTitle = null,
     Object? isLoading = null,
-    Object? isSaving = null,
+    Object? alertTitle = null,
     Object? isVerified = null,
-    Object? msg = null,
+    Object? alertMsg = null,
+    Object? maxDocNo = null,
   }) {
     return _then(_self.copyWith(
       searchDialogData: null == searchDialogData
@@ -412,17 +459,21 @@ class _$RegStateCopyWithImpl<$Res> implements $RegStateCopyWith<$Res> {
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      isSaving: null == isSaving
-          ? _self.isSaving
-          : isSaving // ignore: cast_nullable_to_non_nullable
-              as bool,
+      alertTitle: null == alertTitle
+          ? _self.alertTitle
+          : alertTitle // ignore: cast_nullable_to_non_nullable
+              as String,
       isVerified: null == isVerified
           ? _self.isVerified
           : isVerified // ignore: cast_nullable_to_non_nullable
               as bool,
-      msg: null == msg
-          ? _self.msg
-          : msg // ignore: cast_nullable_to_non_nullable
+      alertMsg: null == alertMsg
+          ? _self.alertMsg
+          : alertMsg // ignore: cast_nullable_to_non_nullable
+              as String,
+      maxDocNo: null == maxDocNo
+          ? _self.maxDocNo
+          : maxDocNo // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -435,9 +486,10 @@ class regState implements RegState {
       {required final List<dynamic> searchDialogData,
       required this.searchDialogTitle,
       required this.isLoading,
-      required this.isSaving,
+      required this.alertTitle,
       required this.isVerified,
-      required this.msg})
+      required this.alertMsg,
+      required this.maxDocNo})
       : _searchDialogData = searchDialogData;
 
   final List<dynamic> _searchDialogData;
@@ -454,11 +506,13 @@ class regState implements RegState {
   @override
   final bool isLoading;
   @override
-  final bool isSaving;
+  final String alertTitle;
   @override
   final bool isVerified;
   @override
-  final String msg;
+  final String alertMsg;
+  @override
+  final String maxDocNo;
 
   /// Create a copy of RegState
   /// with the given fields replaced by the non-null parameter values.
@@ -479,11 +533,14 @@ class regState implements RegState {
                 other.searchDialogTitle == searchDialogTitle) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.isSaving, isSaving) ||
-                other.isSaving == isSaving) &&
+            (identical(other.alertTitle, alertTitle) ||
+                other.alertTitle == alertTitle) &&
             (identical(other.isVerified, isVerified) ||
                 other.isVerified == isVerified) &&
-            (identical(other.msg, msg) || other.msg == msg));
+            (identical(other.alertMsg, alertMsg) ||
+                other.alertMsg == alertMsg) &&
+            (identical(other.maxDocNo, maxDocNo) ||
+                other.maxDocNo == maxDocNo));
   }
 
   @override
@@ -492,13 +549,14 @@ class regState implements RegState {
       const DeepCollectionEquality().hash(_searchDialogData),
       searchDialogTitle,
       isLoading,
-      isSaving,
+      alertTitle,
       isVerified,
-      msg);
+      alertMsg,
+      maxDocNo);
 
   @override
   String toString() {
-    return 'RegState(searchDialogData: $searchDialogData, searchDialogTitle: $searchDialogTitle, isLoading: $isLoading, isSaving: $isSaving, isVerified: $isVerified, msg: $msg)';
+    return 'RegState(searchDialogData: $searchDialogData, searchDialogTitle: $searchDialogTitle, isLoading: $isLoading, alertTitle: $alertTitle, isVerified: $isVerified, alertMsg: $alertMsg, maxDocNo: $maxDocNo)';
   }
 }
 
@@ -513,9 +571,10 @@ abstract mixin class $regStateCopyWith<$Res>
       {List<dynamic> searchDialogData,
       String searchDialogTitle,
       bool isLoading,
-      bool isSaving,
+      String alertTitle,
       bool isVerified,
-      String msg});
+      String alertMsg,
+      String maxDocNo});
 }
 
 /// @nodoc
@@ -533,9 +592,10 @@ class _$regStateCopyWithImpl<$Res> implements $regStateCopyWith<$Res> {
     Object? searchDialogData = null,
     Object? searchDialogTitle = null,
     Object? isLoading = null,
-    Object? isSaving = null,
+    Object? alertTitle = null,
     Object? isVerified = null,
-    Object? msg = null,
+    Object? alertMsg = null,
+    Object? maxDocNo = null,
   }) {
     return _then(regState(
       searchDialogData: null == searchDialogData
@@ -550,17 +610,21 @@ class _$regStateCopyWithImpl<$Res> implements $regStateCopyWith<$Res> {
           ? _self.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      isSaving: null == isSaving
-          ? _self.isSaving
-          : isSaving // ignore: cast_nullable_to_non_nullable
-              as bool,
+      alertTitle: null == alertTitle
+          ? _self.alertTitle
+          : alertTitle // ignore: cast_nullable_to_non_nullable
+              as String,
       isVerified: null == isVerified
           ? _self.isVerified
           : isVerified // ignore: cast_nullable_to_non_nullable
               as bool,
-      msg: null == msg
-          ? _self.msg
-          : msg // ignore: cast_nullable_to_non_nullable
+      alertMsg: null == alertMsg
+          ? _self.alertMsg
+          : alertMsg // ignore: cast_nullable_to_non_nullable
+              as String,
+      maxDocNo: null == maxDocNo
+          ? _self.maxDocNo
+          : maxDocNo // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }

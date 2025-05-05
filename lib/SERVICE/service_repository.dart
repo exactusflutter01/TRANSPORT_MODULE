@@ -1,17 +1,18 @@
-import 'package:dio/dio.dart';
-import 'package:trans_module/CONSTANTS.dart';
-import 'package:trans_module/TYRE_PUNCTURE/puncture_model.dart';
 
-class Tyre_puncher_repository {
+import 'package:dio/dio.dart';
+import 'package:trans_module/CHECK_LIST/checklist_model.dart';
+import 'package:trans_module/CONSTANTS.dart';
+
+class ServiceRepository {
   Future<ApiResponse> fetchDocNo(div_code) async {
     print("REPOSITORY div_code $div_code");
     try {
       final response =
-          await dio.get('/tyre_puncher/doc_no_get/$div_code/$cmpCode');
+          await dio.get('/CHECK_LIST/doc_no_get/$cmpCode');
       if (response.statusCode == 200) {
         if ((response.data as List).isNotEmpty) {
           final modelData = (response.data as List)
-              .map((item) => DocNoTyrePuncherModel.fromJson(item))
+              .map((item) => DocNoChecklistModel.fromJson(item))
               .toList();
           print("REPOSITORY response.data ${response.data}");
           print("REPOSITORY modelData ${modelData[0].var1}");
@@ -31,14 +32,14 @@ class Tyre_puncher_repository {
     }
   }
 
-  Future<ApiResponse> fetchTyreCode(asset_id) async {
+  Future<ApiResponse> fetchCheckCode(asset_id) async {
     try {
       final response =
-          await dio.get('/tyre_puncher/tyre_code_get/$asset_id/$cmpCode');
+          await dio.get('/CHECK_LIST/check_code_get/$cmpCode');
       if (response.statusCode == 200) {
         if ((response.data as List).isNotEmpty) {
           final modelData = (response.data as List)
-              .map((item) => TyreCodeTyrePuncherModel.fromJson(item))
+              .map((item) => CheckCodeModel.fromJson(item))
               .toList();
           print("REPOSITORY response.data ${response.data}");
           print("REPOSITORY modelData ${modelData[0].var1}");
@@ -59,7 +60,7 @@ class Tyre_puncher_repository {
 
   Future<ApiResponse> fetchMaxDocNo() async {
     try {
-      final response = await dio.get('/tyre_puncher/max_doc/$cmpCode');
+      final response = await dio.get('/CHECK_LIST/max_doc_no/$cmpCode');
       if (response.statusCode == 200) {
         if ((response.data as List).isNotEmpty) {
           return ApiResponse(data: response.data[0]['MAX_DOC_NO'] ?? 0);

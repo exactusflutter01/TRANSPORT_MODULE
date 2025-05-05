@@ -30,13 +30,13 @@ final TextStyle mainscreenTextStyle = GoogleFonts.mitr(
 
 String systemDateFetch() {
   DateTime now = DateTime.now();
-  String formattedDate = DateFormat("yyyy-MM-dd").format(now);
+  String formattedDate = DateFormat("dd-MM-yyyy").format(now);
   return formattedDate;
 }
 
 String systemDateTimeFetch() {
   DateTime now = DateTime.now();
-  String formattedDate = DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(now);
+  String formattedDate = DateFormat("dd-MM-yyyy'T'HH:mm:ss").format(now);
   return formattedDate;
 }
 
@@ -48,4 +48,14 @@ String convertToDateTimeWithT(String input) {
   String formattedDate = DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(parsedDate);
 
   return formattedDate;
+}
+
+
+class ApiResponse<T> {
+  final T? data;
+  final String? error;
+
+  ApiResponse({this.data, this.error});
+
+  bool get hasError => error != null;
 }

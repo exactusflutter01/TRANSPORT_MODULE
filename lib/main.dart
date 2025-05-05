@@ -3,6 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:trans_module/ACCIDENT/ACCIDENT_BLOC/accident_bloc.dart';
 import 'package:trans_module/ACCIDENT/accident_repository.dart';
+import 'package:trans_module/BATTERY_INFO/BATTERY_BLOC/battery_bloc.dart';
+import 'package:trans_module/BATTERY_INFO/battery_repository.dart';
+import 'package:trans_module/CHECK_LIST/CHECK_LIST_BLOC/checklist_bloc.dart';
+import 'package:trans_module/CHECK_LIST/checklist_repository.dart';
 import 'package:trans_module/FINE/bloc/fine_bloc_bloc.dart';
 import 'package:trans_module/FINE/repository.dart';
 import 'package:trans_module/FUEL_FILLING/FUEL_BLOC/fuel_bloc.dart';
@@ -14,6 +18,8 @@ import 'package:trans_module/REGISTRATION/REG_BLOC/reg_bloc.dart';
 import 'package:trans_module/REGISTRATION/reg_repository.dart';
 import 'package:trans_module/TOOLS_ISSUE/TOOLS_BLOC/tools_bloc.dart';
 import 'package:trans_module/TOOLS_ISSUE/tools_issue_repository.dart';
+import 'package:trans_module/TYRE_PUNCTURE/TYRE_PUNCHER_BLOC/tyre_puncher_bloc.dart';
+import 'package:trans_module/TYRE_PUNCTURE/puncture_repository.dart';
 import 'package:trans_module/mainScreen.dart';
 import 'package:trans_module/REGISTRATION/reg_page.dart';
 
@@ -35,6 +41,9 @@ class MyApp extends StatelessWidget {
         RepositoryProvider(create: (context) => FineRepository()), 
         RepositoryProvider(create: (context) => AccidentRepository()), 
         RepositoryProvider(create: (context) => ToolsIssueRepository()), 
+        RepositoryProvider(create: (context) => BatteryRepository()), 
+        RepositoryProvider(create: (context) => Tyre_puncher_repository()), 
+        RepositoryProvider(create: (context) => ChecklistRepository()), 
       ],
       child: MultiBlocProvider(
         providers: [
@@ -56,6 +65,15 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => ToolsBloc(context.read<ToolsIssueRepository>()),
+          ),
+          BlocProvider(
+            create: (context) => BatteryBloc(context.read<BatteryRepository>()),
+          ),
+          BlocProvider(
+            create: (context) => TyrePuncherBloc(context.read<Tyre_puncher_repository>()),
+          ),
+          BlocProvider(
+            create: (context) => ChecklistBloc(context.read<ChecklistRepository>()),
           ),
         ],
         child: MaterialApp(

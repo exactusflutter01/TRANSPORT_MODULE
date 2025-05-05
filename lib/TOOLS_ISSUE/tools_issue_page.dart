@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trans_module/CONSTANTS.dart';
+import 'package:trans_module/INSURANCE/INSU_BLOC/insu_bloc.dart';
 import 'package:trans_module/TOOLS_ISSUE/TOOLS_BLOC/tools_bloc.dart';
 import 'package:trans_module/WIDGETS/SizedBoxExtension.dart';
 import 'package:trans_module/WIDGETS/TextfieldWidgets.dart';
@@ -98,29 +99,44 @@ class ToolsIssuePage extends StatelessWidget {
                   ],
                 ),
                 20.heightBox,
-                Row(
-                  children: [
-                    Expanded(
-                      child: CustomTextfield(
-                        cntrollr: vechicle_code_controller,
-                        label: "Vechicle",
-                        // keyboardType: TextInputType.numberWithOptions(),
-                        suffixIcon: Icon(Icons.search),
-                        onSubmitted: () {
-                          // searchBox(context, 'DocNo', []);
-                        },
-                        isMadatory: true,
+                BlocListener<InsuBloc, InsuranceState>(
+                     listener: (context, state) async {
+                        if (state.isLoading == false) {
+                          if (state.SearchDialogueName == 'Vechicle Code' &&
+                              state.ItemsList.isNotEmpty) {
+                            final data = await searchBox(context,
+                                state.SearchDialogueName, state.ItemsList);
+                            vechicle_code_controller.text = data.var1;
+                            vechicle_name_controller.text = data.var2;
+                          }
+                        }
+                      },
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: CustomTextfield(
+                          cntrollr: vechicle_code_controller,
+                          label: "Vechicle",
+                          // keyboardType: TextInputType.numberWithOptions(),
+                          suffixIcon: Icon(Icons.search),
+                          onSubmitted: () {
+                        context
+                                .read<InsuBloc>()
+                                .add(InsuEvent.fetchVehicleCode("10"));
+                          },
+                          isMadatory: true,
+                        ),
                       ),
-                    ),
-                    10.widthBox,
-                    Expanded(
-                      child: CustomTextfield(
-                        cntrollr: vechicle_name_controller,
-                        label: "",
-                        // keyboardType: TextInputType.numberWithOptions(),
-                      ),
-                    )
-                  ],
+                      10.widthBox,
+                      Expanded(
+                        child: CustomTextfield(
+                          cntrollr: vechicle_name_controller,
+                          label: "",
+                          // keyboardType: TextInputType.numberWithOptions(),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 20.heightBox,
                 Row(
