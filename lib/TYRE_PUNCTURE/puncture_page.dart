@@ -55,312 +55,295 @@ class _TyrePuncturePageState extends State<TyrePuncturePage> {
 
   TextEditingController creditAccname_controller = TextEditingController();
   @override
-  void initState() {
-    division_controller.text = "10";
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Tyre Puncture",
-          style: appbarTextStyle,
-        ),
-        actions: [
-          CommonButton(
-            onSubmitted: () async {
-              context
-                  .read<TyrePuncherBloc>()
-                  .add(TyrePuncherEvent.save(tyrePuncherDetails: {
-                    "COMPANY_CODE": cmpCode,
-                    "VEHICLE_CODE": vehiclecode_controller.text,
-                    "AXLE_TYPE": '',
-                    "SERIAL_NO": 1,
-                    "TYRE_CODE": '',
-                    "TYRE_SR_NO": "",
-                    "TYRE_PROPERTIES": "",
-                    "TYRE_POS_CODE": Tyreposition_controller.text,
-                    "TYRE_TYPE": "",
-                    "PROD_CODE": "",
-                    "PUNCTURE_DATE": punctureDate_controller.text,
-                    "AMOUNT": Amount_controller.text,
-                    "USER_ID": userId,
-                    "USER_DT": await systemDateTimeFetch(),
-                    "DOC_NO": docNo_Controller.text,
-                    "DOC_DATE": await systemDateFetch(),
-                    "REMARKS": remarks_controller.text,
-                    "END_METER_READING": meterReading_controller.text,
-                    "AC_CODE_DR": debitAccCode_controller.text,
-                    "AC_CODE_CR": creditAccCode_controller.text,
-                    "EMP_ID": "",
-                    "DOC_REF": DocumentRef_controller.text,
-                    "EXPTYPE_CODE": "",
-                    "EXPSUBTYPE_CODE": "",
-                    "EXP_CODE": "",
-                    "VERIFIED": "Y",
-                    "VERIFIED_BY": userId,
-                    "VERIFIED_DATE": await systemDateFetch(),
-                    "COST_BOOK_NO": " ",
-                    "DIV_CODE": division_controller.text,
-                    "DEPT_CODE": " "
-                  }));
-            },
-            label: 'Save',
-            imagePath: 'assets/icons/save.png',
+        appBar: AppBar(
+          title: Text(
+            "Tyre Puncture",
+            style: appbarTextStyle,
           ),
-        ],
-      ),
-      body: BlocListener<TyrePuncherBloc, TyrePuncherState>(
-        listener: (context, state) async {
-          print("state.searchDialogueTitle ${state.searchDialogueTitle}");
-          print("state.alertTitle ${state.alertTitle}");
-          if (state.isLoading == false) {
-            if (state.searchDialogueTitle == 'Document Numbers') {
-              final data = await searchBox(
-                  context, state.searchDialogueTitle, state.searchDialogueData);
-              docNo_Controller.text = data.var1;
+          actions: [
+            CommonButton(
+              onSubmitted: () async {
+                context
+                    .read<TyrePuncherBloc>()
+                    .add(TyrePuncherEvent.save(tyrePuncherDetails: {
+                      "COMPANY_CODE": cmpCode,
+                      "VEHICLE_CODE": vehiclecode_controller.text,
+                      "AXLE_TYPE": '',
+                      "SERIAL_NO": 1,
+                      "TYRE_CODE": '',
+                      "TYRE_SR_NO": "",
+                      "TYRE_PROPERTIES": "",
+                      "TYRE_POS_CODE": Tyreposition_controller.text,
+                      "TYRE_TYPE": "",
+                      "PROD_CODE": "",
+                      "PUNCTURE_DATE": punctureDate_controller.text,
+                      "AMOUNT": Amount_controller.text,
+                      "USER_ID": userId,
+                      "USER_DT": await systemDateTimeFetch(),
+                      "DOC_NO": docNo_Controller.text,
+                      "DOC_DATE": await systemDateFetch(),
+                      "REMARKS": remarks_controller.text,
+                      "END_METER_READING": meterReading_controller.text,
+                      "AC_CODE_DR": debitAccCode_controller.text,
+                      "AC_CODE_CR": creditAccCode_controller.text,
+                      "EMP_ID": "",
+                      "DOC_REF": DocumentRef_controller.text,
+                      "EXPTYPE_CODE": "",
+                      "EXPSUBTYPE_CODE": "",
+                      "EXP_CODE": "",
+                      "VERIFIED": "Y",
+                      "VERIFIED_BY": userId,
+                      "VERIFIED_DATE": await systemDateFetch(),
+                      "COST_BOOK_NO": " ",
+                      "DIV_CODE": division_controller.text,
+                      "DEPT_CODE": " "
+                    }));
+              },
+              label: 'Save',
+              imagePath: 'assets/icons/save.png',
+            ),
+          ],
+        ),
+        body: BlocListener<TyrePuncherBloc, TyrePuncherState>(
+          listener: (context, state) async {
+            print("state.searchDialogueTitle ${state.searchDialogueTitle}");
+            print("state.alertTitle ${state.alertTitle}");
+            if (state.isLoading == false) {
+              if (state.searchDialogueTitle == 'Document Numbers') {
+                final data = await searchBox(context, state.searchDialogueTitle,
+                    state.searchDialogueData);
+                docNo_Controller.text = data.var1;
+              }
+              if (state.searchDialogueTitle == 'Tyre Position') {
+                final data = await searchBox(context, state.searchDialogueTitle,
+                    state.searchDialogueData);
+                Tyreposition_controller.text = data.var5;
+              }
+              if (state.alertTitle == 'Success') {
+                CustomAlertDialog.show(
+                    context: context,
+                    title: state.alertTitle,
+                    message: state.alertMsg,
+                    imagePath: succesAnimation);
+              }
+              if (state.alertTitle == 'Warning') {
+                CustomAlertDialog.show(
+                    context: context,
+                    title: state.alertTitle,
+                    message: state.alertMsg,
+                    imagePath: warningAnimation);
+              }
+              if (state.alertTitle == 'Failed') {
+                CustomAlertDialog.show(
+                    context: context,
+                    title: state.alertTitle,
+                    message: state.alertMsg,
+                    imagePath: errorAnimation);
+              }
+              if (state.maxDocNo != '') {
+                docNo_Controller.text = state.maxDocNo;
+              }
             }
-            if (state.searchDialogueTitle == 'Tyre Position') {
-              final data = await searchBox(
-                  context, state.searchDialogueTitle, state.searchDialogueData);
-              Tyreposition_controller.text = data.var5;
-            }
-            if (state.alertTitle == 'Success') {
-              CustomAlertDialog.show(
-                  context: context,
-                  title: state.alertTitle,
-                  message: state.alertMsg,
-                  imagePath: succesAnimation);
-            }
-            if (state.alertTitle == 'Warning') {
-              CustomAlertDialog.show(
-                  context: context,
-                  title: state.alertTitle,
-                  message: state.alertMsg,
-                  imagePath: warningAnimation);
-            }
-            if (state.alertTitle == 'Failed') {
-              CustomAlertDialog.show(
-                  context: context,
-                  title: state.alertTitle,
-                  message: state.alertMsg,
-                  imagePath: errorAnimation);
-            }
-            if (state.maxDocNo != '') {
-              docNo_Controller.text = state.maxDocNo;
-            }
-          }
-        },
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              children: [
-                CustomTextfield(
-                  cntrollr: docNo_Controller,
-                  label: "Doc NO",
-                  // keyboardType: TextInputType.numberWithOptions(),
-                  suffixIcon: Icon(Icons.search),
-                  onSubmitted: () async {
-                    context.read<TyrePuncherBloc>().add(
-                        TyrePuncherEvent.searchDialogueDataFetch(
-                            title: 'Document Numbers',
-                            division: division_controller.text));
-                  },
-                  isMadatory: true,
-                ),
-                20.heightBox,
-                Row(
-                  children: [
-                    Flexible(
-                      flex: 1,
-                      child: CustomDateField(
-                        controller: docDate_Controller,
-                        label: "Doc Date",
-                        isMadatory: true,
+          },
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                children: [
+                  CustomTextfield(
+                    cntrollr: docNo_Controller,
+                    label: "Doc NO",
+                    // keyboardType: TextInputType.numberWithOptions(),
+                    suffixIcon: Icon(Icons.search),
+                    onSubmitted: () async {
+                      context.read<TyrePuncherBloc>().add(
+                          TyrePuncherEvent.searchDialogueDataFetch(
+                              title: 'Document Numbers',
+                              division: division_controller.text));
+                    },
+                    isMadatory: true,
+                  ),
+                  20.heightBox,
+                  Row(
+                    children: [
+                      Flexible(
+                        flex: 1,
+                        child: CustomDateField(
+                          controller: docDate_Controller,
+                          label: "Doc Date",
+                          isMadatory: true,
+                        ),
                       ),
+                      10.widthBox,
+                      Flexible(
+                        flex: 1,
+                        child: CustomTextfield(
+                            cntrollr: division_controller,
+                            label: "Division",
+                            suffixIcon: Icon(Icons.search),
+                            onSubmitted: () {
+                              searchBox(context, 'division', []);
+                            }),
+                      ),
+                    ],
+                  ),
+                  20.heightBox,
+                  BlocListener<RegBloc, RegState>(
+                    listener: (context, state) async {
+                      if (state.searchDialogTitle == 'Vehicle Code' &&
+                          state.isLoading == false) {
+                        print(state.searchDialogTitle);
+                        final data = await searchBox(context,
+                            state.searchDialogTitle, state.searchDialogData);
+                        vehiclecode_controller.text = data.var1;
+                        vehiclename_controller.text = data.var2;
+                      }
+                      if (state.searchDialogTitle == 'Credit Code' &&
+                          state.isLoading == false) {
+                        final data = await searchBox(context,
+                            state.searchDialogTitle, state.searchDialogData);
+                        creditAccCode_controller.text = data.var1;
+                        creditAccname_controller.text = data.var2;
+                      }
+                    },
+                    child: Row(
+                      children: [
+                        Flexible(
+                          flex: 1,
+                          child: CustomTextfield(
+                              cntrollr: vehiclecode_controller,
+                              label: "Vehicle code",
+                              isMadatory: true,
+                              suffixIcon: Icon(Icons.search),
+                              onSubmitted: () {
+                                context.read<RegBloc>().add(
+                                    RegEvent.fetchVehicleCode(
+                                        division_controller.text));
+                              }),
+                        ),
+                        10.widthBox,
+                        Flexible(
+                          flex: 1,
+                          child: CustomTextfield(
+                            cntrollr: vehiclename_controller,
+                            label: "",
+                            isReadonly: true,
+                          ),
+                        ),
+                      ],
                     ),
-                    10.widthBox,
-                    Flexible(
-                      flex: 1,
-                      child: CustomTextfield(
-                          cntrollr: division_controller,
-                          label: "Division",
-                          suffixIcon: Icon(Icons.search),
-                          onSubmitted: () {
-                            searchBox(context, 'division', []);
-                          }),
-                    ),
-                  ],
-                ),
-                20.heightBox,
-                BlocListener<RegBloc, RegState>(
-                  listener: (context, state) async {
-                    if (state.searchDialogTitle == 'Vehicle Code' &&
-                        state.isLoading == false) {
-                      print(state.searchDialogTitle);
-                      final data = await searchBox(context,
-                          state.searchDialogTitle, state.searchDialogData);
-                      vehiclecode_controller.text = data.var1;
-                      vehiclename_controller.text = data.var2;
-                    }
-                    if (state.searchDialogTitle == 'Credit Code' &&
-                        state.isLoading == false) {
-                      final data = await searchBox(context,
-                          state.searchDialogTitle, state.searchDialogData);
-                      creditAccCode_controller.text = data.var1;
-                      creditAccname_controller.text = data.var2;
-                    }
-                  },
-                  child: Row(
+                  ),
+                  20.heightBox,
+                  Row(
                     children: [
                       Flexible(
                         flex: 1,
                         child: CustomTextfield(
-                            cntrollr: vehiclecode_controller,
-                            label: "Vehicle code",
+                            cntrollr: Tyreposition_controller,
+                            label: "Tyre Position",
                             isMadatory: true,
                             suffixIcon: Icon(Icons.search),
                             onSubmitted: () {
-                              context.read<RegBloc>().add(
-                                  RegEvent.fetchVehicleCode(
-                                      division_controller.text));
+                              context.read<TyrePuncherBloc>().add(
+                                  TyrePuncherEvent.searchDialogueDataFetch(
+                                      assetId: 'A1', title: 'Tyre Position'));
                             }),
                       ),
                       10.widthBox,
                       Flexible(
                         flex: 1,
                         child: CustomTextfield(
-                          cntrollr: vehiclename_controller,
+                          cntrollr: Tyrepositiondes_controller,
                           label: "",
-                          isReadonly: true,
                         ),
                       ),
                     ],
                   ),
-                ),
-                20.heightBox,
-                Row(
-                  children: [
-                    Flexible(
-                      flex: 1,
-                      child: CustomTextfield(
-                          cntrollr: Tyreposition_controller,
-                          label: "Tyre Position",
+                  20.heightBox,
+                  Row(
+                    children: [
+                      Flexible(
+                        flex: 1,
+                        child: CustomDateField(
+                          controller: punctureDate_controller,
+                          label: "Puncture Date",
                           isMadatory: true,
+                        ),
+                      ),
+                      10.widthBox,
+                      Flexible(
+                        flex: 1,
+                        child: CustomTextfield(
+                          cntrollr: meterReading_controller,
+                          label: "Meter Reading",
+                          isMadatory: true,
+                        ),
+                      ),
+                    ],
+                  ),
+                  20.heightBox,
+                  Row(
+                    children: [
+                      Flexible(
+                        flex: 1,
+                        child: CustomTextfield(
+                          cntrollr: Amount_controller,
+                          label: "Amount",
+                          isReadonly: false,
+                          isMadatory: true,
+                        ),
+                      ),
+                    ],
+                  ),
+                  20.heightBox,
+                  Row(
+                    children: [
+                      Flexible(
+                        flex: 1,
+                        child: CustomTextfield(
+                          cntrollr: DriverId_controller,
+                          label: "Driver",
                           suffixIcon: Icon(Icons.search),
                           onSubmitted: () {
-                            context.read<TyrePuncherBloc>().add(
-                                TyrePuncherEvent.searchDialogueDataFetch(
-                                    assetId: 'A1', title: 'Tyre Position'));
-                          }),
-                    ),
-                    10.widthBox,
-                    Flexible(
-                      flex: 1,
-                      child: CustomTextfield(
-                        cntrollr: Tyrepositiondes_controller,
-                        label: "",
+                            searchBox(context, 'Driver', []);
+                          },
+                          isMadatory: true,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                20.heightBox,
-                Row(
-                  children: [
-                    Flexible(
-                      flex: 1,
-                      child: CustomDateField(
-                        controller: punctureDate_controller,
-                        label: "Puncture Date",
-                        isMadatory: true,
+                      15.widthBox,
+                      Flexible(
+                        flex: 2,
+                        child: CustomTextfield(
+                          cntrollr: DriverName_controller,
+                          label: "",
+                        ),
                       ),
-                    ),
-                    10.widthBox,
-                    Flexible(
-                      flex: 1,
-                      child: CustomTextfield(
-                        cntrollr: meterReading_controller,
-                        label: "Meter Reading",
-                        isMadatory: true,
+                    ],
+                  ),
+                  30.heightBox,
+                  CustomTextfield(
+                    cntrollr: remarks_controller,
+                    label: "remarks",
+                    Maxline: 3,
+                    isMadatory: true,
+                  ),
+                  30.heightBox,
+                  Row(
+                    children: [
+                      Flexible(
+                        flex: 2,
+                        child: CustomTextfield(
+                          cntrollr: DocumentRef_controller,
+                          label: "Document Ref",
+                          isReadonly: false,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                20.heightBox,
-                Row(
-                  children: [
-                    Flexible(
-                      flex: 1,
-                      child: CustomTextfield(
-                        cntrollr: Amount_controller,
-                        label: "Amount",
-                        isReadonly: false,
-                        isMadatory: true,
-                      ),
-                    ),
-                  ],
-                ),
-                20.heightBox,
-                Row(
-                  children: [
-                    Flexible(
-                      flex: 1,
-                      child: CustomTextfield(
-                        cntrollr: DriverId_controller,
-                        label: "Driver",
-                        suffixIcon: Icon(Icons.search),
-                        onSubmitted: () {
-                          searchBox(context, 'Driver', []);
-                        },
-                        isMadatory: true,
-                      ),
-                    ),
-                    10.widthBox,
-                    Flexible(
-                      flex: 1,
-                      child: CustomTextfield(
-                        cntrollr: DriverName_controller,
-                        label: "",
-                      ),
-                    ),
-                  ],
-                ),
-                20.heightBox,
-                CustomTextfield(
-                  cntrollr: remarks_controller,
-                  label: "remarks",
-                  Maxline: 3,
-                  isMadatory: true,
-                ),
-                20.heightBox,
-                Row(
-                  children: [
-                    Flexible(
-                      flex: 1,
-                      child: CustomTextfield(
-                        cntrollr: DocumentRef_controller,
-                        label: "Document Ref",
-                        isReadonly: false,
-                      ),
-                    ),
-                  ],
-                ),
-                20.heightBox,
-                BlocListener<InsuBloc, InsuranceState>(
-                  listener: (context, state) async {
-                    if (state.isLoading == false &&
-                        state.ItemsList.isNotEmpty &&
-                        state.SearchDialogueName == "Debit Code") {
-                      final data = await searchBox(
-                          context, state.SearchDialogueName, state.ItemsList);
-                      debitAccCode_controller.text = data.var1;
-                      debitAccname_controller.text = data.var2;
-                    }
-                  },
-                  child: Row(
+                    ],
+                  ),
+                  30.heightBox,
+                  Row(
                     children: [
                       Flexible(
                         flex: 1,
@@ -369,14 +352,12 @@ class _TyrePuncturePageState extends State<TyrePuncturePage> {
                             label: "Debit Account Code",
                             suffixIcon: Icon(Icons.search),
                             onSubmitted: () {
-                              context
-                                  .read<InsuBloc>()
-                                  .add(InsuEvent.fetchDebitCode());
+                              searchBox(context, 'code', []);
                             }),
                       ),
-                      10.widthBox,
+                      15.widthBox,
                       Flexible(
-                        flex: 1,
+                        flex: 2,
                         child: CustomTextfield(
                           cntrollr: debitAccname_controller,
                           label: "",
@@ -384,58 +365,49 @@ class _TyrePuncturePageState extends State<TyrePuncturePage> {
                       ),
                     ],
                   ),
-                ),
-                20.heightBox,
-                Row(
-                  children: [
-                    Flexible(
-                      flex: 1,
-                      child: CustomTextfield(
-                          cntrollr: creditAccCode_controller,
-                          label: "Credit Account Code",
-                          suffixIcon: Icon(Icons.search),
-                          onSubmitted: () {
-                            context
-                                .read<RegBloc>()
-                                .add(RegEvent.fetchCreditCode());
-                          }),
-                    ),
-                    10.widthBox,
-                    Flexible(
-                      flex: 1,
-                      child: CustomTextfield(
-                        cntrollr: creditAccname_controller,
-                        label: "",
+                  30.heightBox,
+                  Row(
+                    children: [
+                      Flexible(
+                        flex: 1,
+                        child: CustomTextfield(
+                            cntrollr: creditAccCode_controller,
+                            label: "Credit Account Code",
+                            suffixIcon: Icon(Icons.search),
+                            onSubmitted: () {
+                              searchBox(context, 'code', []);
+                            }),
                       ),
-                    ),
-                  ],
-                ),
-                20.heightBox,
-                Row(
-                  children: [
-                    Flexible(
-                      flex: 2,
-                      child: BlocBuilder<TyrePuncherBloc, TyrePuncherState>(
-                        builder: (context, state) {
-                          return Checkbox(
-                              value: state.isVerified,
-                              onChanged: (value) {
-                                context.read<TyrePuncherBloc>().add(TyrePuncherEvent.isVerified(isVerify: value!));
-                              });
-                        },
+                      15.widthBox,
+                      Flexible(
+                        flex: 2,
+                        child: CustomTextfield(
+                          cntrollr: creditAccname_controller,
+                          label: "",
+                        ),
                       ),
-                    ),
-                    Flexible(
-                      flex: 1,
-                      child: Text("Verified"))
-                  ],
-                ),
-                20.heightBox,
-              ],
+                    ],
+                  ),
+                  20.heightBox,
+                  Row(
+                    children: [
+                      // BlocBuilder<>(
+                      //   builder: (context, state) {
+                      //     return Checkbox(
+                      //         value: state.isVerified,
+                      //         onChanged: (value) {
+                      //
+                      //         });
+                      //   },
+                      // ),
+                      Text("Verified")
+                    ],
+                  ),
+                  30.heightBox,
+                ],
+              ),
             ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
